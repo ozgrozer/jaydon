@@ -1,3 +1,3 @@
-# gincp
+# jaydon.dev
 
 Nginx Control Panel
