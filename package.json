@@ -1,0 +1,21 @@
+{
+  "name": "jaydon",
+  "scripts": {
+    "server": "node ./src/backend/server.js",
+    "start": "parcel ./src/frontend/index.jsx --out-dir ./dist --public-url / --port 1147",
+    "build": "parcel build ./src/frontend/index.jsx --out-dir ./dist --public-url / --no-source-maps"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "parcel-bundler": "^1.12.3",
+    "pug": "^2.0.4",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "sass": "^1.23.0-module.beta.1"
+  }
+}
