@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { Fragment} from 'react'
 import ReactDOM from 'react-dom'
+
+import './style.scss'
 
 const App = () => {
   return (
-    <div>
-      hi
-    </div>
+    <Fragment>
+      <div id='menu'>
+        menu
+      </div>
+
+      <div id='main'>
+        main
+      </div>
+    </Fragment>
   )
 }
 

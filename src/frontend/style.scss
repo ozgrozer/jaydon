@@ -1,3 +1,22 @@
+@import './variables';
+
 body {
-  background-color: #eee;
+  margin: 0;
+  background-color: $gray2;
+}
+
+html, body, #root, #menu, #main {
+  height: 100%;
+}
+
+#menu  {
+  float: left;
+  background-color: #fff;
+  width: $menuDesktopWidth;
+}
+
+#main  {
+  float: left;
+  background-color: $gray1;
+  width: calc(100% - #{$menuDesktopWidth});
 }
