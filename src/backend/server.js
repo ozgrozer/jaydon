@@ -1,29 +1,22 @@
 const path = require('path')
 const express = require('express')
+const mongoose = require('mongoose')
+
+const defaults = require('./defaults')
+const siteRoutes = require('./routes/siteRoutes')
+
 const app = express()
-const session = require('express-session')
-const port = 1148
-
-app.use(express.json())
-app.set('views', path.join(__dirname, '..', 'frontend', 'html'))
-app.use(express.static(path.join(__dirname, '..', '..', 'dist')))
+app.use('/', siteRoutes)
 app.set('view engine', 'pug')
-app.use(session({
-  resave: true,
-  key: 'jaydon',
-  saveUninitialized: true,
-  secret: '2$2tc^/Q2nv7y^Zi',
-  cookie: { maxAge: 2592000000 }
-}))
+app.set('views', path.join(__dirname, '..', 'frontend', 'html'))
 
-app.listen(port, () => {
-  console.log('Example app listening on port http://localhost:' + port)
-})
+const getTimeForConsole = () => new Date(Date.now()).toLocaleString() + ':'
 
-app.get('*', (req, res) => {
-  res.render('index', {
-    defaults: {
-      isAuthenticated: req.session.isAuthenticated || false
-    }
+mongoose.connect(defaults.site.dbUrl + defaults.site.dbName, { useNewUrlParser: true })
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'))
+db.once('open', () => {
+  app.listen(defaults.site.port, () => {
+    console.log(getTimeForConsole(), `${defaults.site.name}: http://localhost:${defaults.site.port}`)
   })
 })

@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Dashboard = () => {
+  useEffect(() => {
+    document.title = window.defaults.routes['/'].title
+  }, [])
+
   return (
     <div id='dashboard'>
       <h1>Dashboard</h1>

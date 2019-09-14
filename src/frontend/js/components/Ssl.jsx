@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Ssl = () => {
+  useEffect(() => {
+    document.title = window.defaults.routes['/ssl'].title
+  }, [])
+
   return (
     <div id='ssl'>
       <h1>SSL</h1>

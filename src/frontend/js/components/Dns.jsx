@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Dns = () => {
+  useEffect(() => {
+    document.title = window.defaults.routes['/dns'].title
+  }, [])
+
   return (
     <div id='dns'>
       <h1>DNS</h1>

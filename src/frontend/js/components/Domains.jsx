@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Domains = () => {
+  useEffect(() => {
+    document.title = window.defaults.routes['/domains'].title
+  }, [])
+
   return (
     <div id='domains'>
       <h1>Domains</h1>

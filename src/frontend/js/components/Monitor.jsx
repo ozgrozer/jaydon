@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Monitor = () => {
+  useEffect(() => {
+    document.title = window.defaults.routes['/monitor'].title
+  }, [])
+
   return (
     <div id='monitor'>
       <h1>Monitor</h1>

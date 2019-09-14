@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Databases = () => {
+  useEffect(() => {
+    document.title = window.defaults.routes['/databases'].title
+  }, [])
+
   return (
     <div id='databases'>
       <h1>Databases</h1>

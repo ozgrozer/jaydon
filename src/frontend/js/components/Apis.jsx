@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Apis = () => {
+  useEffect(() => {
+    document.title = window.defaults.routes['/apis'].title
+  }, [])
+
   return (
     <div id='apis'>
       <h1>APIs</h1>
