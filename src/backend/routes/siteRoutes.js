@@ -22,4 +22,28 @@ router.use(session({
 
 router.get('*', require('./siteRoutes/siteRoutesIndex'))
 
+router.post('/sign-in', (req, res) => {
+  const result = {
+    success: false
+  }
+
+  req.session.isAuthenticated = true
+  req.session.cookie.maxAge = 2592000000
+
+  result.success = true
+
+  res.json(result)
+})
+
+router.post('/sign-out', (req, res) => {
+  const result = {
+    success: false
+  }
+
+  delete req.session.isAuthenticated
+  result.success = true
+
+  res.json(result)
+})
+
 module.exports = router

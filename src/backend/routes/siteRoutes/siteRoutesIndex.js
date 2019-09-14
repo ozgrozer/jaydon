@@ -33,8 +33,16 @@ const siteRoutesIndex = async (req, res) => {
       '/apis': {
         title: `APIs - ${defaults.site.name}`
       },
-      '/404': {
-        title: '404'
+
+      '/sign-in': {
+        title: `Sign In - ${defaults.site.name}`
+      },
+      '/forgot-password': {
+        title: `Forgot Password - ${defaults.site.name}`
+      },
+
+      '/not-found': {
+        title: `Not Found - ${defaults.site.name}`
       }
     }
 

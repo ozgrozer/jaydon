@@ -7,7 +7,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.0",
     "babel-core": "^6.26.3",
+    "babel-plugin-root-import": "^6.4.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "connect-mongo": "^3.0.0",
     "express": "^4.17.1",
@@ -19,6 +22,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
+    "rfv": "^0.0.28",
     "sass": "^1.23.0-module.beta.1",
     "standard": "^14.2.0"
   }
