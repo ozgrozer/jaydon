@@ -1,27 +1,28 @@
 @import './variables';
-
-body {
-  margin: 0;
-  background-color: $gray2;
-}
-
-html, body, #root, #menu, #app, #main {
-  height: 100%;
-}
-
-body, input, body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-}
+@import './reset';
 
 #menu  {
   float: left;
-  padding: 100px 30px;
+  padding: 100px 0;
   background-color: #fff;
   width: $menuDesktopWidth;
+
+  a {
+    color: $gray5;
+    display: block;
+    font-size: 18px;
+    padding: 0 30px;
+    line-height: 50px;
+    &:hover, &.active {
+      color: $gray6;
+      background-color: $gray1;
+    }
+  }
 }
 
 #main  {
   float: left;
+  padding: 100px 140px;
   background-color: $gray1;
   width: calc(100% - #{$menuDesktopWidth});
 }
