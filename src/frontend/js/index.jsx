@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import './style.scss'
+import './../css/style.scss'
 
 const App = () => {
   return (
-    <div>
+    <div id='app'>
       <div id='menu'>
         menu
       </div>

@@ -5,7 +5,7 @@ const session = require('express-session')
 const port = 1148
 
 app.use(express.json())
-app.set('views', path.join(__dirname, '..', 'frontend'))
+app.set('views', path.join(__dirname, '..', 'frontend', 'html'))
 app.use(express.static(path.join(__dirname, '..', '..', 'dist')))
 app.set('view engine', 'pug')
 app.use(session({
