@@ -1,6 +1,11 @@
 @import './variables';
 @import './reset';
 
+.link {
+  cursor: pointer;
+  user-select: none;
+}
+
 #menu  {
   float: left;
   padding: 100px 0;

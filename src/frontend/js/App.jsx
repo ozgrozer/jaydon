@@ -16,6 +16,10 @@ import Monitor from './components/Monitor'
 import Apis from './components/Apis'
 
 const App = () => {
+  const signOut = () => {
+    console.log('signOut')
+  }
+
   return (
     <BrowserRouter>
       <div id='app'>
@@ -30,6 +34,7 @@ const App = () => {
           <NavLink to='/logs' activeClassName='active'>Logs</NavLink>
           <NavLink to='/monitor' activeClassName='active'>Monitor</NavLink>
           <NavLink to='/apis' activeClassName='active'>APIs</NavLink>
+          <a onClick={signOut} className='link'>Sign Out</a>
         </div>
 
         <div id='main'>
