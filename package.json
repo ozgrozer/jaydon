@@ -15,6 +15,7 @@
     "pug": "^2.0.4",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
     "sass": "^1.23.0-module.beta.1",
     "standard": "^14.2.0"
   }
