@@ -4,6 +4,7 @@
 #menu  {
   float: left;
   padding: 100px 0;
+  overflow-x: auto;
   background-color: #fff;
   width: $menuDesktopWidth;
 
@@ -22,6 +23,7 @@
 
 #main  {
   float: left;
+  overflow-x: auto;
   padding: 100px 140px;
   background-color: $gray1;
   width: calc(100% - #{$menuDesktopWidth});
