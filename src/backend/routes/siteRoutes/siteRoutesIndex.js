@@ -21,6 +21,9 @@ const siteRoutesIndex = async (req, res) => {
       '/ssl': {
         title: `SSL - ${defaults.site.name}`
       },
+      '/cron': {
+        title: `Cron - ${defaults.site.name}`
+      },
       '/logs': {
         title: `Logs - ${defaults.site.name}`
       },
