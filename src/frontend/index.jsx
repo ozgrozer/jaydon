@@ -1,11 +1,11 @@
-import React, { Fragment} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 
 import './style.scss'
 
 const App = () => {
   return (
-    <Fragment>
+    <div>
       <div id='menu'>
         menu
       </div>
@@ -13,7 +13,7 @@ const App = () => {
       <div id='main'>
         main
       </div>
-    </Fragment>
+    </div>
   )
 }
 
