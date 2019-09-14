@@ -2,8 +2,8 @@
   "name": "jaydon",
   "scripts": {
     "server": "node ./src/backend/server.js",
-    "start": "parcel ./src/frontend/js/index.jsx --out-dir ./dist --public-url / --port 1147",
-    "build": "parcel build ./src/frontend/js/index.jsx --out-dir ./dist --public-url / --no-source-maps"
+    "start": "parcel ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --port 1147",
+    "build": "parcel build ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --no-source-maps"
   },
   "license": "MIT",
   "dependencies": {

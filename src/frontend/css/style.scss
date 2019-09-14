@@ -9,8 +9,13 @@ html, body, #root, #menu, #app, #main {
   height: 100%;
 }
 
+body, input, body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
 #menu  {
   float: left;
+  padding: 100px 30px;
   background-color: #fff;
   width: $menuDesktopWidth;
 }
