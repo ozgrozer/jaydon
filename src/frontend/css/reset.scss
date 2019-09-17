@@ -11,13 +11,17 @@ html, body, #root, #app, #menu, #main {
   height: 100%;
 }
 
-body, input, body {
+body, input, button {
   font-size: $fontSize;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
+a, input, button {
+  transition: all .15s ease-in-out;
+}
+
 body, a {
-  color: $gray9;
+  color: $gray7;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -37,4 +41,40 @@ a {
 
 p {
   line-height: $lineHeight;
+}
+
+button, .button {
+  outline: none;
+  cursor: pointer;
+  border-width: 1px;
+  border-style: solid;
+  height: $buttonHeight1;
+  background-color: #fff;
+  padding: 0 $buttonHeight1;
+  border-radius: $borderRadius;
+  &.white {
+    border-color: $gray3;
+    background-color: #fff;
+    &:hover {
+      border-color: darken($gray3, 5%);
+      background-color: darken(#fff, 2.5%);
+    }
+    &:active {
+      border-color: darken($gray3, 7.5%);
+      background-color: darken(#fff, 5%);
+    }
+  }
+  &.blue {
+    color: #fff;
+    border-color: $blue;
+    background-color: $blue;
+    &:hover {
+      border-color: darken($blue, $buttonHoverBorderColorRatio);
+      background-color: darken($blue, $buttonHoverBackgroundColorRatio);
+    }
+    &:active {
+      border-color: darken($blue, $buttonActiveBorderColorRatio);
+      background-color: darken($blue, $buttonActiveBackgroundColorRatio);
+    }
+  }
 }

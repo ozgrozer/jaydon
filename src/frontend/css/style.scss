@@ -8,17 +8,17 @@
 
 #menu  {
   float: left;
-  padding: 100px 0;
   overflow-x: auto;
   background-color: #fff;
   width: $menuDesktopWidth;
+  padding: $buttonHeight2 0;
+  -webkit-overflow-scrolling: touch;
 
   a {
     color: $gray5;
     display: block;
-    font-size: 18px;
-    padding: 0 30px;
-    line-height: 50px;
+    padding: 0 $mt2;
+    line-height: $mt1;
     &:hover, &.active {
       color: $gray6;
       background-color: $gray1;
@@ -29,7 +29,42 @@
 #main  {
   float: left;
   overflow-x: auto;
-  padding: 100px 140px;
   background-color: $gray1;
+  -webkit-overflow-scrolling: touch;
   width: calc(100% - #{$menuDesktopWidth});
+  padding: $buttonHeight2 ($buttonHeight2 * 1.5);
+
+  .header {
+    &:after {
+      content: '';
+      clear: both;
+      display: table;
+    }
+
+    h1 {
+      float: left;
+      height: $buttonHeight1;
+      line-height: $buttonHeight1;
+    }
+
+    button {
+      float: right;
+    }
+  }
+
+  .content {
+    margin-top: $mt1;
+
+    .list {
+      width: 100%;
+      display: block;
+      padding: 0 $mt1;
+      margin-top: $mt2;
+      height: $buttonHeight2;
+      line-height: $buttonHeight2;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
 }
