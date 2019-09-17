@@ -12,9 +12,12 @@ const ListRecords = props => {
         <h1>{props.title}</h1>
 
         {props.button ? (
-          <button className='blue'>
+          <Link
+            to={`/${props.id}/new`}
+            className='button blue'
+          >
             {props.button}
-          </button>
+          </Link>
         ) : null}
       </div>
 

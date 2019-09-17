@@ -48,9 +48,11 @@ button, .button {
   cursor: pointer;
   border-width: 1px;
   border-style: solid;
+  display: inline-block;
   height: $buttonHeight1;
   background-color: #fff;
   padding: 0 $buttonHeight1;
+  line-height: $buttonHeight1;
   border-radius: $borderRadius;
   &.white {
     border-color: $gray3;
