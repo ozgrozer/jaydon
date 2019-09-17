@@ -1,3 +1,3 @@
-# jaydon.dev
+# jaydon
 
 Nginx Control Panel
