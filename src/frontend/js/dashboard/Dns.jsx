@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
-const Dns = () => {
-  useEffect(() => {
-    document.title = window.defaults.routes['/dns'].title
-  }, [])
+import ListRecords from './ListRecords'
 
+const DNS = () => {
   return (
-    <div id='dns'>
-      <h1>DNS</h1>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam beatae suscipit tempora, nesciunt sapiente labore enim aliquid sunt unde maxime quos est odit, dolorem. Explicabo soluta, molestias fugit ratione debitis.</p>
-    </div>
+    <ListRecords
+      id='dns'
+      title='DNS'
+      button='New DNS'
+    />
   )
 }
 
-export default Dns
+export default DNS

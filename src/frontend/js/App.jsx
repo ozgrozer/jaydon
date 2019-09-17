@@ -11,12 +11,12 @@ import Dashboard from './dashboard/Dashboard'
 import Users from './dashboard/Users'
 import Domains from './dashboard/Domains'
 import Databases from './dashboard/Databases'
-import Dns from './dashboard/Dns'
-import Ssl from './dashboard/Ssl'
+import DNS from './dashboard/DNS'
+import SSL from './dashboard/SSL'
 import Cron from './dashboard/Cron'
 import Logs from './dashboard/Logs'
 import Monitor from './dashboard/Monitor'
-import Apis from './dashboard/Apis'
+import APIs from './dashboard/APIs'
 
 import SignIn from './auth/SignIn'
 import ForgotPassword from './auth/ForgotPassword'
@@ -64,12 +64,12 @@ const App = () => {
           <Route path='/users' component={Users} />
           <Route path='/domains' component={Domains} />
           <Route path='/databases' component={Databases} />
-          <Route path='/dns' component={Dns} />
-          <Route path='/ssl' component={Ssl} />
+          <Route path='/dns' component={DNS} />
+          <Route path='/ssl' component={SSL} />
           <Route path='/cron' component={Cron} />
           <Route path='/logs' component={Logs} />
           <Route path='/monitor' component={Monitor} />
-          <Route path='/apis' component={Apis} />
+          <Route path='/apis' component={APIs} />
         </div>
       </div>
     ) : (

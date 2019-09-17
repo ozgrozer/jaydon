@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
-const Ssl = () => {
-  useEffect(() => {
-    document.title = window.defaults.routes['/ssl'].title
-  }, [])
+import ListRecords from './ListRecords'
 
+const SSL = () => {
   return (
-    <div id='ssl'>
-      <h1>SSL</h1>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et, suscipit laboriosam distinctio quam a debitis tempora consectetur rerum, beatae similique, voluptate perspiciatis molestiae amet impedit excepturi neque animi nesciunt.</p>
-    </div>
+    <ListRecords
+      id='ssl'
+      title='SSL'
+      button='New SSL'
+    />
   )
 }
 
-export default Ssl
+export default SSL
