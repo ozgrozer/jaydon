@@ -23,6 +23,49 @@ import APIs from './dashboard/APIs'
 
 import NotFound from './other/NotFound'
 
+const routes = {
+  '/': {
+    title: 'Dashboard',
+    component: Dashboard
+  },
+  '/users': {
+    title: 'Users',
+    component: Users
+  },
+  '/domains': {
+    title: 'Domains',
+    component: Domains
+  },
+  '/databases': {
+    title: 'Databases',
+    component: Databases
+  },
+  '/dns': {
+    title: 'DNS',
+    component: DNS
+  },
+  '/ssl': {
+    title: 'SSL',
+    component: SSL
+  },
+  '/cron': {
+    title: 'Cron',
+    component: Cron
+  },
+  '/logs': {
+    title: 'Logs',
+    component: Logs
+  },
+  '/monitor': {
+    title: 'Monitor',
+    component: Monitor
+  },
+  '/apis': {
+    title: 'APIs',
+    component: APIs
+  }
+}
+
 const App = () => {
   const [state, setState] = useContext(MainContext)
 
@@ -46,30 +89,38 @@ const App = () => {
     (state.isAuthenticated ? (
       <div id='app'>
         <div id='menu'>
-          <NavLink to='/' exact activeClassName='active'>Dashboard</NavLink>
-          <NavLink to='/users' activeClassName='active'>Users</NavLink>
-          <NavLink to='/domains' activeClassName='active'>Domains</NavLink>
-          <NavLink to='/databases' activeClassName='active'>Databases</NavLink>
-          <NavLink to='/dns' activeClassName='active'>DNS</NavLink>
-          <NavLink to='/ssl' activeClassName='active'>SSL</NavLink>
-          <NavLink to='/cron' activeClassName='active'>Cron</NavLink>
-          <NavLink to='/logs' activeClassName='active'>Logs</NavLink>
-          <NavLink to='/monitor' activeClassName='active'>Monitor</NavLink>
-          <NavLink to='/apis' activeClassName='active'>APIs</NavLink>
+          {Object.keys(routes).map((path) => {
+            const route = routes[path]
+            const exact = path === '/'
+
+            return (
+              <NavLink
+                to={path}
+                key={path}
+                exact={exact}
+                activeClassName='active'
+              >
+                {route.title}
+              </NavLink>
+            )
+          })}
           <a onClick={signOut} className='link'>Sign Out</a>
         </div>
 
         <div id='main'>
-          <Route path='/' exact component={Dashboard} />
-          <Route path='/users' component={Users} />
-          <Route path='/domains' component={Domains} />
-          <Route path='/databases' component={Databases} />
-          <Route path='/dns' component={DNS} />
-          <Route path='/ssl' component={SSL} />
-          <Route path='/cron' component={Cron} />
-          <Route path='/logs' component={Logs} />
-          <Route path='/monitor' component={Monitor} />
-          <Route path='/apis' component={APIs} />
+          {Object.keys(routes).map((path) => {
+            const route = routes[path]
+            const exact = path === '/'
+
+            return (
+              <Route
+                key={path}
+                path={path}
+                exact={exact}
+                component={route.component}
+              />
+            )
+          })}
         </div>
       </div>
     ) : (
