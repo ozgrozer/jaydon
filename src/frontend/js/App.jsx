@@ -98,11 +98,10 @@ const Main = () => {
     <MainProvider>
       <BrowserRouter>
         <Switch>
-          <Route path='/' exact component={App} />} />
-
           <Route path='/sign-in' component={Auth} />} />
           <Route path='/forgot-passwords' component={Auth} />} />
 
+          <Route path='/' exact component={App} />} />
           <Route path='/users' component={App} />} />
           <Route path='/domains' component={App} />} />
           <Route path='/databases' component={App} />} />
