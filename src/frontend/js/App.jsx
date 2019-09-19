@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react'
+import React, { useContext } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import { BrowserRouter, NavLink, Route, Redirect, Switch } from 'react-router-dom'
@@ -93,48 +93,28 @@ const Auth = () => {
   )
 }
 
-const AuthOrApp = props => {
-  const [state] = useContext(MainContext)
-
-  return (
-    <Fragment>
-      {state.isAuthenticated ? (
-        <Route render={() => <App {...props} />} />
-      ) : (
-        <Redirect to={{ pathname: '/sign-in' }} />
-      )}
-    </Fragment>
-  )
-}
-
-const RouteIndex = props => {
-  return (
-    <Switch>
-      <Route path='/' exact render={() => <AuthOrApp {...props} />} />
-
-      <Route path='/sign-in' render={() => <Auth {...props} />} />
-      <Route path='/forgot-passwords' render={() => <Auth {...props} />} />
-
-      <Route path='/users' render={() => <App {...props} />} />
-      <Route path='/domains' render={() => <App {...props} />} />
-      <Route path='/databases' render={() => <App {...props} />} />
-      <Route path='/dns' render={() => <App {...props} />} />
-      <Route path='/ssl' render={() => <App {...props} />} />
-      <Route path='/cron' render={() => <App {...props} />} />
-      <Route path='/logs' render={() => <App {...props} />} />
-      <Route path='/monitor' render={() => <App {...props} />} />
-      <Route path='/apis' render={() => <App {...props} />} />
-
-      <Route render={() => <NotFound {...props} />} />
-    </Switch>
-  )
-}
-
 const Main = () => {
   return (
     <MainProvider>
       <BrowserRouter>
-        <RouteIndex />
+        <Switch>
+          <Route path='/' exact component={App} />} />
+
+          <Route path='/sign-in' component={Auth} />} />
+          <Route path='/forgot-passwords' component={Auth} />} />
+
+          <Route path='/users' component={App} />} />
+          <Route path='/domains' component={App} />} />
+          <Route path='/databases' component={App} />} />
+          <Route path='/dns' component={App} />} />
+          <Route path='/ssl' component={App} />} />
+          <Route path='/cron' component={App} />} />
+          <Route path='/logs' component={App} />} />
+          <Route path='/monitor' component={App} />} />
+          <Route path='/apis' component={App} />} />
+
+          <Route component={NotFound} />} />
+        </Switch>
       </BrowserRouter>
     </MainProvider>
   )
