@@ -56,6 +56,7 @@ const siteRoutesIndex = async (req, res) => {
         routes,
         activePageTitle,
         siteName: defaults.site.name,
+        language: defaults.site.language,
         isAuthenticated: req.session.isAuthenticated || false
       }
     })

@@ -1,6 +1,7 @@
 const defaults = {
   site: {
     port: 1148,
+    language: 'en',
     name: 'Jaydon',
     dbName: 'jaydon',
     sessionSecret: '2$2tc^/Q2nv7y^Zi',
