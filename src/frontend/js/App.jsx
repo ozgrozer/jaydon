@@ -7,6 +7,9 @@ import './../css/style.scss'
 
 import { MainContext, MainProvider } from './context/MainContext'
 
+import SignIn from './auth/SignIn'
+import ForgotPassword from './auth/ForgotPassword'
+
 import Dashboard from './dashboard/Dashboard'
 import Users from './dashboard/Users'
 import Domains from './dashboard/Domains'
@@ -17,9 +20,6 @@ import Cron from './dashboard/Cron'
 import Logs from './dashboard/Logs'
 import Monitor from './dashboard/Monitor'
 import APIs from './dashboard/APIs'
-
-import SignIn from './auth/SignIn'
-import ForgotPassword from './auth/ForgotPassword'
 
 import NotFound from './other/NotFound'
 
