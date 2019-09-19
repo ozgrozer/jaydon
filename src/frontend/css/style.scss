@@ -8,6 +8,8 @@
 
 #menu  {
   float: left;
+  height: 100%;
+  position: fixed;
   overflow-x: auto;
   background-color: #fff;
   width: $menuDesktopWidth;
@@ -28,9 +30,8 @@
 
 #main  {
   float: left;
-  overflow-x: auto;
   background-color: $gray1;
-  -webkit-overflow-scrolling: touch;
+  margin-left: $menuDesktopWidth;
   width: calc(100% - #{$menuDesktopWidth});
   padding: $buttonHeight2 ($buttonHeight2 * 1.5);
 
