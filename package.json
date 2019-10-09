@@ -1,6 +1,7 @@
 {
   "name": "jaydon",
   "scripts": {
+    "firstRun": "node ./src/backend/firstRun.js",
     "server": "node ./src/backend/server.js",
     "start": "parcel ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --port 1147",
     "build": "parcel build ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --no-source-maps"
