@@ -14,11 +14,10 @@ router.post('/sign-in', (req, res) => {
     success: false
   }
 
-  req.session.isAuthenticated = true
-  req.session.cookie.maxAge = 2592000000
+  /* req.session.isAuthenticated = true
+  req.session.cookie.maxAge = 2592000000 */
 
   result.success = true
-
   res.json(result)
 })
 
@@ -27,9 +26,9 @@ router.post('/sign-out', (req, res) => {
     success: false
   }
 
-  delete req.session.isAuthenticated
-  result.success = true
+  /* delete req.session.isAuthenticated */
 
+  result.success = true
   res.json(result)
 })
 
