@@ -20,17 +20,16 @@ const validations = {
 }
 
 const SignIn = () => {
-  const [state, setState] = useContext(MainContext)
+  const { setState } = useContext(MainContext)
 
   useEffect(() => {
     document.title = window.defaults.routes['/sign-in'].title
   }, [])
 
   const postSubmit = (res) => {
-    setState((state) => ({
-      ...state,
+    setState({
       isAuthenticated: true
-    }))
+    })
   }
 
   return (

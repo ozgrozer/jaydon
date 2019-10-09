@@ -67,17 +67,16 @@ const routes = {
 }
 
 const App = () => {
-  const [state, setState] = useContext(MainContext)
+  const { state, setState } = useContext(MainContext)
 
   const signOut = () => {
     axios
       .post('/sign-out')
       .then((res) => {
         if (res.data.success) {
-          setState((state) => ({
-            ...state,
+          setState({
             isAuthenticated: false
-          }))
+          })
         }
       })
       .catch((err) => {
@@ -130,7 +129,7 @@ const App = () => {
 }
 
 const Auth = () => {
-  const [state] = useContext(MainContext)
+  const { state } = useContext(MainContext)
 
   return (
     (!state.isAuthenticated ? (

@@ -7,8 +7,20 @@ const MainProvider = props => {
     isAuthenticated: window.defaults.isAuthenticated || false
   })
 
+  const _setState = newState => {
+    setState(state => ({
+      ...state,
+      ...newState
+    }))
+  }
+
+  const value = {
+    state,
+    setState: _setState
+  }
+
   return (
-    <MainContext.Provider value={[state, setState]}>
+    <MainContext.Provider value={value}>
       {props.children}
     </MainContext.Provider>
   )
