@@ -16,8 +16,6 @@ const dbPath = path.join(__dirname, '..', '..', `${defaults.site.dbName}.sqlite`
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) console.log(err)
 
-  console.log(getTimeForConsole(), `Connected to database ${dbPath}`)
-
   app.listen(defaults.site.port, () => {
     console.log(getTimeForConsole(), `App is running on http://localhost:${defaults.site.port}`)
   })
