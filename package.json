@@ -23,6 +23,7 @@
     "react-router-dom": "^5.0.1",
     "rfv": "^0.0.28",
     "sass": "^1.23.0-module.beta.1",
+    "sqlite3": "^4.1.0",
     "standard": "^14.2.0"
   }
 }
