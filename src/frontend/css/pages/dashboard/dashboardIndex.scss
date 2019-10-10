@@ -1,0 +1,70 @@
+#dashboard {
+  .link {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  #menu  {
+    float: left;
+    height: 100%;
+    position: fixed;
+    overflow-x: auto;
+    background-color: #fff;
+    width: $menuDesktopWidth;
+    padding: $buttonHeight2 0;
+    -webkit-overflow-scrolling: touch;
+
+    a {
+      display: block;
+      padding: 0 $mt2;
+      color: $gray-500;
+      line-height: $mt1;
+      &:hover, &.active {
+        color: $gray-600;
+        background-color: $gray-100;
+      }
+    }
+  }
+
+  #main  {
+    float: left;
+    background-color: $gray-100;
+    margin-left: $menuDesktopWidth;
+    width: calc(100% - #{$menuDesktopWidth});
+    padding: $buttonHeight2 ($buttonHeight2 * 1.5);
+
+    .header {
+      &:after {
+        content: '';
+        clear: both;
+        display: table;
+      }
+
+      h1 {
+        float: left;
+        height: $buttonHeight1;
+        line-height: $buttonHeight1;
+      }
+
+      .btn {
+        float: right;
+      }
+    }
+
+    .content {
+      margin-top: $mt1;
+
+      .list {
+        width: 100%;
+        display: block;
+        padding: 0 $mt1;
+        margin-top: $mt2;
+        height: $buttonHeight2;
+        line-height: $buttonHeight2;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
