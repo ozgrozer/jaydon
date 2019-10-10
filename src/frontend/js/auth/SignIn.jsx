@@ -71,8 +71,8 @@ const SignIn = () => {
               className='custom-control-input'
             />
             <label
+              htmlFor='rememberMe'
               className='custom-control-label'
-              for='rememberMe'
             >
               Remember Me
             </label>
