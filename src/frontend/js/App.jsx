@@ -86,7 +86,7 @@ const App = () => {
 
   return (
     (state.isAuthenticated ? (
-      <div id='app'>
+      <div id='dashboard'>
         <div id='menu'>
           {Object.keys(routes).map((path) => {
             const route = routes[path]
