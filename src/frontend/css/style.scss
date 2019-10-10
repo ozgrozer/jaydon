@@ -1,7 +1,6 @@
-@import './bootstrap';
-
-@import './variables';
-@import './reset';
+@import './utilities/bootstrap';
+@import './utilities/variables';
+@import './utilities/reset';
 
 @import './pages/pagesIndex';
 
@@ -21,20 +20,20 @@
   -webkit-overflow-scrolling: touch;
 
   a {
-    color: $gray5;
     display: block;
     padding: 0 $mt2;
+    color: $gray-500;
     line-height: $mt1;
     &:hover, &.active {
-      color: $gray6;
-      background-color: $gray1;
+      color: $gray-600;
+      background-color: $gray-100;
     }
   }
 }
 
 #main  {
   float: left;
-  background-color: $gray1;
+  background-color: $gray-100;
   margin-left: $menuDesktopWidth;
   width: calc(100% - #{$menuDesktopWidth});
   padding: $buttonHeight2 ($buttonHeight2 * 1.5);
