@@ -57,7 +57,7 @@ const siteRoutesIndex = async (req, res) => {
         activePageTitle,
         siteName: defaults.site.name,
         language: defaults.site.language,
-        isAuthenticated: false
+        isAuthenticated: req.session.isAuthenticated || false
       }
     })
   } catch (err) {

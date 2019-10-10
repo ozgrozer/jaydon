@@ -3,7 +3,7 @@ const signIn = (req, res) => {
     success: false
   }
 
-  /* delete req.session.isAuthenticated */
+  delete req.session.isAuthenticated
 
   result.success = true
   res.json(result)

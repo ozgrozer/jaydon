@@ -23,6 +23,16 @@ const signIn = async (req, res) => {
 
     if (_dbGet.rows) {
       result.success = true
+
+      req.session.isAuthenticated = true
+
+      if (req.body.rememberMe === 'on') {
+        // cookie expires after 30 days (30 * 24 * 60 * 60 * 1000)
+        req.session.cookie.maxAge = 2592000000
+      } else {
+        // cookie expires at the end of the session
+        req.session.cookie.expires = false
+      }
     } else {
       result.error = 'User couldn\'t found'
       result.validations.username = result.error
@@ -34,9 +44,6 @@ const signIn = async (req, res) => {
     result.error = err.message
     res.json(result)
   }
-
-  /* req.session.isAuthenticated = true
-  req.session.cookie.maxAge = 2592000000 */
 }
 
 module.exports = signIn

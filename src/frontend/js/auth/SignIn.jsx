@@ -68,6 +68,7 @@ const SignIn = () => {
             <Input
               type='checkbox'
               id='rememberMe'
+              name='rememberMe'
               className='custom-control-input'
             />
             <label
