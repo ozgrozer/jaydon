@@ -14,7 +14,7 @@ const ListRecords = props => {
         {props.button ? (
           <Link
             to={`/${props.id}/new`}
-            className='button blue'
+            className='btn btn-primary btn-lg'
           >
             {props.button}
           </Link>
