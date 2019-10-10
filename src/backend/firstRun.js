@@ -36,7 +36,7 @@ db.serialize(() => {
     insert into adminUsers
     (username, password, createdAt)
     values
-    ('root', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', '${unixTime()}')
+    ('root', '4813494D137E1631BBA301D5ACAB6E7BB7AA74CE1185D456565EF51D737677B2', '${unixTime()}')
   `)
   console.log('Insert record: adminUsers')
 })
