@@ -5,6 +5,14 @@ body {
 a {
   text-decoration: none !important;
   transition: all .15s ease-in-out;
+  &:hover {
+    color: inherit;
+  }
+}
+
+body, a {
+  color: $gray-900;
+  font-size: $fontSize;
 }
 
 h1, h2, h3, h4, h5, h6 {

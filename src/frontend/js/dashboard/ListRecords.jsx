@@ -25,8 +25,8 @@ const ListRecords = props => {
         {[1, 2, 3, 4, 5].map((key) => (
           <Link
             key={key}
+            className='list'
             to={`/${props.id}/${key}`}
-            className='button white list'
           >
             {props.id} {key}
           </Link>
