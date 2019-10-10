@@ -16,9 +16,9 @@
 
     a {
       display: block;
-      padding: 0 $mt2;
       color: $gray-500;
-      line-height: $mt1;
+      line-height: $buttonHeight1;
+      padding: 0 ($buttonHeight1 / 1.5);
       &:hover, &.active {
         color: $gray-600;
         background-color: $gray-100;
