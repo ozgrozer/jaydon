@@ -43,27 +43,45 @@ const SignIn = () => {
         postSubmit={postSubmit}
         postOptions={{ method: 'post', url: '/sign-in' }}
       >
-        <div>
+        <div className='form-group'>
           <Input
             type='text'
             name='username'
             placeholder='Username'
             validations={validations.username}
+            className='form-control form-control-lg'
           />
         </div>
 
-        <div>
+        <div className='form-group'>
           <Input
             type='password'
             name='password'
             placeholder='Password'
             validations={validations.password}
+            className='form-control form-control-lg'
           />
         </div>
 
-        <div>
-          <button>Submit</button>
+        <div className='form-group'>
+          <div className='custom-control custom-checkbox'>
+            <Input
+              type='checkbox'
+              id='rememberMe'
+              className='custom-control-input'
+            />
+            <label
+              className='custom-control-label'
+              for='rememberMe'
+            >
+              Remember Me
+            </label>
+          </div>
         </div>
+
+        <button className='btn btn-primary btn-lg btn-block'>
+          Submit
+        </button>
       </Form>
     </div>
   )
