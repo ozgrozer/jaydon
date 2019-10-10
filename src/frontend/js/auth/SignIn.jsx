@@ -4,10 +4,11 @@ import { Form, Input } from 'rfv'
 import { MainContext } from './../context/MainContext'
 
 const validations = {
-  email: [
+  username: [
     {
-      rule: 'isEmail',
-      invalidFeedback: 'Please provide a valid email'
+      rule: 'isLength',
+      args: { min: 1 },
+      invalidFeedback: 'Please provide a username'
     }
   ],
   password: [
@@ -27,9 +28,13 @@ const SignIn = () => {
   }, [])
 
   const postSubmit = (res) => {
-    setState({
-      isAuthenticated: true
-    })
+    if (res.data.success) {
+      setState({
+        isAuthenticated: true
+      })
+    } else if (res.data.error) {
+      console.log(res.data.error)
+    }
   }
 
   return (
@@ -40,10 +45,10 @@ const SignIn = () => {
       >
         <div>
           <Input
-            type='email'
-            name='email'
-            placeholder='Email'
-            validations={validations.email}
+            type='text'
+            name='username'
+            placeholder='Username'
+            validations={validations.username}
           />
         </div>
 
