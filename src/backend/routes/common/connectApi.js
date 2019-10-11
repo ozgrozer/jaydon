@@ -9,7 +9,8 @@ const connectApi = async props => {
   const categories = ['domains']
   const events = ['create', 'read', 'update', 'delete']
 
-  const { apiKey, category, event, version, req, res } = props
+  const { apiKey, category, event, version } = props.meta
+  const { req, res } = props.express
 
   try {
     const checkApiKey = await dbGet({
@@ -19,7 +20,7 @@ const connectApi = async props => {
       `
     })
 
-    if (!checkApiKey.rows) {
+    if (!checkApiKey.row) {
       throw new Error('API key couldn\'t found')
     }
 

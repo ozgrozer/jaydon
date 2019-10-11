@@ -1,9 +1,12 @@
 const commonConnectApi = require.main.require('./routes/common/connectApi')
 
 const connectApi = (req, res) => {
-  const { category, event, data, version } = req.body
+  const { category, event, version } = req.body.meta
+  const data = req.body.data
   const apiKey = req.session.authenticatedUserApiKey
-  commonConnectApi({ apiKey, category, event, data, version, req, res })
+  const meta = { apiKey, category, event, version }
+  const express = { req, res }
+  commonConnectApi({ meta, data, express })
 }
 
 module.exports = connectApi

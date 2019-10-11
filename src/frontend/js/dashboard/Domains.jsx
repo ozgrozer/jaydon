@@ -6,8 +6,11 @@ import ListRecords from './ListRecords'
 const Domains = () => {
   const getDomains = async () => {
     const apiResults = await connectApi({
-      category: 'domains',
-      event: 'update'
+      meta: {
+        category: 'domains',
+        event: 'read'
+      },
+      data: {}
     })
     console.log(apiResults)
   }

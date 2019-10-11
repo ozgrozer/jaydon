@@ -2,12 +2,14 @@ import axios from 'axios'
 
 const connectApi = props => {
   const url = '/connect-api'
-  const data = props
-  data.version = '1'
+  const meta = props.meta
+  const data = props.data
+  meta.version = '1'
+  const postData = { meta, data }
 
   return new Promise((resolve, reject) => {
     axios
-      .post(url, data)
+      .post(url, postData)
       .then(res => {
         resolve(res.data)
       })
