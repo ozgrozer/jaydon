@@ -14,17 +14,18 @@ const signIn = async (req, res) => {
       .update(req.body.password)
       .digest('hex')
 
-    const _dbGet = await dbGet({
+    const getUser = await dbGet({
       query: `
-        select id from adminUsers
+        select apiKey from adminUsers
         where username='${req.body.username}' and password='${hashedPassword}'
       `
     })
 
-    if (_dbGet.rows) {
+    if (getUser.rows) {
       result.success = true
 
       req.session.isAuthenticated = true
+      req.session.authenticatedUserApiKey = getUser.rows.apiKey
 
       if (req.body.rememberMe === 'on') {
         // cookie expires after 30 days (30 * 24 * 60 * 60 * 1000)

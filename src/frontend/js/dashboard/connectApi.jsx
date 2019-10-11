@@ -3,7 +3,7 @@ import axios from 'axios'
 const connectApi = props => {
   const url = '/connect-api'
   const data = props
-  data.version = 1
+  data.version = '1'
 
   return new Promise((resolve, reject) => {
     axios
