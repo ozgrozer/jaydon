@@ -1,4 +1,4 @@
-const signIn = (req, res) => {
+const signOut = (req, res) => {
   const result = {
     success: false
   }
@@ -9,4 +9,4 @@ const signIn = (req, res) => {
   res.json(result)
 }
 
-module.exports = signIn
+module.exports = signOut
