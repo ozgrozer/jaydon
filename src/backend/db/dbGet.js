@@ -19,7 +19,7 @@ const dbGet = props => {
       }
     })
 
-    db.get(props.query, (err, rows) => {
+    db.get(props.query, (err, row) => {
       db.close(err => {
         if (err) {
           result.errorType = 'db close error'
@@ -34,7 +34,7 @@ const dbGet = props => {
         reject(result)
       }
 
-      result.rows = rows
+      result.row = row
       resolve(result)
     })
   })

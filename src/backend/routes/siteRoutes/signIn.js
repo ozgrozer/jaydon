@@ -21,11 +21,11 @@ const signIn = async (req, res) => {
       `
     })
 
-    if (getUser.rows) {
+    if (getUser.row) {
       result.success = true
 
       req.session.isAuthenticated = true
-      req.session.authenticatedUserApiKey = getUser.rows.apiKey
+      req.session.authenticatedUserApiKey = getUser.row.apiKey
 
       if (req.body.rememberMe === 'on') {
         // cookie expires after 30 days (30 * 24 * 60 * 60 * 1000)
