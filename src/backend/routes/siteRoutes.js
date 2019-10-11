@@ -1,6 +1,5 @@
 const path = require('path')
 const express = require('express')
-const helmet = require('helmet')
 const session = require('express-session')
 const SQLiteStore = require('connect-sqlite3')(session)
 
@@ -10,7 +9,6 @@ const dbPath = `./../../${defaults.site.dbName}.sqlite`
 
 const router = express.Router()
 router.use(express.json())
-router.use(helmet())
 router.use(express.static(path.join(__dirname, '..', '..', '..', 'dist')))
 router.use(session({
   resave: true,
