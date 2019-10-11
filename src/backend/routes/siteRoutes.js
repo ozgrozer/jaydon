@@ -24,5 +24,6 @@ router.use(session({
 router.get('*', require('./siteRoutes/getAll'))
 router.post('/sign-in', require('./siteRoutes/signIn'))
 router.post('/sign-out', require('./siteRoutes/signOut'))
+router.post('/connect-api', require('./siteRoutes/connectApi'))
 
 module.exports = router

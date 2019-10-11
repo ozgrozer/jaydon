@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
+import connectApi from './connectApi'
 import ListRecords from './ListRecords'
 
 const Domains = () => {
+  const getDomains = async () => {
+    const apiResults = await connectApi({
+      category: 'domains',
+      event: 'update'
+    })
+    console.log(apiResults)
+  }
+
+  useEffect(() => {
+    getDomains()
+  }, [])
+
   return (
     <ListRecords
       id='domains'
