@@ -15,6 +15,7 @@ db.serialize(() => {
       id integer primary key,
       username text,
       password text,
+      apiKey text,
       createdAt integer,
       updatedAt integer
     )
