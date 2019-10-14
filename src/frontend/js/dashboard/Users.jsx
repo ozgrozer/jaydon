@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ListRecords from './ListRecords'
+import ListRecords from './common/ListRecords'
 
 const Users = () => {
   return (

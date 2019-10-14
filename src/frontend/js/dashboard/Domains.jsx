@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import connectApi from './connectApi'
-import ListRecords from './ListRecords'
+import connectApi from './common/connectApi'
+import ListRecords from './common/ListRecords'
 
 const Domains = () => {
   const [domains, setDomains] = useState({})
