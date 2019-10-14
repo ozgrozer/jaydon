@@ -25,7 +25,6 @@ const readDomain = async (req, res) => {
     }
 
     result.success = true
-    result.name = 'readDomain'
     result.domains = getDomains
     res.json(result)
   } catch (err) {
