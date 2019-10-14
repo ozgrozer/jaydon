@@ -32,10 +32,12 @@ const Domains = props => {
   }, [])
 
   const component = {
-    id: 'domains',
-    title: 'Domains',
-    data: state.domains,
-    button: 'New Domain'
+    singularId: 'domain',
+    pluralId: 'domains',
+    singularTitle: 'Domain',
+    pluralTitle: 'Domains',
+    newButton: true,
+    data: state.domains
   }
 
   return (

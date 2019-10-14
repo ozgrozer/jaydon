@@ -4,12 +4,14 @@ const NewRecord = props => {
   const { component } = props
 
   useEffect(() => {
-    document.title = 'New - ' + window.defaults.routes[`/${component.id}`].title
+    document.title = 'New - ' + window.defaults.routes[`/${component.pluralId}`].title
   }, [])
 
   return (
     <div id='newRecord'>
-      NewRecord
+      <div className='header'>
+        <h1>New {component.singularTitle}</h1>
+      </div>
     </div>
   )
 }

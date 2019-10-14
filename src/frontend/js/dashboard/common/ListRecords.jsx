@@ -6,20 +6,20 @@ const ListRecords = props => {
   component.data = component.data || {}
 
   useEffect(() => {
-    document.title = window.defaults.routes[`/${component.id}`].title
+    document.title = window.defaults.routes[`/${component.pluralId}`].title
   }, [])
 
   return (
     <div id='listRecords'>
       <div className='header'>
-        <h1>{component.title}</h1>
+        <h1>{component.pluralTitle}</h1>
 
-        {component.button ? (
+        {component.newButton ? (
           <Link
-            to={`/${component.id}/new`}
+            to={`/${component.pluralId}/new`}
             className='btn btn-primary btn-lg'
           >
-            {component.button}
+            New {component.singularTitle}
           </Link>
         ) : null}
       </div>
@@ -33,7 +33,7 @@ const ListRecords = props => {
               <Link
                 key={key}
                 className='list'
-                to={`/${component.id}/${record.id}`}
+                to={`/${component.pluralId}/${record.id}`}
               >
                 {record.title}
               </Link>

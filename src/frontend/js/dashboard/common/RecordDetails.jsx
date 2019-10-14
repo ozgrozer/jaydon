@@ -4,12 +4,14 @@ const RecordDetails = props => {
   const { component } = props
 
   useEffect(() => {
-    document.title = 'Details - ' + window.defaults.routes[`/${component.id}`].title
+    document.title = 'Details - ' + window.defaults.routes[`/${component.pluralId}`].title
   }, [])
 
   return (
     <div id='recordDetails'>
-      RecordDetails
+      <div className='header'>
+        <h1>Edit {component.singularTitle}</h1>
+      </div>
     </div>
   )
 }
