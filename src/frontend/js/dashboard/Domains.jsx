@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react'
 
 import { MainContext } from './../context/MainContext'
 import connectApi from './common/connectApi'
-import ListRecords from './common/ListRecords'
+import Page from './common/Page'
 
 const Domains = props => {
   const { state, setState } = useContext(MainContext)
@@ -39,7 +39,7 @@ const Domains = props => {
   }
 
   return (
-    <ListRecords
+    <Page
       {...props}
       component={component}
     />

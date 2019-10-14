@@ -10,7 +10,7 @@ const ListRecords = props => {
   }, [])
 
   return (
-    <div id={component.id}>
+    <div id={`${component.id}List`}>
       <div className='header'>
         <h1>{component.title}</h1>
 
