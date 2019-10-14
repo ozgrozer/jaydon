@@ -23,10 +23,10 @@
     "morgan": "^1.9.1",
     "parcel-bundler": "1.11.0",
     "pug": "^2.0.4",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
     "react-router-dom": "^5.0.1",
-    "rfv": "^0.0.29",
+    "rfv": "^0.0.31",
     "sass": "^1.23.0-module.beta.1",
     "sqlite3": "^4.1.0",
     "standard": "^14.2.0"
