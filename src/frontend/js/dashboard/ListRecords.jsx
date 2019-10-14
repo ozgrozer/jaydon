@@ -2,6 +2,9 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const ListRecords = props => {
+  let { data } = props
+  data = data || {}
+
   useEffect(() => {
     document.title = window.defaults.routes[`/${props.id}`].title
   }, [])
@@ -22,15 +25,23 @@ const ListRecords = props => {
       </div>
 
       <div className='content'>
-        {[1, 2, 3, 4, 5].map((key) => (
-          <Link
-            key={key}
-            className='list'
-            to={`/${props.id}/${key}`}
-          >
-            {props.id} {key}
-          </Link>
-        ))}
+        {Object.keys(data).length ? (
+          Object.keys(data).map((key) => {
+            const record = data[key]
+
+            return (
+              <Link
+                key={key}
+                className='list'
+                to={`/${props.id}/${record.id}`}
+              >
+                {record.title}
+              </Link>
+            )
+          })
+        ) : (
+          <div>No record.</div>
+        )}
       </div>
     </div>
   )
