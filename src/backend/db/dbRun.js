@@ -35,7 +35,13 @@ const dbRun = props => {
         result.data.id = this.lastID
       }
 
-      result.success = true
+      if (this.changes > 0) {
+        result.success = true
+      } else {
+        result.error = 'no changes'
+        reject(result)
+      }
+
       resolve(result)
     })
 
