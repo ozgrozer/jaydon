@@ -12,15 +12,7 @@ import SignIn from './auth/SignIn'
 import ForgotPassword from './auth/ForgotPassword'
 
 import Dashboard from './dashboard/Dashboard'
-import Users from './dashboard/Users'
 import Domains from './dashboard/Domains'
-import Databases from './dashboard/Databases'
-import DNS from './dashboard/DNS'
-import SSL from './dashboard/SSL'
-import Cron from './dashboard/Cron'
-import Logs from './dashboard/Logs'
-import Monitor from './dashboard/Monitor'
-import APIs from './dashboard/APIs'
 
 import NotFound from './other/NotFound'
 
@@ -29,41 +21,9 @@ const routes = {
     title: 'Dashboard',
     component: Dashboard
   },
-  '/users': {
-    title: 'Users',
-    component: Users
-  },
   '/domains': {
     title: 'Domains',
     component: Domains
-  },
-  '/databases': {
-    title: 'Databases',
-    component: Databases
-  },
-  '/dns': {
-    title: 'DNS',
-    component: DNS
-  },
-  '/ssl': {
-    title: 'SSL',
-    component: SSL
-  },
-  '/cron': {
-    title: 'Cron',
-    component: Cron
-  },
-  '/logs': {
-    title: 'Logs',
-    component: Logs
-  },
-  '/monitor': {
-    title: 'Monitor',
-    component: Monitor
-  },
-  '/apis': {
-    title: 'APIs',
-    component: APIs
   }
 }
 
@@ -153,15 +113,7 @@ const Main = () => {
           <Route path='/forgot-passwords' component={Auth} />} />
 
           <Route path='/' exact component={App} />} />
-          <Route path='/users' component={App} />} />
           <Route path='/domains' component={App} />} />
-          <Route path='/databases' component={App} />} />
-          <Route path='/dns' component={App} />} />
-          <Route path='/ssl' component={App} />} />
-          <Route path='/cron' component={App} />} />
-          <Route path='/logs' component={App} />} />
-          <Route path='/monitor' component={App} />} />
-          <Route path='/apis' component={App} />} />
 
           <Route component={NotFound} />} />
         </Switch>

@@ -6,32 +6,8 @@ const siteRoutesIndex = async (req, res) => {
       '/': {
         title: defaults.site.name
       },
-      '/users': {
-        title: `Users - ${defaults.site.name}`
-      },
       '/domains': {
         title: `Domains - ${defaults.site.name}`
-      },
-      '/databases': {
-        title: `Databases - ${defaults.site.name}`
-      },
-      '/dns': {
-        title: `DNS - ${defaults.site.name}`
-      },
-      '/ssl': {
-        title: `SSL - ${defaults.site.name}`
-      },
-      '/cron': {
-        title: `Cron - ${defaults.site.name}`
-      },
-      '/logs': {
-        title: `Logs - ${defaults.site.name}`
-      },
-      '/monitor': {
-        title: `Monitor - ${defaults.site.name}`
-      },
-      '/apis': {
-        title: `APIs - ${defaults.site.name}`
       },
 
       '/sign-in': {
