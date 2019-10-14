@@ -10,7 +10,10 @@ const connectApi = async props => {
   const events = ['create', 'read', 'update', 'delete']
 
   const { apiKey, category, event, version } = props.meta
+  const data = props.data
   const { req, res } = props.express
+
+  req.body.data = data
 
   try {
     const checkApiKey = await dbGet({

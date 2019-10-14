@@ -6,6 +6,7 @@ const readDomain = async (req, res) => {
   try {
     let getDomains = {}
     const { data } = req.body
+
     if (Object.prototype.hasOwnProperty.call(data, 'id')) {
       const _getDomains = await dbGet({
         query: `
