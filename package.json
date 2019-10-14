@@ -18,17 +18,17 @@
     "connect-sqlite3": "^0.9.11",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "express-session": "^1.16.2",
-    "helmet": "^3.21.0",
+    "express-session": "^1.17.0",
+    "helmet": "^3.21.1",
     "morgan": "^1.9.1",
     "parcel-bundler": "1.11.0",
     "pug": "^2.0.4",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-router-dom": "^5.0.1",
+    "react-router-dom": "^5.1.2",
     "rfv": "^0.0.31",
-    "sass": "^1.23.0-module.beta.1",
+    "sass": "^1.23.0",
     "sqlite3": "^4.1.0",
-    "standard": "^14.2.0"
+    "standard": "^14.3.1"
   }
 }
