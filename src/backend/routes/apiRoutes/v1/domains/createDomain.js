@@ -13,11 +13,11 @@ const createDomain = async (req, res) => {
       }
     })
 
-    result.data = _createDomain.data
     result.success = true
+    result.data = _createDomain.data
     res.json(result)
   } catch (err) {
-    result.error = err.message
+    result.error = err.error
     res.json(result)
   }
 }
