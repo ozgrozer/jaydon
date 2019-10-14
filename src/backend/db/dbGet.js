@@ -7,9 +7,7 @@ const dbPath = path.join(__dirname, '..', '..', '..', `${defaults.site.dbName}.s
 
 const dbGet = props => {
   return new Promise((resolve, reject) => {
-    const result = {
-      success: false
-    }
+    const result = { success: false }
 
     const db = new sqlite3.Database(dbPath, err => {
       if (err) {
@@ -35,6 +33,7 @@ const dbGet = props => {
       }
 
       result.row = row
+      result.success = true
       resolve(result)
     })
   })
