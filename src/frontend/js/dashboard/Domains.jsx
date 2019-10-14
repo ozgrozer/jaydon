@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import connectApi from './connectApi'
 import ListRecords from './ListRecords'
 
 const Domains = () => {
+  const [domains, setDomains] = useState({})
+
   const getDomains = async () => {
     const apiResults = await connectApi({
       meta: {
@@ -12,7 +14,15 @@ const Domains = () => {
       },
       data: {}
     })
-    console.log(apiResults)
+
+    const _domains = {}
+    Object.keys(apiResults.data).map((key) => {
+      const data = apiResults.data[key]
+      _domains[key] = data
+      _domains[key].title = _domains[key].domain
+      delete _domains[key].domain
+    })
+    setDomains(_domains)
   }
 
   useEffect(() => {
@@ -22,6 +32,7 @@ const Domains = () => {
   return (
     <ListRecords
       id='domains'
+      data={domains}
       title='Domains'
       button='New Domain'
     />
