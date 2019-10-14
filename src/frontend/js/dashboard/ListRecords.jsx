@@ -40,7 +40,9 @@ const ListRecords = props => {
             )
           })
         ) : (
-          <div>No record.</div>
+          <div className='alert alert-secondary'>
+            No record.
+          </div>
         )}
       </div>
     </div>
