@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import connectApi from './common/connectApi'
 import ListRecords from './common/ListRecords'
 
-const Domains = () => {
+const Domains = props => {
   const [domains, setDomains] = useState({})
 
   const getDomains = async () => {
@@ -29,12 +29,17 @@ const Domains = () => {
     getDomains()
   }, [])
 
+  const component = {
+    id: 'domains',
+    data: domains,
+    title: 'Domains',
+    button: 'New Domain'
+  }
+
   return (
     <ListRecords
-      id='domains'
-      data={domains}
-      title='Domains'
-      button='New Domain'
+      {...props}
+      component={component}
     />
   )
 }

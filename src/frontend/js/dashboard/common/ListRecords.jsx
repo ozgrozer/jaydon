@@ -2,38 +2,38 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const ListRecords = props => {
-  let { data } = props
-  data = data || {}
+  const { component } = props
+  component.data = component.data || {}
 
   useEffect(() => {
-    document.title = window.defaults.routes[`/${props.id}`].title
+    document.title = window.defaults.routes[`/${component.id}`].title
   }, [])
 
   return (
-    <div id={props.id}>
+    <div id={component.id}>
       <div className='header'>
-        <h1>{props.title}</h1>
+        <h1>{component.title}</h1>
 
-        {props.button ? (
+        {component.button ? (
           <Link
-            to={`/${props.id}/new`}
+            to={`/${component.id}/new`}
             className='btn btn-primary btn-lg'
           >
-            {props.button}
+            {component.button}
           </Link>
         ) : null}
       </div>
 
       <div className='content'>
-        {Object.keys(data).length ? (
-          Object.keys(data).map((key) => {
-            const record = data[key]
+        {Object.keys(component.data).length ? (
+          Object.keys(component.data).map((key) => {
+            const record = component.data[key]
 
             return (
               <Link
                 key={key}
                 className='list'
-                to={`/${props.id}/${record.id}`}
+                to={`/${component.id}/${record.id}`}
               >
                 {record.title}
               </Link>
