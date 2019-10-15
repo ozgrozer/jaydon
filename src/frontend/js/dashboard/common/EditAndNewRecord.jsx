@@ -1,7 +1,6 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import { Form, Input } from 'rfv'
 
-import { MainContext } from '~/src/frontend/js/context/MainContext'
 import connectApi from '~/src/frontend/js/dashboard/common/connectApi'
 import validations from '~/src/common/validations'
 
@@ -17,8 +16,6 @@ const EditAndNewRecord = props => {
   let formName = section === 'new' ? 'create' : 'edit'
   formName += ucFirst(component.id)
   const formEvent = section === 'new' ? 'create' : 'update'
-
-  const { setState } = useContext(MainContext)
 
   useEffect(() => {
     document.title = sectionTitle + ' - ' + window.defaults.routes[`/${component.id}`].title
@@ -36,7 +33,9 @@ const EditAndNewRecord = props => {
         }
       })
 
-      console.log(apiResults)
+      if (apiResults.success) {
+        props.history.push(`/${component.id}`)
+      }
     }
   }
 
