@@ -11,10 +11,14 @@ const lowerCaseFirstLetter = str => {
   return str.charAt(0).toLowerCase() + str.substr(1)
 }
 
+const upperCaseFirstLetter = str => {
+  return str.charAt(0).toUpperCase() + str.substr(1)
+}
+
 const validatePost = (req, res, next) => {
   let section
-  if (req.body.controllerName) {
-    section = req.body.controllerName
+  if (req.body.meta) {
+    section = req.body.meta.event + upperCaseFirstLetter(req.body.meta.category)
   } else {
     section = camelCase(req.originalUrl.substr(1))
     section = lowerCaseFirstLetter(section)

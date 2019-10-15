@@ -28,7 +28,7 @@ const validations = {
     password: premade.password
   },
 
-  editDomain: {
+  createDomains: {
     domain: premade.domain
   }
 }
