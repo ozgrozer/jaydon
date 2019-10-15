@@ -1,24 +1,8 @@
 import React, { useEffect, useContext } from 'react'
 import { Form, Input } from 'rfv'
 
-import { MainContext } from './../context/MainContext'
-
-const validations = {
-  username: [
-    {
-      rule: 'isLength',
-      args: { min: 1 },
-      invalidFeedback: 'Please provide a username'
-    }
-  ],
-  password: [
-    {
-      rule: 'isLength',
-      args: { min: 1 },
-      invalidFeedback: 'Please provide a password'
-    }
-  ]
-}
+import { MainContext } from '~/src/frontend/js/context/MainContext'
+import validations from '~/src/common/validations'
 
 const SignIn = () => {
   const { setState } = useContext(MainContext)
@@ -48,7 +32,7 @@ const SignIn = () => {
             type='text'
             name='username'
             placeholder='Username'
-            validations={validations.username}
+            validations={validations.signIn.username}
             className='form-control form-control-lg'
           />
         </div>
@@ -58,7 +42,7 @@ const SignIn = () => {
             type='password'
             name='password'
             placeholder='Password'
-            validations={validations.password}
+            validations={validations.signIn.password}
             className='form-control form-control-lg'
           />
         </div>
