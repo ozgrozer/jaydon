@@ -28,8 +28,8 @@ const Domains = props => {
   }
 
   useEffect(() => {
-    getDomains()
-  }, [])
+    if (props.location.pathname === '/domains') getDomains()
+  }, [props.location.pathname])
 
   const component = {
     id: 'domains',
@@ -39,7 +39,7 @@ const Domains = props => {
     data: state.domains,
     form: {
       items: [
-        { type: 'input', name: 'domain', placeholder: 'Domain (example1.com)' }
+        { type: 'input', name: 'domain', placeholder: 'Domain (example.com)' }
       ]
     }
   }
