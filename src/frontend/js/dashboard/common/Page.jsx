@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-import ListRecords from './ListRecords'
-import EditAndNewRecord from './EditAndNewRecord'
+import ListRecords from '~/src/frontend/js/dashboard/common/ListRecords'
+import EditAndNewRecord from '~/src/frontend/js/dashboard/common/EditAndNewRecord'
 
 const Page = props => {
   const { component } = props
