@@ -4,6 +4,7 @@ const session = require('express-session')
 const SQLiteStore = require('connect-sqlite3')(session)
 
 const defaults = require.main.require('./defaults')
+const validatePost = require.main.require('./middleware/validatePost')
 
 const dbPath = `./../../${defaults.site.dbName}.sqlite`
 
@@ -22,7 +23,7 @@ router.use(session({
 }))
 
 router.get('*', require('./siteRoutes/getAll'))
-router.post('/sign-in', require('./siteRoutes/signIn'))
+router.post('/sign-in', [validatePost], require('./siteRoutes/signIn'))
 router.post('/sign-out', require('./siteRoutes/signOut'))
 router.post('/connect-api', require('./siteRoutes/connectApi'))
 
