@@ -1,4 +1,14 @@
 #dashboard {
+  .box1 {
+    padding: $mt1;
+    background-color: #fff;
+    border-radius: $borderRadius;
+    box-shadow: 0 0 5px 0 $gray-200;
+  }
+  .container1 {
+    width: 400px;
+  }
+
   .link {
     cursor: pointer;
     user-select: none;
@@ -64,12 +74,6 @@
         &:first-child {
           margin-top: 0;
         }
-      }
-      .box1 {
-        padding: $mt1;
-        background-color: #fff;
-        border-radius: $borderRadius;
-        box-shadow: 0 0 5px 0 $gray-200;
       }
     }
   }
