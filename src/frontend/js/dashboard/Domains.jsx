@@ -29,7 +29,7 @@ const Domains = props => {
 
   useEffect(() => {
     getDomains()
-  }, [])
+  }, [props.location.pathname])
 
   const component = {
     id: 'domains',
