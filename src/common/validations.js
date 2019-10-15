@@ -13,6 +13,13 @@ const premade = {
       invalidFeedback: 'Password must be at least 4 characters'
     }
   ],
+  id: [
+    {
+      rule: 'isLength',
+      args: { min: 1 },
+      invalidFeedback: 'Please provide an ID'
+    }
+  ],
   domain: [
     {
       rule: 'isURL',
@@ -32,6 +39,7 @@ const validations = {
     domain: premade.domain
   },
   editDomains: {
+    id: premade.id,
     domain: premade.domain
   }
 }
