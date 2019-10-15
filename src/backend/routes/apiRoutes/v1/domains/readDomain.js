@@ -18,7 +18,7 @@ const readDomain = async (req, res) => {
     } else {
       const _getDomains = await dbAll({
         query: `
-          select * from domains
+          select * from domains order by id desc
         `
       })
       getDomains = _getDomains.rows
