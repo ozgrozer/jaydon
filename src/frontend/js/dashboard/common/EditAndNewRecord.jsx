@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Input } from 'rfv'
 
 import connectApi from '~/src/frontend/js/dashboard/common/connectApi'
@@ -17,8 +17,25 @@ const EditAndNewRecord = props => {
   formName += ucFirst(component.id)
   const formEvent = section === 'new' ? 'create' : 'update'
 
+  const [record, setRecord] = useState({})
+  const readApi = async () => {
+    const apiResults = await connectApi({
+      meta: {
+        category: component.id,
+        event: 'read'
+      },
+      data: {
+        id: recordId
+      }
+    })
+
+    setRecord(apiResults.data)
+  }
+
   useEffect(() => {
     document.title = sectionTitle + ' - ' + window.defaults.routes[`/${component.id}`].title
+
+    if (section === 'edit') readApi()
   }, [])
 
   const onSubmit = async res => {
@@ -28,9 +45,7 @@ const EditAndNewRecord = props => {
           category: component.id,
           event: formEvent
         },
-        data: {
-          domain: res.items.domain
-        }
+        data: res.items
       })
 
       if (apiResults.success) {
@@ -55,6 +70,7 @@ const EditAndNewRecord = props => {
                     <Input
                       type='text'
                       name={formItem.name}
+                      value={record[formItem.name]}
                       placeholder={formItem.placeholder}
                       className='form-control form-control-lg'
                       validations={validations[formName][formItem.name]}
@@ -66,6 +82,15 @@ const EditAndNewRecord = props => {
               <button className='btn btn-primary btn-lg btn-block'>
                 {buttonTitle}
               </button>
+
+              {section === 'edit' && (
+                <Input
+                  name='id'
+                  type='hidden'
+                  value={recordId}
+                  validations={validations[formName].id}
+                />
+              )}
             </Form>
           </div>
         </div>
