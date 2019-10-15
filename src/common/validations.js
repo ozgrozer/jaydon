@@ -30,6 +30,9 @@ const validations = {
 
   createDomains: {
     domain: premade.domain
+  },
+  editDomains: {
+    domain: premade.domain
   }
 }
 

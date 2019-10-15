@@ -32,12 +32,16 @@ const Domains = props => {
   }, [])
 
   const component = {
-    singularId: 'domain',
-    pluralId: 'domains',
+    id: 'domains',
     singularTitle: 'Domain',
     pluralTitle: 'Domains',
     newButton: true,
-    data: state.domains
+    data: state.domains,
+    form: {
+      items: [
+        { type: 'input', name: 'domain', placeholder: 'Domain (example1.com)' }
+      ]
+    }
   }
 
   return (
