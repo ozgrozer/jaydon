@@ -55,22 +55,21 @@
       margin-top: $mt1;
 
       a.list {
-        width: 100%;
-        height: 100px;
         display: block;
-        padding: 0 $mt1;
         margin-top: $mt2;
         font-weight: bold;
-        line-height: 100px;
-        background-color: #fff;
-        border-radius: $borderRadius;
-        box-shadow: 0 0 5px 0 $gray-200;
         &:hover {
           box-shadow: 0 0 20px 0 $gray-300;
         }
         &:first-child {
           margin-top: 0;
         }
+      }
+      .box1 {
+        padding: $mt1;
+        background-color: #fff;
+        border-radius: $borderRadius;
+        box-shadow: 0 0 5px 0 $gray-200;
       }
     }
   }

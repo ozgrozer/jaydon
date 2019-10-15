@@ -12,7 +12,9 @@ const Dashboard = () => {
       </div>
 
       <div className='content'>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio quis, delectus eos ea magnam alias non officiis mollitia cum quisquam harum inventore, quo explicabo cupiditate reiciendis rem minus qui aperiam?
+        <div className='box1'>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio quis, delectus eos ea magnam alias non officiis mollitia cum quisquam harum inventore, quo explicabo cupiditate reiciendis rem minus qui aperiam?
+        </div>
       </div>
     </div>
   )

@@ -32,7 +32,7 @@ const ListRecords = props => {
             return (
               <Link
                 key={key}
-                className='list'
+                className='box1 list'
                 to={`/${component.pluralId}/${record.id}`}
               >
                 {record.title}

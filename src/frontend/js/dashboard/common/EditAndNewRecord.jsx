@@ -15,6 +15,12 @@ const EditAndNewRecord = props => {
       <div className='header'>
         <h1>{sectionTitle} {component.singularTitle}</h1>
       </div>
+
+      <div className='content'>
+        <div className='box1'>
+          test
+        </div>
+      </div>
     </div>
   )
 }
