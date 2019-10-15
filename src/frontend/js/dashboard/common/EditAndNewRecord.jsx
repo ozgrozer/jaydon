@@ -54,6 +54,24 @@ const EditAndNewRecord = props => {
     }
   }
 
+  const deleteRecord = async () => {
+    if (window.confirm('Are you sure you want to delete this record?')) {
+      const apiResults = await connectApi({
+        meta: {
+          category: component.id,
+          event: 'delete'
+        },
+        data: {
+          id: recordId
+        }
+      })
+
+      if (apiResults.success) {
+        props.history.push(`/${component.id}`)
+      }
+    }
+  }
+
   return (
     <div id='newRecord'>
       <div className='header'>
@@ -92,6 +110,15 @@ const EditAndNewRecord = props => {
                 />
               )}
             </Form>
+
+            {section === 'edit' && (
+              <a
+                onClick={deleteRecord}
+                className='link text-danger mt1 d-inline-block'
+              >
+                Delete {component.singularTitle}?
+              </a>
+            )}
           </div>
         </div>
       </div>
