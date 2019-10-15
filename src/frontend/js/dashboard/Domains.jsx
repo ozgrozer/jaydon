@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from 'react'
 
-import { MainContext } from './../context/MainContext'
-import connectApi from './common/connectApi'
-import Page from './common/Page'
+import { MainContext } from '~/src/frontend/js/context/MainContext'
+import connectApi from '~/src/frontend/js/dashboard/common/connectApi'
+import Page from '~/src/frontend/js/dashboard/common/Page'
 
 const Domains = props => {
   const { state, setState } = useContext(MainContext)
@@ -29,7 +29,7 @@ const Domains = props => {
 
   useEffect(() => {
     getDomains()
-  }, [props.location.pathname])
+  }, [])
 
   const component = {
     id: 'domains',
