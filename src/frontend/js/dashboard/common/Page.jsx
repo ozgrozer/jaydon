@@ -5,25 +5,27 @@ import ListRecords from './ListRecords'
 import EditAndNewRecord from './EditAndNewRecord'
 
 const Page = props => {
+  const { component } = props
+
   return (
     <div id='page'>
       <Route
         exact
-        path='/domains/:recordId'
+        path={`/${component.id}/:recordId`}
         component={_props => (
           <EditAndNewRecord
             {..._props}
-            component={props.component}
+            component={component}
           />
         )}
       />
       <Route
         exact
-        path='/domains'
+        path={`/${component.id}`}
         component={_props => (
           <ListRecords
             {..._props}
-            component={props.component}
+            component={component}
           />
         )}
       />
