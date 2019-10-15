@@ -27,10 +27,13 @@ cd jaydon
 # Install dependencies
 yarn install
 
+# Create necessary tables
+yarn run firstRun
+
 # Start server with PM2
 pm2 start ./src/backend/server.js --name jaydon -i max
 
-# Open browser and go to
+# Open your browser and go to
 http://your-ip:1148
 ```
 
@@ -48,3 +51,7 @@ http://your-ip:1148
 - [ ] Logs
 - [ ] Monitor
 - [ ] API
+
+### License
+
+[MIT](license)
