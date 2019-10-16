@@ -1,8 +1,9 @@
 .DS_Store
 .cache
+.vagrant
 dist
 node_modules
-yarn-error.log
+*.log
 *.sublime-project
 *.sublime-workspace
 *.sqlite
