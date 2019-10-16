@@ -13,9 +13,8 @@ const EditAndNewRecord = props => {
   const sectionTitle = section === 'new' ? 'New' : 'Edit'
   let buttonTitle = section === 'new' ? 'Add' : 'Update'
   buttonTitle += ` ${component.singularTitle}`
-  let formName = section === 'new' ? 'create' : 'edit'
-  formName += ucFirst(component.id)
   const formEvent = section === 'new' ? 'create' : 'update'
+  const formName = formEvent + ucFirst(component.id)
 
   const [record, setRecord] = useState({})
   const readApi = async () => {

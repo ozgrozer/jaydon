@@ -38,9 +38,14 @@ const validations = {
   createDomains: {
     domain: premade.domain
   },
-  editDomains: {
+  readDomains: {
+  },
+  updateDomains: {
     id: premade.id,
     domain: premade.domain
+  },
+  deleteDomains: {
+    id: premade.id
   }
 }
 
