@@ -17,22 +17,28 @@ const upperCaseFirstLetter = str => {
 
 const validatePost = (req, res, next) => {
   let section
+  let postBody
+
   if (req.body.meta) {
     section = req.body.meta.event + upperCaseFirstLetter(req.body.meta.category)
+
+    postBody = req.body.data
   } else {
     section = camelCase(req.originalUrl.substr(1))
     section = lowerCaseFirstLetter(section)
+
+    postBody = req.body
   }
   const totalValidations = Object.keys(validations[section]).length
   let howManyOfFormItemsAreValidated = 0
   const errorResult = {}
 
-  Object.keys(req.body).map((name) => {
+  Object.keys(postBody).map((name) => {
     const validation = validations[section][name]
       ? validations[section][name][0]
       : false
     const validate = validation
-      ? validator[validation.rule](req.body[name], validation.args)
+      ? validator[validation.rule](postBody[name], validation.args)
       : false
     if (validate) {
       howManyOfFormItemsAreValidated++
@@ -41,13 +47,21 @@ const validatePost = (req, res, next) => {
     }
   })
 
-  if (howManyOfFormItemsAreValidated === totalValidations) {
-    next()
+  if (req.body.meta) {
+    if (howManyOfFormItemsAreValidated === totalValidations) {
+      return true
+    } else {
+      throw new Error('Validation error')
+    }
   } else {
-    res.json({
-      success: false,
-      error: 'Validation error'
-    })
+    if (howManyOfFormItemsAreValidated === totalValidations) {
+      next()
+    } else {
+      res.json({
+        success: false,
+        error: 'Validation error'
+      })
+    }
   }
 }
 

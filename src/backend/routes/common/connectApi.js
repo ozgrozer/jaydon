@@ -1,4 +1,5 @@
 const { dbGet } = require.main.require('./db/db')
+const validatePost = require.main.require('./middleware/validatePost')
 
 const ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
 const removeLast = str => str.substring(0, str.length - 1)
@@ -11,7 +12,7 @@ const connectApi = async props => {
 
   const { apiKey, category, event, version } = props.meta
   const data = props.data
-  const { req, res } = props.express
+  const { req, res, next } = props.express
 
   req.body.data = data
 
@@ -37,6 +38,8 @@ const connectApi = async props => {
 
     const categoryRemoveLast = removeLast(category)
     const categoryUcFirst = ucFirst(categoryRemoveLast)
+
+    validatePost(req, res, next)
 
     const requirePath = `./routes/apiRoutes/v${version}/${category}/${event}${categoryUcFirst}`
     const requiredEvent = require.main.require(requirePath)
