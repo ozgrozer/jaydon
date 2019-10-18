@@ -29,7 +29,13 @@ const createWwwDirectory = async props => {
   const result = await exec(`mkdir ${wwwDirectoryPath}`)
   return result
 }
-
+const updateWwwDirectory = async props => {
+  const { oldDomain, newDomain } = props
+  const oldWwwDirectoryPath = `${defaults.nginx.dir.www}/${oldDomain}`
+  const newWwwDirectoryPath = `${defaults.nginx.dir.www}/${newDomain}`
+  const result = await exec(`mv ${oldWwwDirectoryPath} ${newWwwDirectoryPath}`)
+  return result
+}
 const deleteWwwDirectory = async props => {
   const { domain } = props
   const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
@@ -44,7 +50,12 @@ const createNginxConfFile = async props => {
   const result = await exec(`echo "${nginxConfFileContent}" > ${nginxConfFilePath}`)
   return result
 }
-
+const updateNginxConfFile = async props => {
+  const { oldDomain, newDomain } = props
+  await deleteNginxConfFile({ domain: oldDomain })
+  const result = await createNginxConfFile({ domain: newDomain })
+  return result
+}
 const deleteNginxConfFile = async props => {
   const { domain } = props
   const nginxConfFilePath = `${defaults.nginx.dir.core}/sites-available/${domain}`
@@ -54,8 +65,12 @@ const deleteNginxConfFile = async props => {
 
 module.exports = {
   nginxConfGen,
+
   createWwwDirectory,
+  updateWwwDirectory,
   deleteWwwDirectory,
+
   createNginxConfFile,
+  updateNginxConfFile,
   deleteNginxConfFile
 }
