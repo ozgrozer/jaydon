@@ -32,9 +32,10 @@ const createDomainRow = async props => {
 
 const createDomain = async (req, res) => {
   const result = { success: false }
-  const { domain } = req.body.data
 
   try {
+    const { domain } = req.body.data
+
     await createWwwDirectory({ domain })
     await createNginxConfFile({ domain })
     const _createDomainRow = await createDomainRow({ domain })
