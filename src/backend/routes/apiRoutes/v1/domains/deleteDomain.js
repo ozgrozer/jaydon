@@ -3,11 +3,11 @@ const defaults = require.main.require('./defaults')
 const { dbRun, dbGet } = require.main.require('./db/db')
 
 const getDomain = async props => {
-  const { domainId } = props
+  const { id } = props
   const getDomain = await dbGet({
     query: `
       select domain from domains
-      where id='${domainId}'
+      where id='${id}'
     `
   })
   const domain = getDomain.row.domain
@@ -29,11 +29,11 @@ const deleteNginxConfFile = async props => {
 }
 
 const deleteDomainRow = async props => {
-  const { domainId } = props
+  const { id } = props
   const deleteRecord = await dbRun({
     query: 'delete from domains where id=$id',
     params: {
-      $id: domainId
+      $id: id
     }
   })
   return deleteRecord
@@ -43,12 +43,12 @@ const deleteDomain = async (req, res) => {
   const result = { success: false }
 
   try {
-    const domainId = req.body.data.id
+    const { id } = req.body.data
 
-    const domain = await getDomain({ domainId })
+    const domain = await getDomain({ id })
     await deleteWwwDirectory({ domain })
     await deleteNginxConfFile({ domain })
-    const _deleteDomainRow = await deleteDomainRow({ domainId })
+    const _deleteDomainRow = await deleteDomainRow({ id })
 
     result.success = true
     result.data = _deleteDomainRow.data
