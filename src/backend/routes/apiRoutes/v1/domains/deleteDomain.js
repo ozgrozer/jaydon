@@ -1,5 +1,4 @@
-const exec = require.main.require('./common/exec')
-const defaults = require.main.require('./defaults')
+const { deleteWwwDirectory, deleteNginxConfFile } = require.main.require('./common/nginx')
 const { dbRun, dbGet } = require.main.require('./db/db')
 
 const getDomain = async props => {
@@ -12,20 +11,6 @@ const getDomain = async props => {
   })
   const domain = getDomain.row.domain
   return domain
-}
-
-const deleteWwwDirectory = async props => {
-  const { domain } = props
-  const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
-  const result = await exec(`rm -r ${wwwDirectoryPath}`)
-  return result
-}
-
-const deleteNginxConfFile = async props => {
-  const { domain } = props
-  const nginxConfFilePath = `${defaults.nginx.dir.core}/sites-available/${domain}`
-  const result = await exec(`rm ${nginxConfFilePath}`)
-  return result
 }
 
 const deleteDomainRow = async props => {
