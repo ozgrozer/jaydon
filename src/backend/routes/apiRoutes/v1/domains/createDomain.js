@@ -3,29 +3,44 @@ const { nginxConfGen } = require.main.require('./common/nginx')
 const defaults = require.main.require('./defaults')
 const { dbRun } = require.main.require('./db/db')
 
+const createWwwDirectory = async props => {
+  const { domain } = props
+  const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
+  const result = await exec(`mkdir ${wwwDirectoryPath}`)
+  return result
+}
+
+const createNginxConfFile = async props => {
+  const { domain } = props
+  const nginxConfFilePath = `${defaults.nginx.dir.core}/sites-available/${domain}`
+  const nginxConfFileContent = nginxConfGen({ domain })
+  const result = await exec(`echo "${nginxConfFileContent}" > ${nginxConfFilePath}`)
+  return result
+}
+
+const createDomainRecord = async props => {
+  const { domain } = props
+  const createRecord = await dbRun({
+    query: 'insert into domains(domain, createdAt) values($domain, $createdAt)',
+    params: {
+      $domain: domain,
+      $createdAt: +new Date()
+    }
+  })
+  return createRecord
+}
+
 const createDomain = async (req, res) => {
   const result = { success: false }
-  const { data } = req.body
-  const { domain } = data
+  const { domain } = req.body.data
 
   try {
-    const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
-    await exec(`mkdir ${wwwDirectoryPath}`)
-
-    const nginxConfFilePath = `${defaults.nginx.dir.core}/sites-available/${domain}`
-    const nginxConfFileContent = nginxConfGen({ domain: domain })
-    await exec(`echo "${nginxConfFileContent}" > ${nginxConfFilePath}`)
-
-    const _createDomain = await dbRun({
-      query: 'insert into domains(domain, createdAt) values($domain, $createdAt)',
-      params: {
-        $domain: domain,
-        $createdAt: +new Date()
-      }
-    })
+    await createWwwDirectory({ domain })
+    await createNginxConfFile({ domain })
+    const _createDomainRecord = await createDomainRecord({ domain })
 
     result.success = true
-    result.data = _createDomain.data
+    result.data = _createDomainRecord.data
     res.json(result)
   } catch (err) {
     result.error = err.message
