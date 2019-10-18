@@ -4,6 +4,12 @@ const defaults = {
     language: 'en',
     name: 'Jaydon',
     dbName: 'jaydon'
+  },
+  nginx: {
+    dir: {
+      core: '/etc/nginx',
+      www: '/var/www'
+    }
   }
 }
 
