@@ -4,7 +4,7 @@ Nginx Control Panel
 
 > This is an experimental control panel written for a niche reason. Use at your own risk.
 
-### Before Installation
+## Before Installation
 
 You need:
 
@@ -15,7 +15,32 @@ You need:
 - [Yarn](https://www.npmjs.com/package/yarn)
 - [PM2](https://www.npmjs.com/package/pm2)
 
-### Installation
+> Unless other control panels in Jaydon you control the versions of your softwares such as Nginx, Node.js etc.
+
+If you're using Ubuntu you can use these commands to simply install dependencies.
+
+```
+# Update package list
+sudo apt update -y
+
+# Install Nginx
+sudo apt install nginx -y
+
+# Install Git
+sudo apt install git -y
+
+# Install Node.js
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt install nodejs -y
+
+# Install Yarn
+sudo npm i -g yarn
+
+# Install PM2
+sudo npm i -g pm2
+```
+
+## Installation
 
 ```
 # Download repository
@@ -37,11 +62,11 @@ pm2 start ./src/backend/server.js --name jaydon -i max
 http://your-ip:1148
 ```
 
-### Preview
+## Preview
 
 <img src="preview.jpg" alt="" width="600" />
 
-### Todo
+## Todo
 
 - [ ] Domains
 - [ ] Users
@@ -52,6 +77,6 @@ http://your-ip:1148
 - [ ] Monitor
 - [ ] API
 
-### License
+## License
 
 [MIT](license)
