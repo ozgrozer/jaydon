@@ -18,7 +18,7 @@ const createNginxConfFile = async props => {
   return result
 }
 
-const createDomainRecord = async props => {
+const createDomainRow = async props => {
   const { domain } = props
   const createRecord = await dbRun({
     query: 'insert into domains(domain, createdAt) values($domain, $createdAt)',
@@ -37,10 +37,10 @@ const createDomain = async (req, res) => {
   try {
     await createWwwDirectory({ domain })
     await createNginxConfFile({ domain })
-    const _createDomainRecord = await createDomainRecord({ domain })
+    const _createDomainRow = await createDomainRow({ domain })
 
     result.success = true
-    result.data = _createDomainRecord.data
+    result.data = _createDomainRow.data
     res.json(result)
   } catch (err) {
     result.error = err.message
