@@ -1,5 +1,19 @@
 const { createWwwDirectory, createNginxConfFile } = require.main.require('./common/nginx')
-const { dbRun } = require.main.require('./db/db')
+const { dbRun, dbGet } = require.main.require('./db/db')
+
+const checkDomainRow = async props => {
+  const { domain } = props
+  const checkDomain = await dbGet({
+    query: `
+      select domain from domains
+      where domain='${domain}'
+    `
+  })
+  if (checkDomain.row) {
+    throw new Error('Domain already exists')
+  }
+  return true
+}
 
 const createDomainRow = async props => {
   const { domain } = props
@@ -19,6 +33,7 @@ const createDomain = async (req, res) => {
   try {
     const { domain } = req.body.data
 
+    await checkDomainRow({ domain })
     await createWwwDirectory({ domain })
     await createNginxConfFile({ domain })
     const _createDomainRow = await createDomainRow({ domain })

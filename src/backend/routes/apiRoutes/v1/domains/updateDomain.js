@@ -13,6 +13,20 @@ const getDomain = async props => {
   return domain
 }
 
+const checkDomainRow = async props => {
+  const { domain } = props
+  const checkDomain = await dbGet({
+    query: `
+      select domain from domains
+      where domain='${domain}'
+    `
+  })
+  if (checkDomain.row) {
+    throw new Error('Domain already exists')
+  }
+  return true
+}
+
 const updateDomainRow = async props => {
   const { id, domain } = props
   const updateRecord = await dbRun({
@@ -32,6 +46,7 @@ const updateDomain = async (req, res) => {
   try {
     const { id, domain } = req.body.data
 
+    await checkDomainRow({ domain })
     const oldDomain = await getDomain({ id })
     await updateWwwDirectory({
       oldDomain,
@@ -47,7 +62,7 @@ const updateDomain = async (req, res) => {
     result.data = _updateDomainRow.data
     res.json(result)
   } catch (err) {
-    result.error = err.error
+    result.error = err.message
     res.json(result)
   }
 }
