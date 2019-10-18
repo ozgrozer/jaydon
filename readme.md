@@ -4,9 +4,19 @@ Nginx Control Panel
 
 > This is an experimental control panel written for a niche reason. Use at your own risk.
 
+## Quick Installation
+
+If you're using Ubuntu you can run this command to install everything in **Before Installation** and **Installation** sections.
+
+```
+curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install.sh | bash
+```
+
 ## Before Installation
 
-You need:
+> Unlike other control panels with Jaydon you control the versions of your softwares such as Nginx, Node.js etc.
+
+Before you install Jaydon you need:
 
 - [Nginx](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
@@ -14,8 +24,6 @@ You need:
 - [NPM](https://www.npmjs.com/get-npm)
 - [Yarn](https://www.npmjs.com/package/yarn)
 - [PM2](https://www.npmjs.com/package/pm2)
-
-> Unless other control panels in Jaydon you control the versions of your softwares such as Nginx, Node.js etc.
 
 If you're using Ubuntu you can use these commands to simply install dependencies.
 
@@ -41,6 +49,8 @@ sudo npm i -g pm2
 ```
 
 ## Installation
+
+If you have all the dependencies above now you can install Jaydon.
 
 ```
 # Download repository
