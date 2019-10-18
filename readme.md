@@ -44,19 +44,18 @@ sudo npm i -g pm2
 
 ```
 # Download repository
-git clone https://github.com/ozgrozer/jaydon.git
-
-# Change directory
-cd jaydon
+git clone https://github.com/ozgrozer/jaydon.git && cd jaydon
 
 # Install dependencies
 yarn install
 
-# Create necessary tables
+# Create necessary database tables
 yarn run firstRun
 
 # Start server with PM2
 pm2 start ./src/backend/server.js --name jaydon -i max
+pm2 startup
+pm2 save
 
 # Open your browser and go to
 http://your-ip:1148
