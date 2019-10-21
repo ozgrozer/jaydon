@@ -3,6 +3,9 @@ import React, { useContext } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import { BrowserRouter, NavLink, Route, Redirect, Switch } from 'react-router-dom'
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import 'animate.css'
 
 import './../css/style.scss'
 
@@ -107,6 +110,8 @@ const Auth = () => {
 const Main = () => {
   return (
     <MainProvider>
+      <ReactNotification />
+
       <BrowserRouter>
         <Switch>
           <Route path='/sign-in' component={Auth} />} />
