@@ -1,4 +1,4 @@
-const { updateWwwDirectory, updateNginxConfFile } = require.main.require('./common/nginx')
+const { updateNginxSite } = require.main.require('./common/nginx')
 const { dbRun, dbGet } = require.main.require('./db/db')
 
 const getDomain = async props => {
@@ -48,11 +48,7 @@ const updateDomain = async (req, res) => {
 
     await checkDomainRow({ domain })
     const oldDomain = await getDomain({ id })
-    await updateWwwDirectory({
-      oldDomain,
-      newDomain: domain
-    })
-    await updateNginxConfFile({
+    await updateNginxSite({
       oldDomain,
       newDomain: domain
     })

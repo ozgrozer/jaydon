@@ -1,4 +1,4 @@
-const { deleteWwwDirectory, deleteNginxConfFile } = require.main.require('./common/nginx')
+const { deleteNginxSite } = require.main.require('./common/nginx')
 const { dbRun, dbGet } = require.main.require('./db/db')
 
 const getDomain = async props => {
@@ -31,8 +31,7 @@ const deleteDomain = async (req, res) => {
     const { id } = req.body.data
 
     const domain = await getDomain({ id })
-    await deleteWwwDirectory({ domain })
-    await deleteNginxConfFile({ domain })
+    await deleteNginxSite({ domain })
     const _deleteDomainRow = await deleteDomainRow({ id })
 
     result.success = true

@@ -23,54 +23,60 @@ server {
   return deleteFirstLine(result)
 }
 
-const createWwwDirectory = async props => {
+const createNginxSite = async props => {
   const { domain } = props
   const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
-  const result = await exec(`mkdir ${wwwDirectoryPath}`)
+  const nginxConfFileContent = nginxConfGen({ domain })
+  const nginxConfFilePath = `${defaults.nginx.dir.core}/sites-available/${domain}`
+  const nginxLinkedConfFolderPath = `${defaults.nginx.dir.core}/sites-enabled/`
+
+  const createWwwDirectory = `mkdir ${wwwDirectoryPath}`
+  const createNginxConfFile = `echo "${nginxConfFileContent}" > ${nginxConfFilePath}`
+  const linkNginxConfFile = `ln -s ${nginxConfFilePath} ${nginxLinkedConfFolderPath}`
+  const restartNginxService = 'service nginx restart'
+
+  const result = await exec(`${createWwwDirectory} && ${createNginxConfFile} && ${linkNginxConfFile} && ${restartNginxService}`)
   return result
 }
-const updateWwwDirectory = async props => {
+const updateNginxSite = async props => {
   const { oldDomain, newDomain } = props
   const oldWwwDirectoryPath = `${defaults.nginx.dir.www}/${oldDomain}`
   const newWwwDirectoryPath = `${defaults.nginx.dir.www}/${newDomain}`
-  const result = await exec(`mv ${oldWwwDirectoryPath} ${newWwwDirectoryPath}`)
+  const oldNginxConfFilePath = `${defaults.nginx.dir.core}/sites-available/${oldDomain}`
+  const oldLinkedNginxConfFilePath = `${defaults.nginx.dir.core}/sites-enabled/${oldDomain}`
+  const nginxConfFileContent = nginxConfGen({ domain: newDomain })
+  const nginxConfFilePath = `${defaults.nginx.dir.core}/sites-available/${newDomain}`
+  const nginxLinkedConfFolderPath = `${defaults.nginx.dir.core}/sites-enabled/`
+
+  const updateWwwDirectory = `mv ${oldWwwDirectoryPath} ${newWwwDirectoryPath}`
+  const deleteOldNginxConfFile = `rm ${oldNginxConfFilePath}`
+  const deleteOldLinkedNginxConfFile = `rm ${oldLinkedNginxConfFilePath}`
+  const createNginxConfFile = `echo "${nginxConfFileContent}" > ${nginxConfFilePath}`
+  const linkNginxConfFile = `ln -s ${nginxConfFilePath} ${nginxLinkedConfFolderPath}`
+  const restartNginxService = 'service nginx restart'
+
+  const result = await exec(`${updateWwwDirectory} && ${deleteOldNginxConfFile} && ${deleteOldLinkedNginxConfFile} && ${createNginxConfFile} && ${linkNginxConfFile} && ${restartNginxService}`)
   return result
 }
-const deleteWwwDirectory = async props => {
+const deleteNginxSite = async props => {
   const { domain } = props
   const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
-  const result = await exec(`rm -r ${wwwDirectoryPath}`)
-  return result
-}
+  const nginxConfFilePath = `${defaults.nginx.dir.core}/sites-available/${domain}`
+  const nginxLinkedConfFilePath = `${defaults.nginx.dir.core}/sites-enabled/${domain}`
 
-const createNginxConfFile = async props => {
-  const { domain } = props
-  const nginxConfFilePath = `${defaults.nginx.dir.core}/sites-available/${domain}`
-  const nginxConfFileContent = nginxConfGen({ domain })
-  const result = await exec(`echo "${nginxConfFileContent}" > ${nginxConfFilePath}`)
-  return result
-}
-const updateNginxConfFile = async props => {
-  const { oldDomain, newDomain } = props
-  await deleteNginxConfFile({ domain: oldDomain })
-  const result = await createNginxConfFile({ domain: newDomain })
-  return result
-}
-const deleteNginxConfFile = async props => {
-  const { domain } = props
-  const nginxConfFilePath = `${defaults.nginx.dir.core}/sites-available/${domain}`
-  const result = await exec(`rm ${nginxConfFilePath}`)
+  const deleteWwwDirectory = `rm -r ${wwwDirectoryPath}`
+  const deleteNginxConfFile = `rm ${nginxConfFilePath}`
+  const deleteLinkedNginxConfFile = `rm ${nginxLinkedConfFilePath}`
+  const restartNginxService = 'service nginx restart'
+
+  const result = await exec(`${deleteWwwDirectory} && ${deleteNginxConfFile} && ${deleteLinkedNginxConfFile} && ${restartNginxService}`)
   return result
 }
 
 module.exports = {
   nginxConfGen,
 
-  createWwwDirectory,
-  updateWwwDirectory,
-  deleteWwwDirectory,
-
-  createNginxConfFile,
-  updateNginxConfFile,
-  deleteNginxConfFile
+  createNginxSite,
+  updateNginxSite,
+  deleteNginxSite
 }
