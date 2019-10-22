@@ -34,6 +34,10 @@ If you're using Ubuntu you can use these commands to simply install dependencies
 # Update package list
 sudo apt update -y
 
+# Install gcc and g++
+sudo apt install gcc
+sudo apt install g++
+
 # Install Nginx
 sudo apt install nginx -y
 
