@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Input } from 'rfv'
 
+import notification from '~/src/frontend/js/common/notification'
 import connectApi from '~/src/frontend/js/dashboard/common/connectApi'
 import validations from '~/src/common/validations'
 
@@ -49,6 +50,20 @@ const EditAndNewRecord = props => {
 
       if (apiResults.success) {
         props.history.push(`/${component.id}`)
+
+        const message = section === 'new'
+          ? 'Domain added'
+          : 'Domain updated'
+
+        notification({
+          type: 'success',
+          message
+        })
+      } else {
+        notification({
+          type: 'danger',
+          message: apiResults.error
+        })
       }
     }
   }
@@ -67,6 +82,16 @@ const EditAndNewRecord = props => {
 
       if (apiResults.success) {
         props.history.push(`/${component.id}`)
+
+        notification({
+          type: 'success',
+          message: 'Domain deleted'
+        })
+      } else {
+        notification({
+          type: 'danger',
+          message: apiResults.error
+        })
       }
     }
   }
