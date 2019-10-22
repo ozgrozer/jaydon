@@ -38,8 +38,11 @@ const EditAndNewRecord = props => {
     if (section === 'edit') readApi()
   }, [])
 
+  const [formIsSubmitting, setFormIsSubmitting] = useState(false)
   const onSubmit = async res => {
     if (res.isFormValid) {
+      setFormIsSubmitting(true)
+
       const apiResults = await connectApi({
         meta: {
           category: component.id,
@@ -47,6 +50,8 @@ const EditAndNewRecord = props => {
         },
         data: res.items
       })
+
+      setFormIsSubmitting(false)
 
       if (apiResults.success) {
         props.history.push(`/${component.id}`)
@@ -70,6 +75,8 @@ const EditAndNewRecord = props => {
 
   const deleteRecord = async () => {
     if (window.confirm('Are you sure you want to delete this record?')) {
+      setFormIsSubmitting(true)
+
       const apiResults = await connectApi({
         meta: {
           category: component.id,
@@ -79,6 +86,8 @@ const EditAndNewRecord = props => {
           id: recordId
         }
       })
+
+      setFormIsSubmitting(false)
 
       if (apiResults.success) {
         props.history.push(`/${component.id}`)
@@ -106,33 +115,35 @@ const EditAndNewRecord = props => {
         <div className='box1'>
           <div className='container1'>
             <Form onSubmit={onSubmit}>
-              {component.form.items.map((formItem, key) => {
-                return (
-                  <div key={key} className='form-group'>
-                    <Input
-                      type='text'
-                      name={formItem.name}
-                      value={record[formItem.name]}
-                      placeholder={formItem.placeholder}
-                      className='form-control form-control-lg'
-                      validations={validations[formName][formItem.name]}
-                    />
-                  </div>
-                )
-              })}
+              <fieldset disabled={formIsSubmitting}>
+                {component.form.items.map((formItem, key) => {
+                  return (
+                    <div key={key} className='form-group'>
+                      <Input
+                        type='text'
+                        name={formItem.name}
+                        value={record[formItem.name]}
+                        placeholder={formItem.placeholder}
+                        className='form-control form-control-lg'
+                        validations={validations[formName][formItem.name]}
+                      />
+                    </div>
+                  )
+                })}
 
-              <button className='btn btn-primary btn-lg btn-block'>
-                {buttonTitle}
-              </button>
+                <button className='btn btn-primary btn-lg btn-block'>
+                  {buttonTitle}
+                </button>
 
-              {section === 'edit' && (
-                <Input
-                  name='id'
-                  type='hidden'
-                  value={recordId}
-                  validations={validations[formName].id}
-                />
-              )}
+                {section === 'edit' && (
+                  <Input
+                    name='id'
+                    type='hidden'
+                    value={recordId}
+                    validations={validations[formName].id}
+                  />
+                )}
+              </fieldset>
             </Form>
 
             {section === 'edit' && (
