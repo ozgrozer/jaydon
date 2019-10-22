@@ -9,7 +9,7 @@ Nginx Control Panel
 
 ## Quick Installation
 
-If you're using Ubuntu you can run this command to install everything in **Before Installation** and **Installation** sections.
+If you're using Ubuntu 18 you can run this command to install everything in **Before Installation** and **Installation** sections.
 
 ```
 curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install.sh | bash
@@ -21,6 +21,7 @@ curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install.sh | ba
 
 Before you install Jaydon you need:
 
+- [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 - [Nginx](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Node.js](https://nodejs.org/en/download/package-manager/)
@@ -28,15 +29,20 @@ Before you install Jaydon you need:
 - [Yarn](https://www.npmjs.com/package/yarn)
 - [PM2](https://www.npmjs.com/package/pm2)
 
-If you're using Ubuntu you can use these commands to simply install dependencies.
+If you're using Ubuntu 18 you can use these commands to simply install dependencies.
 
 ```
 # Update package list
 sudo apt update -y
 
-# Install gcc and g++
-sudo apt install gcc -y
-sudo apt install g++ -y
+# Install MongoDB
+sudo apt install gnupg -y
+wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+sudo apt update -y
+sudo apt install mongodb-org -y
+sudo service mongod start
+systemctl enable mongod.service
 
 # Install Nginx
 sudo apt install nginx -y
@@ -65,9 +71,6 @@ git clone https://github.com/ozgrozer/jaydon.git && cd jaydon
 
 # Install dependencies
 yarn install
-
-# Rebuild packages
-yarn rebuild
 
 # Create necessary database tables
 yarn run firstRun
