@@ -2,8 +2,8 @@ echo "1/11. Updating package list"
 sudo apt update -y
 
 echo "2/11. Installing gcc and g++"
-sudo apt install gcc
-sudo apt install g++
+sudo apt install gcc -y
+sudo apt install g++ -y
 
 echo "3/11. Installing Nginx"
 sudo apt install nginx -y
