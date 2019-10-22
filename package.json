@@ -1,12 +1,27 @@
 {
   "name": "jaydon",
+  "version": "0.0.1",
+  "description": "Nginx Control Panel",
+  "license": "MIT",
+  "keywords": [
+    "nginx",
+    "control-panel"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ozgrozer/jaydon.git"
+  },
+  "author": {
+    "name": "Ozgur",
+    "email": "ozgr@live.com",
+    "url": "https://github.com/ozgrozer"
+  },
   "scripts": {
     "firstRun": "node ./src/backend/firstRun.js",
     "server": "node ./src/backend/server.js",
     "start": "parcel ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --port 1147 --hmr-port 1150",
     "build": "parcel build ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --no-source-maps"
   },
-  "license": "MIT",
   "dependencies": {
     "animate.css": "^3.7.2",
     "axios": "^0.19.0",
