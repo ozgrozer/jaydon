@@ -8,7 +8,7 @@ echo "3. Installing Git."
 sudo apt install git -y
 
 echo "4. Installing Node.js."
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt install nodejs -y
 
 echo "5. Installing Yarn."
