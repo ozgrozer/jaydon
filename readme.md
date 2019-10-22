@@ -1,5 +1,8 @@
 # jaydon
 
+[![tag](https://img.shields.io/github/tag/ozgrozer/jaydon.svg)](https://github.com/ozgrozer/jaydon/tags)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ozgrozer/jaydon/blob/master/license)
+
 Nginx Control Panel
 
 > This is an experimental control panel written for a niche reason. Use at your own risk.
