@@ -1,32 +1,8 @@
 import React, { useEffect } from 'react'
-import { store } from 'react-notifications-component'
-
-const notification = props => {
-  const { title, message, type } = props
-
-  store.addNotification({
-    title,
-    message,
-    type,
-    width: 200,
-    container: 'bottom-left',
-    animationIn: ['animated', 'fadeIn'],
-    animationOut: ['animated', 'fadeOut'],
-    dismiss: {
-      duration: 3000,
-      pauseOnHover: true
-    }
-  })
-}
 
 const Dashboard = () => {
   useEffect(() => {
     document.title = window.defaults.routes['/'].title
-
-    notification({
-      type: 'success',
-      message: 'Successfully created'
-    })
   }, [])
 
   return (
