@@ -12,7 +12,7 @@ Nginx Control Panel
 If you're using Ubuntu you can run this command to install everything in **Before Installation** and **Installation** sections.
 
 ```
-curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/v0.1.2/install.sh | bash
+curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install.sh | bash
 ```
 
 ## Before Installation
