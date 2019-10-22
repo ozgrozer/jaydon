@@ -1,6 +1,6 @@
 {
   "name": "jaydon",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Nginx Control Panel",
   "license": "MIT",
   "keywords": [
@@ -20,7 +20,8 @@
     "firstRun": "node ./src/backend/firstRun.js",
     "server": "node ./src/backend/server.js",
     "start": "parcel ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --port 1147 --hmr-port 1150",
-    "build": "parcel build ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --no-source-maps"
+    "build": "parcel build ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --no-source-maps",
+    "rebuild": "npm rebuild"
   },
   "dependencies": {
     "animate.css": "^3.7.2",

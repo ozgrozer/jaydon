@@ -66,6 +66,9 @@ git clone https://github.com/ozgrozer/jaydon.git && cd jaydon
 # Install dependencies
 yarn install
 
+# Rebuild packages
+yarn rebuild
+
 # Create necessary database tables
 yarn run firstRun
 
