@@ -1,5 +1,12 @@
+const os = require('os')
+
 const defaults = require.main.require('./defaults')
 const exec = require.main.require('./common/exec')
+
+const osType = os.type()
+const restartNginxServiceCommand = osType === 'Darwin'
+  ? 'brew services restart nginx'
+  : 'service nginx restart'
 
 const deleteFirstLine = str => {
   const lines = str.split('\n')
@@ -33,9 +40,8 @@ const createNginxSite = async props => {
   const createWwwDirectory = `mkdir ${wwwDirectoryPath}`
   const createNginxConfFile = `echo "${nginxConfFileContent}" > ${nginxConfFilePath}`
   const linkNginxConfFile = `ln -s ${nginxConfFilePath} ${nginxLinkedConfFolderPath}`
-  const restartNginxService = 'service nginx restart'
 
-  const result = await exec(`${createWwwDirectory} && ${createNginxConfFile} && ${linkNginxConfFile} && ${restartNginxService}`)
+  const result = await exec(`${createWwwDirectory} && ${createNginxConfFile} && ${linkNginxConfFile} && ${restartNginxServiceCommand}`)
   return result
 }
 const updateNginxSite = async props => {
@@ -53,9 +59,8 @@ const updateNginxSite = async props => {
   const deleteOldLinkedNginxConfFile = `rm ${oldLinkedNginxConfFilePath}`
   const createNginxConfFile = `echo "${nginxConfFileContent}" > ${nginxConfFilePath}`
   const linkNginxConfFile = `ln -s ${nginxConfFilePath} ${nginxLinkedConfFolderPath}`
-  const restartNginxService = 'service nginx restart'
 
-  const result = await exec(`${updateWwwDirectory} && ${deleteOldNginxConfFile} && ${deleteOldLinkedNginxConfFile} && ${createNginxConfFile} && ${linkNginxConfFile} && ${restartNginxService}`)
+  const result = await exec(`${updateWwwDirectory} && ${deleteOldNginxConfFile} && ${deleteOldLinkedNginxConfFile} && ${createNginxConfFile} && ${linkNginxConfFile} && ${restartNginxServiceCommand}`)
   return result
 }
 const deleteNginxSite = async props => {
@@ -67,9 +72,8 @@ const deleteNginxSite = async props => {
   const deleteWwwDirectory = `rm -r ${wwwDirectoryPath}`
   const deleteNginxConfFile = `rm ${nginxConfFilePath}`
   const deleteLinkedNginxConfFile = `rm ${nginxLinkedConfFilePath}`
-  const restartNginxService = 'service nginx restart'
 
-  const result = await exec(`${deleteWwwDirectory} && ${deleteNginxConfFile} && ${deleteLinkedNginxConfFile} && ${restartNginxService}`)
+  const result = await exec(`${deleteWwwDirectory} && ${deleteNginxConfFile} && ${deleteLinkedNginxConfFile} && ${restartNginxServiceCommand}`)
   return result
 }
 
