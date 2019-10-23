@@ -1,9 +1,9 @@
 const defaults = {
   site: {
     port: 1148,
-    language: 'en',
     name: 'Jaydon',
-    dbName: 'jaydon'
+    dbName: 'jaydon',
+    dbUrl: 'mongodb://127.0.0.1:27017/'
   },
   nginx: {
     dir: {
