@@ -1,6 +1,6 @@
 const crypto = require('crypto')
 
-const { dbGet } = require.main.require('./db/db')
+const { findDocuments } = require.main.require('./db/db')
 
 const signIn = async (req, res) => {
   const result = {
@@ -9,23 +9,28 @@ const signIn = async (req, res) => {
   }
 
   try {
-    const hashedPassword = crypto
+    const username = req.body.username
+    const password = crypto
       .createHash('sha256')
       .update(req.body.password)
       .digest('hex')
 
-    const getUser = await dbGet({
-      query: `
-        select apiKey from adminUsers
-        where username='${req.body.username}' and password='${hashedPassword}'
-      `
+    const findUsers = await findDocuments({
+      model: 'adminUsers',
+      find: {
+        username,
+        password
+      },
+      select: 'apiKey'
     })
 
-    if (getUser.row) {
+    if (Object.keys(findUsers).length) {
+      const foundUser = findUsers[0]
+
       result.success = true
 
       req.session.isAuthenticated = true
-      req.session.authenticatedUserApiKey = getUser.row.apiKey
+      req.session.authenticatedUserApiKey = foundUser.apiKey
 
       if (req.body.rememberMe === 'on') {
         // cookie expires after 30 days (30 * 24 * 60 * 60 * 1000)
