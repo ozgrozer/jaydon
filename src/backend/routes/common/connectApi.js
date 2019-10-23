@@ -1,4 +1,4 @@
-const { dbGet } = require.main.require('./db/db')
+const { findDocuments } = require.main.require('./db/db')
 const validatePost = require.main.require('./middleware/validatePost')
 
 const ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
@@ -17,14 +17,13 @@ const connectApi = async props => {
   req.body.data = data
 
   try {
-    const checkApiKey = await dbGet({
-      query: `
-        select apiKey from adminUsers
-        where apiKey='${apiKey}'
-      `
+    const findApiKeys = await findDocuments({
+      model: 'adminUsers',
+      find: { apiKey },
+      select: 'apiKey'
     })
 
-    if (!checkApiKey.row) {
+    if (!Object.keys(findApiKeys).length) {
       throw new Error('API key couldn\'t found')
     }
 
