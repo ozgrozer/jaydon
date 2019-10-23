@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 
 const schemas = require('./schemas')
 
-const createModel = (opts) => {
+const createModel = props => {
   const necessarySchema = { createdAt: Number, updatedAt: Number }
-  const combineSchemas = { ...necessarySchema, ...schemas[opts.name] }
+  const combineSchemas = { ...necessarySchema, ...schemas[props.name] }
   const schema = mongoose.Schema(combineSchemas)
 
   schema.pre('save', function (next) {
@@ -18,7 +18,13 @@ const createModel = (opts) => {
     this.update({}, { $set: { updatedAt: unixTime } })
   })
 
-  return mongoose.model(opts.name, schema)
+  schema.method('toJSON', function () {
+    const { __v, _id, ...object } = this.toObject()
+    object.id = _id
+    return object
+  })
+
+  return mongoose.model(props.name, schema)
 }
 
 module.exports = createModel
