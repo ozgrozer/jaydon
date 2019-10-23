@@ -26,7 +26,7 @@ sudo npm i -g yarn
 echo "7/11. Installing PM2"
 sudo npm i -g pm2
 
-echo "8/11. Downloading repository"
+echo "8/11. Downloading Jaydon"
 git clone https://github.com/ozgrozer/jaydon.git && cd jaydon
 
 echo "9/11. Installing dependencies"

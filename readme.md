@@ -66,7 +66,7 @@ sudo npm i -g pm2
 If you have all the dependencies above now you can install Jaydon.
 
 ```
-# Download repository
+# Download Jaydon
 git clone https://github.com/ozgrozer/jaydon.git && cd jaydon
 
 # Install dependencies
