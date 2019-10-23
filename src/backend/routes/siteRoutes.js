@@ -16,6 +16,7 @@ router.use(session({
   key: defaults.site.dbName,
   secret: '#%qj#+8dvw8H7U9E',
   store: new MongoStore({
+    useUnifiedTopology: true,
     url: defaults.site.dbUrl + defaults.site.dbName
   }),
   cookie: { maxAge: 2592000000 }/* 30 days (30 * 24 * 60 * 60 * 1000) */
