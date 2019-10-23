@@ -32,7 +32,6 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "bootstrap": "^4.3.1",
-    "connect-sqlite3": "^0.9.11",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
@@ -46,7 +45,6 @@
     "react-router-dom": "^5.1.2",
     "rfv": "^0.0.31",
     "sass": "^1.23.0",
-    "sqlite3": "^4.1.0",
     "standard": "^14.3.1"
   }
 }
