@@ -1,27 +1,28 @@
 const { deleteNginxSite } = require.main.require('./common/nginx')
-const { dbRun, dbGet } = require.main.require('./db/db')
+const { findDocuments, deleteDocuments } = require.main.require('./db/db')
 
 const getDomain = async props => {
   const { id } = props
-  const getDomain = await dbGet({
-    query: `
-      select domain from domains
-      where id='${id}'
-    `
+  const findDomains = await findDocuments({
+    model: 'domains',
+    find: { _id: id },
+    select: 'domain'
   })
-  const domain = getDomain.row.domain
-  return domain
+
+  if (Object.keys(findDomains).length) {
+    return findDomains[0].domain
+  } else {
+    throw new Error('Domain couldn\'t found')
+  }
 }
 
-const deleteDomainRow = async props => {
+const deleteDomainDocument = async props => {
   const { id } = props
-  const deleteRecord = await dbRun({
-    query: 'delete from domains where id=$id',
-    params: {
-      $id: id
-    }
+  const deleteDomain = await deleteDocuments({
+    model: 'domains',
+    select: { _id: id }
   })
-  return deleteRecord
+  return deleteDomain
 }
 
 const deleteDomain = async (req, res) => {
@@ -32,10 +33,10 @@ const deleteDomain = async (req, res) => {
 
     const domain = await getDomain({ id })
     await deleteNginxSite({ domain })
-    const _deleteDomainRow = await deleteDomainRow({ id })
+    const _deleteDomainDocument = await deleteDomainDocument({ id })
 
     result.success = true
-    result.data = _deleteDomainRow.data
+    result.data = _deleteDomainDocument
     res.json(result)
   } catch (err) {
     result.error = err.message

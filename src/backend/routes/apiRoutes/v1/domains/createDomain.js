@@ -1,30 +1,28 @@
 const { createNginxSite } = require.main.require('./common/nginx')
-const { dbRun, dbGet } = require.main.require('./db/db')
+const { findDocuments, newDocument } = require.main.require('./db/db')
 
-const checkDomainRow = async props => {
+const ifDomainExists = async props => {
   const { domain } = props
-  const checkDomain = await dbGet({
-    query: `
-      select domain from domains
-      where domain='${domain}'
-    `
+  const findDomains = await findDocuments({
+    model: 'domains',
+    find: { domain },
+    select: 'domain'
   })
-  if (checkDomain.row) {
+
+  if (Object.keys(findDomains).length) {
     throw new Error('Domain already exists')
+  } else {
+    return true
   }
-  return true
 }
 
-const createDomainRow = async props => {
+const newDomain = async props => {
   const { domain } = props
-  const createRecord = await dbRun({
-    query: 'insert into domains(domain, createdAt) values($domain, $createdAt)',
-    params: {
-      $domain: domain,
-      $createdAt: +new Date()
-    }
+  const _newDomain = await newDocument({
+    model: 'domains',
+    data: { domain }
   })
-  return createRecord
+  return _newDomain
 }
 
 const createDomain = async (req, res) => {
@@ -33,12 +31,12 @@ const createDomain = async (req, res) => {
   try {
     const { domain } = req.body.data
 
-    await checkDomainRow({ domain })
+    await ifDomainExists({ domain })
     await createNginxSite({ domain })
-    const _createDomainRow = await createDomainRow({ domain })
+    const _newDomain = await newDomain({ domain })
 
     result.success = true
-    result.data = _createDomainRow.data
+    result.data = _newDomain
     res.json(result)
   } catch (err) {
     result.error = err.message

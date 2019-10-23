@@ -1,41 +1,42 @@
 const { updateNginxSite } = require.main.require('./common/nginx')
-const { dbRun, dbGet } = require.main.require('./db/db')
+const { findDocuments, updateDocument } = require.main.require('./db/db')
+
+const ifDomainExists = async props => {
+  const { domain } = props
+  const findDomains = await findDocuments({
+    model: 'domains',
+    find: { domain },
+    select: 'domain'
+  })
+
+  if (Object.keys(findDomains).length) {
+    throw new Error('Domain already exists')
+  } else {
+    return true
+  }
+}
 
 const getDomain = async props => {
   const { id } = props
-  const getDomain = await dbGet({
-    query: `
-      select domain from domains
-      where id='${id}'
-    `
+  const findDomains = await findDocuments({
+    model: 'domains',
+    find: { _id: id },
+    select: 'domain'
   })
-  const domain = getDomain.row.domain
-  return domain
-}
 
-const checkDomainRow = async props => {
-  const { domain } = props
-  const checkDomain = await dbGet({
-    query: `
-      select domain from domains
-      where domain='${domain}'
-    `
-  })
-  if (checkDomain.row) {
-    throw new Error('Domain already exists')
+  if (Object.keys(findDomains).length) {
+    return findDomains[0].domain
+  } else {
+    throw new Error('Domain couldn\'t found')
   }
-  return true
 }
 
-const updateDomainRow = async props => {
+const updateDomainDocument = async props => {
   const { id, domain } = props
-  const updateRecord = await dbRun({
-    query: 'update domains set domain=$domain, updatedAt=$updatedAt where id=$id',
-    params: {
-      $id: id,
-      $domain: domain,
-      $updatedAt: +new Date()
-    }
+  const updateRecord = await updateDocument({
+    model: 'domains',
+    query: { _id: id },
+    data: { domain }
   })
   return updateRecord
 }
@@ -46,16 +47,16 @@ const updateDomain = async (req, res) => {
   try {
     const { id, domain } = req.body.data
 
-    await checkDomainRow({ domain })
+    await ifDomainExists({ domain })
     const oldDomain = await getDomain({ id })
     await updateNginxSite({
       oldDomain,
       newDomain: domain
     })
-    const _updateDomainRow = await updateDomainRow({ id, domain })
+    const _updateDomainDocument = await updateDomainDocument({ id, domain })
 
     result.success = true
-    result.data = _updateDomainRow.data
+    result.data = _updateDomainDocument
     res.json(result)
   } catch (err) {
     result.error = err.message

@@ -1,31 +1,22 @@
-const { dbGet, dbAll } = require.main.require('./db/db')
+const { findDocuments } = require.main.require('./db/db')
 
 const readDomain = async (req, res) => {
   const result = { success: false }
 
   try {
-    let getDomains = {}
     const { data } = req.body
 
-    if (Object.prototype.hasOwnProperty.call(data, 'id')) {
-      const _getDomains = await dbGet({
-        query: `
-          select * from domains
-          where id='${data.id}'
-        `
-      })
-      getDomains = _getDomains.row
-    } else {
-      const _getDomains = await dbAll({
-        query: `
-          select * from domains order by id desc
-        `
-      })
-      getDomains = _getDomains.rows
-    }
+    const ifIdExists = Object.prototype.hasOwnProperty.call(data, 'id')
+    const find = ifIdExists ? { _id: data.id } : {}
+    const _findDomains = await findDocuments({
+      model: 'domains',
+      find,
+      sort: { _id: -1 }
+    })
+    const findDomains = ifIdExists ? _findDomains[0] : _findDomains
 
     result.success = true
-    result.data = getDomains
+    result.data = findDomains
     res.json(result)
   } catch (err) {
     result.error = err.message
