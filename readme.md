@@ -112,6 +112,10 @@ And just run it.
 - [ ] Monitor
 - [ ] API
 
+## Contribution
+
+Feel free to contribute. Open a new [issue](https://github.com/ozgrozer/jaydon/issues), or make a [pull request](https://github.com/ozgrozer/jaydon/pulls).
+
 ## License
 
 [MIT](license)
