@@ -83,6 +83,20 @@ pm2 save
 http://your-ip:1148
 ```
 
+## Update
+
+Make sure update.sh is executable.
+
+```
+chmod +x update.sh
+```
+
+And just run it.
+
+```
+./update.sh
+```
+
 ## Preview
 
 <img src="preview.jpg" alt="" width="600" />
