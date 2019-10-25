@@ -5,15 +5,16 @@ const nginxConfigurationGenerator = props => {
   const { domain } = props
   const domainDirectory = `${defaults.nginx.dir.www}/${domain}`
 
-  const result = `
-server {
-  listen 80;
-  server_name ${domain};
-  root ${domainDirectory};
-}
-`
+  const str = `
+    server {
+      listen 80;
+      server_name ${domain};
+      root ${domainDirectory};
+    }
+  `
+  const spaces = 4
 
-  return fixContent(result)
+  return fixContent({ str, spaces })
 }
 
 module.exports = nginxConfigurationGenerator
