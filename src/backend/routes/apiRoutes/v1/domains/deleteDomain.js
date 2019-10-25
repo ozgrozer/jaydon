@@ -1,4 +1,4 @@
-const { deleteNginxSite } = require.main.require('./common/nginx')
+const { deleteNginxSite } = require.main.require('./nginx/nginx')
 const { findDocuments, deleteDocuments } = require.main.require('./db/db')
 
 const getDomain = async props => {

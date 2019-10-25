@@ -1,4 +1,4 @@
-const { createNginxSite } = require.main.require('./common/nginx')
+const { createNginxSite } = require.main.require('./nginx/nginx')
 const { findDocuments, newDocument } = require.main.require('./db/db')
 
 const ifDomainExists = async props => {
