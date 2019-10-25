@@ -39,7 +39,8 @@ const Domains = props => {
     data: state.domains,
     form: {
       items: [
-        { type: 'input', name: 'domain', placeholder: 'Domain (example.com)' }
+        { element: 'input', type: 'text', name: 'domain', placeholder: 'Domain (example.com)' },
+        { element: 'input', type: 'checkbox', name: 'gitSupport', label: 'Git support' }
       ]
     }
   }
