@@ -7,6 +7,49 @@ import validations from '~/src/common/validations'
 
 const ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
 
+const FormItem = props => {
+  const { formItem, record, formName } = props
+
+  const formItemId = `${formName}-${formItem.name}`
+
+  if (formItem.element === 'input') {
+    if (formItem.type === 'checkbox') {
+      return (
+        <div className='form-group'>
+          <div className='custom-control custom-checkbox'>
+            <Input
+              id={formItemId}
+              name={formItem.name}
+              type={formItem.type}
+              className='form-control custom-control-input'
+              validations={validations[formName][formItem.name]}
+            />
+            <label
+              htmlFor={formItemId}
+              className='custom-control-label'
+            >
+              {formItem.label}
+            </label>
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div className='form-group'>
+          <Input
+            name={formItem.name}
+            type={formItem.type}
+            value={record[formItem.name]}
+            placeholder={formItem.placeholder}
+            className='form-control form-control-lg'
+            validations={validations[formName][formItem.name]}
+          />
+        </div>
+      )
+    }
+  }
+}
+
 const EditAndNewRecord = props => {
   const { component } = props
   const recordId = props.match.params.recordId
@@ -114,24 +157,20 @@ const EditAndNewRecord = props => {
       <div className='content'>
         <div className='box1'>
           <div className='container1'>
-            <Form onSubmit={onSubmit}>
+            <Form className='form1' onSubmit={onSubmit}>
               <fieldset disabled={formIsSubmitting}>
                 {component.form.items.map((formItem, key) => {
                   return (
-                    <div key={key} className='form-group'>
-                      <Input
-                        type='text'
-                        name={formItem.name}
-                        value={record[formItem.name]}
-                        placeholder={formItem.placeholder}
-                        className='form-control form-control-lg'
-                        validations={validations[formName][formItem.name]}
-                      />
-                    </div>
+                    <FormItem
+                      key={key}
+                      record={record}
+                      formItem={formItem}
+                      formName={formName}
+                    />
                   )
                 })}
 
-                <button className='btn btn-primary btn-lg btn-block'>
+                <button className='btn btn-primary btn-lg btn-block mt1'>
                   {buttonTitle}
                 </button>
 
