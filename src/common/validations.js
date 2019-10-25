@@ -26,6 +26,13 @@ const premade = {
       args: { protocols: [] },
       invalidFeedback: 'Please provide a valid domain'
     }
+  ],
+  checkbox: [
+    {
+      rule: 'equals',
+      args: 'on',
+      invalidFeedback: 'Please check'
+    }
   ]
 }
 
@@ -36,7 +43,8 @@ const validations = {
   },
 
   createDomains: {
-    domain: premade.domain
+    domain: premade.domain,
+    gitSupport: []
   },
   readDomains: {
   },
