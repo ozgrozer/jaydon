@@ -5,7 +5,8 @@ const schemas = {
     apiKey: { type: String, required: true }
   },
   domains: {
-    domain: { type: String, required: true }
+    domain: { type: String, required: true },
+    gitSupport: { type: Boolean }
   }
 }
 

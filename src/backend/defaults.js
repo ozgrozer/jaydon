@@ -10,6 +10,12 @@ const defaults = {
       core: '/etc/nginx',
       www: '/var/www'
     }
+  },
+  git: {
+    dir: {
+      bare: '/var/git',
+      www: '/var/www'
+    }
   }
 }
 
