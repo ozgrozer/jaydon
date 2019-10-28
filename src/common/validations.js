@@ -43,8 +43,7 @@ const validations = {
   },
 
   createDomains: {
-    domain: premade.domain,
-    gitSupport: []
+    domain: premade.domain
   },
   readDomains: {
   },
