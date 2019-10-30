@@ -1,4 +1,4 @@
-const { updateNginxSite } = require.main.require('./nginx/nginx')
+const { updateNginxSite, updateGitSupport } = require.main.require('./nginx/nginx')
 const { findDocuments, updateDocument } = require.main.require('./db/db')
 
 const ifDomainExists = async props => {
@@ -57,6 +57,7 @@ const updateDomain = async (req, res) => {
     if (oldDomain !== newDomain) {
       await ifDomainExists({ domain: newDomain })
       await updateNginxSite({ oldDomain, newDomain })
+      if (oldDomainGitSupport) await updateGitSupport({ oldDomain, newDomain })
     }
 
     const _updateDomainDocument = await updateDomainDocument({
