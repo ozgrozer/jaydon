@@ -3,6 +3,7 @@ const { findDocuments, updateDocument } = require.main.require('./db/db')
 
 const ifDomainExists = async props => {
   const { domain } = props
+
   const findDomains = await findDocuments({
     model: 'domains',
     find: { domain },
@@ -16,16 +17,16 @@ const ifDomainExists = async props => {
   }
 }
 
-const getDomain = async props => {
+const getDomainDocument = async props => {
   const { id } = props
   const findDomains = await findDocuments({
     model: 'domains',
     find: { _id: id },
-    select: 'domain'
+    select: 'domain gitSupport'
   })
 
   if (Object.keys(findDomains).length) {
-    return findDomains[0].domain
+    return findDomains[0]
   } else {
     throw new Error('Domain couldn\'t found')
   }
@@ -45,15 +46,24 @@ const updateDomain = async (req, res) => {
   const result = { success: false }
 
   try {
-    const { id, domain } = req.body.data
+    const id = req.body.data.id
+    const newDomain = req.body.data.domain
+    const newDomainGitSupport = req.body.data.gitSupport
 
-    await ifDomainExists({ domain })
-    const oldDomain = await getDomain({ id })
-    await updateNginxSite({
-      oldDomain,
-      newDomain: domain
+    const getOldDomain = await getDomainDocument({ id })
+    const oldDomain = getOldDomain.domain
+    const oldDomainGitSupport = getOldDomain.gitSupport
+
+    if (oldDomain !== newDomain) {
+      await ifDomainExists({ domain: newDomain })
+      await updateNginxSite({ oldDomain, newDomain })
+    }
+
+    const _updateDomainDocument = await updateDomainDocument({
+      id,
+      domain: newDomain,
+      gitSupport: newDomainGitSupport
     })
-    const _updateDomainDocument = await updateDomainDocument({ id, domain })
 
     result.success = true
     result.data = _updateDomainDocument
