@@ -6200,13 +6200,13 @@ ret@~0.1.10:
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
   integrity sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==
 
-rfv@^0.0.31:
-  version "0.0.31"
-  resolved "https://registry.yarnpkg.com/rfv/-/rfv-0.0.31.tgz#9d69c9888cfaa4ce3fdbbcccfdb23ee98da190cf"
-  integrity sha512-P/8XtyW6kpH55Xf/P0cyHwK8HuCSdlW4w6+frI+pPQXrknRUkg2eTC+jUcgIAMEFlzNc2eTYdwJxNETIZqUFUQ==
+rfv@^0.0.33:
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/rfv/-/rfv-0.0.33.tgz#010f071217841cdd6ef27d4f0eb0a4c492e2355c"
+  integrity sha512-g2KbKxk2f/JfDja5bkTzvpoF6P1F912PWE6nQDMWM27EEVYIv2xKDFb1Gda8xuZLkr//4hNcjvl12P1GVBmSqw==
   dependencies:
     axios "^0.19.0"
-    validator "^11.1.0"
+    validator "^12.0.0"
 
 rgb-regex@^1.0.1:
   version "1.0.1"
@@ -7188,10 +7188,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-validator@^11.1.0:
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-11.1.0.tgz#ac18cac42e0aa5902b603d7a5d9b7827e2346ac4"
-  integrity sha512-qiQ5ktdO7CD6C/5/mYV4jku/7qnqzjrxb3C/Q5wR3vGGinHTgJZN/TdFT3ZX4vXhX2R1PXx42fB1cn5W+uJ4lg==
+validator@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-12.0.0.tgz#fb33221f5320abe2422cda2f517dc3838064e813"
+  integrity sha512-r5zA1cQBEOgYlesRmSEwc9LkbfNLTtji+vWyaHzRZUxCTHdsX3bd+sdHfs5tGZ2W6ILGGsxWxCNwT/h3IY/3ng==
 
 value-equal@^1.0.1:
   version "1.0.1"

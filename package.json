@@ -45,7 +45,7 @@
     "react-dom": "^16.10.2",
     "react-notifications-component": "^2.1.0",
     "react-router-dom": "^5.1.2",
-    "rfv": "^0.0.31",
+    "rfv": "^0.0.33",
     "sass": "^1.23.0",
     "standard": "^14.3.1"
   }
