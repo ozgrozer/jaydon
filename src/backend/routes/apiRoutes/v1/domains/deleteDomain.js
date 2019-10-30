@@ -1,16 +1,16 @@
-const { deleteNginxSite } = require.main.require('./nginx/nginx')
+const { deleteNginxSite, deleteGitSupport } = require.main.require('./nginx/nginx')
 const { findDocuments, deleteDocuments } = require.main.require('./db/db')
 
-const getDomain = async props => {
+const getDomainDocument = async props => {
   const { id } = props
   const findDomains = await findDocuments({
     model: 'domains',
     find: { _id: id },
-    select: 'domain'
+    select: 'domain gitSupport'
   })
 
   if (Object.keys(findDomains).length) {
-    return findDomains[0].domain
+    return findDomains[0]
   } else {
     throw new Error('Domain couldn\'t found')
   }
@@ -31,7 +31,8 @@ const deleteDomain = async (req, res) => {
   try {
     const { id } = req.body.data
 
-    const domain = await getDomain({ id })
+    const { domain, gitSupport } = await getDomainDocument({ id })
+    if (gitSupport) deleteGitSupport({ domain })
     await deleteNginxSite({ domain })
     const _deleteDomainDocument = await deleteDomainDocument({ id })
 
