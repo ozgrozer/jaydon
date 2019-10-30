@@ -32,7 +32,7 @@ const deleteDomain = async (req, res) => {
     const { id } = req.body.data
 
     const { domain, gitSupport } = await getDomainDocument({ id })
-    if (gitSupport) deleteGitSupport({ domain })
+    if (gitSupport) await deleteGitSupport({ domain })
     await deleteNginxSite({ domain })
     const _deleteDomainDocument = await deleteDomainDocument({ id })
 
