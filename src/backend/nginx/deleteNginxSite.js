@@ -8,11 +8,15 @@ const deleteNginxSite = async props => {
   const nginxConfigurationFilePath = `${defaults.nginx.dir.core}/sites-available/${domain}`
   const nginxLinkedConfigurationFilePath = `${defaults.nginx.dir.core}/sites-enabled/${domain}`
 
-  const deleteWwwDirectory = `rm -r ${wwwDirectoryPath}`
-  const deleteNginxConfigurationFile = `rm ${nginxConfigurationFilePath}`
-  const deleteLinkedNginxConfigurationFile = `rm ${nginxLinkedConfigurationFilePath}`
+  const commands = [
+    `rm -r ${wwwDirectoryPath}`,
+    `rm ${nginxConfigurationFilePath}`,
+    `rm ${nginxLinkedConfigurationFilePath}`,
+    restartNginxServiceCommand
+  ]
 
-  const result = await exec(`${deleteWwwDirectory} && ${deleteNginxConfigurationFile} && ${deleteLinkedNginxConfigurationFile} && ${restartNginxServiceCommand}`)
+  const joinCommands = commands.join(' && ')
+  const result = await exec(joinCommands)
   return result
 }
 

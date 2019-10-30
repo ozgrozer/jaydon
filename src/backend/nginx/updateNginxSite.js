@@ -13,13 +13,17 @@ const updateNginxSite = async props => {
   const nginxConfigurationFilePath = `${defaults.nginx.dir.core}/sites-available/${newDomain}`
   const nginxLinkedConfigurationFolderPath = `${defaults.nginx.dir.core}/sites-enabled/`
 
-  const updateWwwDirectory = `mv ${oldWwwDirectoryPath} ${newWwwDirectoryPath}`
-  const deleteOldNginxConfigurationFile = `rm ${oldNginxConfigurationFilePath}`
-  const deleteOldLinkedNginxConfigurationFile = `rm ${oldLinkedNginxConfigurationFilePath}`
-  const createNginxConfigurationFile = `echo "${nginxConfigurationFileContent}" > ${nginxConfigurationFilePath}`
-  const linkNginxConfigurationFile = `ln -s ${nginxConfigurationFilePath} ${nginxLinkedConfigurationFolderPath}`
+  const commands = [
+    `mv ${oldWwwDirectoryPath} ${newWwwDirectoryPath}`,
+    `rm ${oldNginxConfigurationFilePath}`,
+    `rm ${oldLinkedNginxConfigurationFilePath}`,
+    `echo "${nginxConfigurationFileContent}" > ${nginxConfigurationFilePath}`,
+    `ln -s ${nginxConfigurationFilePath} ${nginxLinkedConfigurationFolderPath}`,
+    restartNginxServiceCommand
+  ]
 
-  const result = await exec(`${updateWwwDirectory} && ${deleteOldNginxConfigurationFile} && ${deleteOldLinkedNginxConfigurationFile} && ${createNginxConfigurationFile} && ${linkNginxConfigurationFile} && ${restartNginxServiceCommand}`)
+  const joinCommands = commands.join(' && ')
+  const result = await exec(joinCommands)
   return result
 }
 

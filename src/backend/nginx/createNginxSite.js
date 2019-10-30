@@ -12,12 +12,16 @@ const createNginxSite = async props => {
   const nginxConfigurationFileContent = nginxConfigurationGenerator({ domain })
   const nginxLinkedConfigurationFolderPath = `${defaults.nginx.dir.core}/sites-enabled/`
 
-  const createWwwDirectory = `mkdir ${wwwDirectoryPath}`
-  const createWwwIndexFile = `echo "${indexHtmlFileContent}" > ${wwwDirectoryPath}/index.html`
-  const createNginxConfigurationFile = `echo "${nginxConfigurationFileContent}" > ${nginxConfigurationFilePath}`
-  const linkNginxConfigurationFile = `ln -s ${nginxConfigurationFilePath} ${nginxLinkedConfigurationFolderPath}`
+  const commands = [
+    `mkdir ${wwwDirectoryPath}`,
+    `echo "${indexHtmlFileContent}" > ${wwwDirectoryPath}/index.html`,
+    `echo "${nginxConfigurationFileContent}" > ${nginxConfigurationFilePath}`,
+    `ln -s ${nginxConfigurationFilePath} ${nginxLinkedConfigurationFolderPath}`,
+    restartNginxServiceCommand
+  ]
 
-  const result = await exec(`${createWwwDirectory} && ${createWwwIndexFile} && ${createNginxConfigurationFile} && ${linkNginxConfigurationFile} && ${restartNginxServiceCommand}`)
+  const joinCommands = commands.join(' && ')
+  const result = await exec(joinCommands)
   return result
 }
 
