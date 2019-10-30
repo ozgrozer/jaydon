@@ -14,10 +14,12 @@ const FormItem = props => {
 
   if (formItem.element === 'input') {
     if (formItem.type === 'checkbox') {
+      const checked = record[formItem.name] === true ? 'on' : 'off'
       return (
         <div className='form-group'>
           <div className='custom-control custom-checkbox'>
             <Input
+              value={checked}
               id={formItemId}
               name={formItem.name}
               type={formItem.type}
