@@ -10,10 +10,28 @@ const indexHtmlContentGenerator = props => {
       <title>${domain}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
       <style>
-        html, body { height: 100%; }
-        body { text-align: center; font-family: Verdana; margin: 0; display: flex; align-items: center; justify-content: center; }
-        h1 { color: #a4b0be; font-size: 60px; margin-top: 0; margin-bottom: 50px; }
-        a { color: #70a1ff; font-size: 18px; text-decoration: none; }
+        html, body {
+          height: 100%;
+        }
+        body {
+          margin: 0;
+          display: flex;
+          text-align: center;
+          align-items: center;
+          justify-content: center;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+        }
+        h1 {
+          margin-top: 0;
+          color: #a4b0be;
+          font-size: 60px;
+          margin-bottom: 50px;
+        }
+        a {
+          color: #70a1ff;
+          font-size: 18px;
+          text-decoration: none;
+        }
       </style>
     </head>
     <body>
