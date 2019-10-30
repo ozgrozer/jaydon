@@ -1,4 +1,4 @@
-const { updateNginxSite, updateGitSupport } = require.main.require('./nginx/nginx')
+const { updateNginxSite, updateGitSupport, deleteGitSupport, createGitSupport } = require.main.require('./nginx/nginx')
 const { findDocuments, updateDocument } = require.main.require('./db/db')
 
 const ifDomainExists = async props => {
@@ -33,11 +33,11 @@ const getDomainDocument = async props => {
 }
 
 const updateDomainDocument = async props => {
-  const { id, domain } = props
+  const { id, data } = props
   const updateRecord = await updateDocument({
     model: 'domains',
     query: { _id: id },
-    data: { domain }
+    data
   })
   return updateRecord
 }
@@ -46,24 +46,37 @@ const updateDomain = async (req, res) => {
   const result = { success: false }
 
   try {
-    const id = req.body.data.id
-    const newDomain = req.body.data.domain
-    const newDomainGitSupport = req.body.data.gitSupport
+    const data = req.body.data
+    const id = data.id
+    const newDomain = data.domain
+    const newDomainGitSupport = data.gitSupport === 'on' || data.gitSupport === true
 
     const getOldDomain = await getDomainDocument({ id })
     const oldDomain = getOldDomain.domain
-    const oldDomainGitSupport = getOldDomain.gitSupport
+    const oldDomainGitSupport = getOldDomain.gitSupport === 'on' || getOldDomain.gitSupport === true
 
     if (oldDomain !== newDomain) {
       await ifDomainExists({ domain: newDomain })
       await updateNginxSite({ oldDomain, newDomain })
-      if (oldDomainGitSupport) await updateGitSupport({ oldDomain, newDomain })
+      if (oldDomainGitSupport) {
+        await updateGitSupport({ oldDomain, newDomain })
+      }
+    }
+
+    if (oldDomain === newDomain) {
+      if (oldDomainGitSupport && !newDomainGitSupport) {
+        await deleteGitSupport({ domain: newDomain })
+      } else if (!oldDomainGitSupport && newDomainGitSupport) {
+        await createGitSupport({ domain: newDomain })
+      }
     }
 
     const _updateDomainDocument = await updateDomainDocument({
       id,
-      domain: newDomain,
-      gitSupport: newDomainGitSupport
+      data: {
+        domain: newDomain,
+        gitSupport: newDomainGitSupport
+      }
     })
 
     result.success = true
