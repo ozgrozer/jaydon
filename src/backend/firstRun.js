@@ -31,7 +31,8 @@ const learnServerIpAddress = async () => {
   await newDocument({
     model: 'settings',
     data: {
-      server: { ip }
+      key: 'server',
+      value: { ip }
     }
   })
 }

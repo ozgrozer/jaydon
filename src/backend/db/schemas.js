@@ -9,7 +9,8 @@ const schemas = {
     gitSupport: { type: Boolean }
   },
   settings: {
-    server: { type: Object }
+    key: { type: String },
+    value: { type: Object }
   }
 }
 
