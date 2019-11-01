@@ -3,6 +3,20 @@ const os = require('os')
 const defaults = require.main.require('./defaults')
 const { findDocuments } = require.main.require('./db/db')
 
+const getServerIp = async () => {
+  const getSettings = await findDocuments({
+    model: 'settings',
+    find: {
+      key: 'server'
+    }
+  })
+
+  if (Object.keys(getSettings).length) {
+    const getServerSettings = getSettings[0].toObject().value
+    return getServerSettings.ip
+  }
+}
+
 const readDomain = async (req, res) => {
   const result = { success: false }
 
@@ -22,8 +36,8 @@ const readDomain = async (req, res) => {
       result.data = getDomain
 
       const osUsername = os.userInfo().username
-      const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-      result.data.gitSupportDetails = `git clone ${osUsername}@${ip}:${defaults.git.dir.bare}/${getDomain.domain}.git`
+      const serverIp = await getServerIp()
+      result.data.gitSupportDetails = `git clone ${osUsername}@${serverIp}:${defaults.git.dir.bare}/${getDomain.domain}.git`
     } else {
       result.data = _findDomains
     }
