@@ -51,13 +51,8 @@ const Domains = props => {
           element: 'input',
           type: 'checkbox',
           name: 'gitSupport',
-          label: 'Git support'
-        },
-        {
-          section: 'edit',
-          element: 'box',
-          type: 'secondary',
-          name: 'gitSupportDetails'
+          label: 'Git support',
+          helpButtonTargetName: 'gitSupportDetails'
         }
       ]
     }

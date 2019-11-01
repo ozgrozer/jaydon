@@ -9,12 +9,19 @@ const ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
 
 const FormItem = props => {
   const { formItem, record, formName } = props
-
   const formItemId = `${formName}-${formItem.name}`
+
+  const [helpButtonVisibility, setHelpButtonVisibility] = useState(false)
+  const helpButtonOnClick = props => {
+    setHelpButtonVisibility(!helpButtonVisibility)
+  }
 
   if (formItem.element === 'box') {
     return (
-      <div className='form-group'>
+      <div
+        className='form-group'
+        style={{ display: formItem.display || '' }}
+      >
         <div className={`alert alert-${formItem.type}`}>
           {record[formItem.name]}
         </div>
@@ -34,13 +41,29 @@ const FormItem = props => {
               className='form-control custom-control-input'
               validations={validations[formName][formItem.name]}
             />
+
             <label
               htmlFor={formItemId}
               className='custom-control-label'
             >
               {formItem.label}
             </label>
+
+            {formItem.helpButtonTargetName && (
+              <span
+                onClick={helpButtonOnClick}
+                className={`helpButton${helpButtonVisibility ? ' active' : ''}`}
+              >
+                ?
+              </span>
+            )}
           </div>
+
+          {formItem.helpButtonTargetName && (
+            <div className={`alert alert-secondary mt10 ${helpButtonVisibility ? 'show' : 'hide'}`}>
+              {record[formItem.helpButtonTargetName]}
+            </div>
+          )}
         </div>
       )
     } else {
@@ -159,7 +182,7 @@ const EditAndNewRecord = props => {
   }
 
   return (
-    <div id='newRecord'>
+    <div id='editAndNewRecord'>
       <div className='header'>
         <h1>{sectionTitle} {component.singularTitle}</h1>
       </div>
