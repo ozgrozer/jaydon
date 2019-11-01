@@ -34,7 +34,10 @@ const ListRecords = props => {
               <Link
                 key={key}
                 className='box1 list'
-                to={`/${component.id}/${record.id}`}
+                to={{
+                  state: { key },
+                  pathname: `/${component.id}/${record.id}`
+                }}
               >
                 {recordTitle}
               </Link>

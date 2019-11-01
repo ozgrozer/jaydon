@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Form, Input } from 'rfv'
 
+import { MainContext } from '~/src/frontend/js/context/MainContext'
 import notification from '~/src/frontend/js/common/notification'
 import connectApi from '~/src/frontend/js/dashboard/common/connectApi'
 import validations from '~/src/common/validations'
@@ -8,8 +9,19 @@ import validations from '~/src/common/validations'
 const ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
 
 const FormItem = props => {
-  const { formItem, record, formName } = props
+  const { formItem, record, formName, stateKey, componentId, section } = props
   const formItemId = `${formName}-${formItem.name}`
+  const { state } = useContext(MainContext)
+
+  let value = ''
+  if (section === 'edit') {
+    if (Object.prototype.hasOwnProperty.call(state, componentId)) {
+      const getRecords = state[componentId]
+      value = getRecords[stateKey][formItem.name]
+    } else {
+      value = record[formItem.name]
+    }
+  }
 
   const [helpButtonVisibility, setHelpButtonVisibility] = useState(false)
   const helpButtonOnClick = props => {
@@ -23,13 +35,13 @@ const FormItem = props => {
         style={{ display: formItem.display || '' }}
       >
         <div className={`alert alert-${formItem.type}`}>
-          {record[formItem.name]}
+          {value}
         </div>
       </div>
     )
   } else if (formItem.element === 'input') {
     if (formItem.type === 'checkbox') {
-      const checked = record[formItem.name] === true ? 'on' : 'off'
+      const checked = value === true ? 'on' : 'off'
       return (
         <div className='form-group'>
           <div className='custom-control custom-checkbox'>
@@ -70,9 +82,9 @@ const FormItem = props => {
       return (
         <div className='form-group'>
           <Input
+            value={value}
             name={formItem.name}
             type={formItem.type}
-            value={record[formItem.name]}
             placeholder={formItem.placeholder}
             className='form-control form-control-lg'
             validations={validations[formName][formItem.name]}
@@ -84,14 +96,18 @@ const FormItem = props => {
 }
 
 const EditAndNewRecord = props => {
-  const { component } = props
+  const { component, location } = props
+  const stateKey = location.state !== undefined
+    ? location.state.key
+    : ''
   const recordId = props.match.params.recordId
   const section = recordId === 'new' ? 'new' : 'edit'
   const sectionTitle = section === 'new' ? 'New' : 'Edit'
   let buttonTitle = section === 'new' ? 'Add' : 'Update'
   buttonTitle += ` ${component.singularTitle}`
   const formEvent = section === 'new' ? 'create' : 'update'
-  const formName = formEvent + ucFirst(component.id)
+  const componentId = component.id
+  const formName = formEvent + ucFirst(componentId)
 
   const [record, setRecord] = useState({})
   const readApi = async () => {
@@ -199,8 +215,10 @@ const EditAndNewRecord = props => {
                         key={key}
                         record={record}
                         section={section}
+                        stateKey={stateKey}
                         formItem={formItem}
                         formName={formName}
+                        componentId={componentId}
                       />
                     )
                   } else {
