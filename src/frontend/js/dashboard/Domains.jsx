@@ -57,8 +57,7 @@ const Domains = props => {
           section: 'edit',
           element: 'box',
           type: 'secondary',
-          name: 'gitSupportDetails',
-          conditions: {}
+          name: 'gitSupportDetails'
         }
       ]
     }

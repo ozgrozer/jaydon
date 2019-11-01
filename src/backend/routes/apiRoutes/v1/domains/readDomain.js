@@ -21,11 +21,9 @@ const readDomain = async (req, res) => {
       const getDomain = _findDomains[0].toObject()
       result.data = getDomain
 
-      if (getDomain.gitSupport) {
-        const osUsername = os.userInfo().username
-        const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-        result.data.gitSupportDetails = `git clone ${osUsername}@${ip}:${defaults.git.dir.bare}/${getDomain.domain}.git`
-      }
+      const osUsername = os.userInfo().username
+      const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+      result.data.gitSupportDetails = `git clone ${osUsername}@${ip}:${defaults.git.dir.bare}/${getDomain.domain}.git`
     } else {
       result.data = _findDomains
     }
