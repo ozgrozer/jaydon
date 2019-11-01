@@ -8,22 +8,18 @@ import validations from '~/src/common/validations'
 const ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
 
 const FormItem = props => {
-  const { formItem, record, formName, section } = props
+  const { formItem, record, formName } = props
 
   const formItemId = `${formName}-${formItem.name}`
 
   if (formItem.element === 'box') {
-    if (section === 'all' || section === formItem.section) {
-      return (
-        <div className='form-group'>
-          <div className={`alert alert-${formItem.type}`}>
-            {record[formItem.name]}
-          </div>
+    return (
+      <div className='form-group'>
+        <div className={`alert alert-${formItem.type}`}>
+          {record[formItem.name]}
         </div>
-      )
-    } else {
-      return null
-    }
+      </div>
+    )
   } else if (formItem.element === 'input') {
     if (formItem.type === 'checkbox') {
       const checked = record[formItem.name] === true ? 'on' : 'off'
@@ -174,15 +170,19 @@ const EditAndNewRecord = props => {
             <Form className='form1' onSubmit={onSubmit}>
               <fieldset disabled={formIsSubmitting}>
                 {component.form.items.map((formItem, key) => {
-                  return (
-                    <FormItem
-                      key={key}
-                      record={record}
-                      section={section}
-                      formItem={formItem}
-                      formName={formName}
-                    />
-                  )
+                  if (formItem.section === 'all' || section === formItem.section) {
+                    return (
+                      <FormItem
+                        key={key}
+                        record={record}
+                        section={section}
+                        formItem={formItem}
+                        formName={formName}
+                      />
+                    )
+                  } else {
+                    return null
+                  }
                 })}
 
                 <button className='btn btn-primary btn-lg btn-block mt1'>
