@@ -46,7 +46,7 @@ const Domains = props => {
           type: 'checkbox',
           name: 'gitSupport',
           label: 'Git support',
-          helpButtonTargetName: 'gitSupportDetails'
+          helpButtonTargetReference: 'gitSupportDetails'
         }
       ]
     }

@@ -49,7 +49,7 @@ const FormItem = props => {
               {formItem.label}
             </label>
 
-            {formItem.helpButtonTargetName && (
+            {formItem.helpButtonTargetReference && (
               <span
                 onClick={helpButtonOnClick}
                 className={`helpButton${helpButtonVisibility ? ' active' : ''}`}
@@ -59,9 +59,9 @@ const FormItem = props => {
             )}
           </div>
 
-          {formItem.helpButtonTargetName && (
+          {formItem.helpButtonTargetReference && (
             <div className={`alert alert-secondary mt10 ${helpButtonVisibility ? 'show' : 'hide'}`}>
-              {record[formItem.helpButtonTargetName]}
+              {record[formItem.helpButtonTargetReference]}
             </div>
           )}
         </div>
