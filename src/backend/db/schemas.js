@@ -7,6 +7,9 @@ const schemas = {
   domains: {
     domain: { type: String, required: true },
     gitSupport: { type: Boolean }
+  },
+  settings: {
+    server: { type: Object }
   }
 }
 
