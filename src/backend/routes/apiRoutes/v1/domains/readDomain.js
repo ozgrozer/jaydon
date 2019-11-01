@@ -1,3 +1,6 @@
+const os = require('os')
+
+const defaults = require.main.require('./defaults')
 const { findDocuments } = require.main.require('./db/db')
 
 const readDomain = async (req, res) => {
@@ -13,10 +16,21 @@ const readDomain = async (req, res) => {
       find,
       sort: { _id: -1 }
     })
-    const findDomains = ifIdExists ? _findDomains[0] : _findDomains
+
+    if (ifIdExists) {
+      const getDomain = _findDomains[0].toObject()
+      result.data = getDomain
+
+      if (getDomain.gitSupport) {
+        const osUsername = os.userInfo().username
+        const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+        result.data.gitSupportDetails = `git clone ${osUsername}@${ip}:${defaults.git.dir.bare}/${getDomain.domain}.git`
+      }
+    } else {
+      result.data = _findDomains
+    }
 
     result.success = true
-    result.data = findDomains
     res.json(result)
   } catch (err) {
     result.error = err.message
