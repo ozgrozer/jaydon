@@ -1,0 +1,15 @@
+#listRecords {
+  .content {
+    a.list {
+      display: block;
+      margin-top: $mt2;
+      font-weight: bold;
+      &:hover {
+        box-shadow: 0 0 20px 0 $gray-300;
+      }
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}

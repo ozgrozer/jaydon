@@ -1,3 +1,6 @@
+@import './newRecord';
+@import './listRecords';
+
 #dashboard {
   .box1 {
     padding: $mt1;
@@ -63,18 +66,6 @@
 
     .content {
       margin-top: $mt1;
-
-      a.list {
-        display: block;
-        margin-top: $mt2;
-        font-weight: bold;
-        &:hover {
-          box-shadow: 0 0 20px 0 $gray-300;
-        }
-        &:first-child {
-          margin-top: 0;
-        }
-      }
     }
   }
 }
