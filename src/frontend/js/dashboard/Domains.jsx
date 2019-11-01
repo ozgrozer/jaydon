@@ -16,14 +16,7 @@ const Domains = props => {
       data: {}
     })
 
-    const domains = {}
-    Object.keys(apiResults.data).map((key) => {
-      const data = apiResults.data[key]
-      domains[key] = data
-      domains[key].title = domains[key].domain
-      delete domains[key].domain
-    })
-
+    const domains = apiResults.data
     setState({ domains })
   }
 
@@ -36,6 +29,7 @@ const Domains = props => {
     singularTitle: 'Domain',
     pluralTitle: 'Domains',
     newButton: true,
+    listTitleReference: 'domain',
     data: state.domains,
     form: {
       items: [

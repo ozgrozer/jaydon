@@ -28,6 +28,7 @@ const ListRecords = props => {
         {Object.keys(component.data).length ? (
           Object.keys(component.data).map((key) => {
             const record = component.data[key]
+            const recordTitle = record[component.listTitleReference]
 
             return (
               <Link
@@ -35,7 +36,7 @@ const ListRecords = props => {
                 className='box1 list'
                 to={`/${component.id}/${record.id}`}
               >
-                {record.title}
+                {recordTitle}
               </Link>
             )
           })
