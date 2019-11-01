@@ -8,11 +8,23 @@ import validations from '~/src/common/validations'
 const ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
 
 const FormItem = props => {
-  const { formItem, record, formName } = props
+  const { formItem, record, formName, section } = props
 
   const formItemId = `${formName}-${formItem.name}`
 
-  if (formItem.element === 'input') {
+  if (formItem.element === 'box') {
+    if (section === 'all' || section === formItem.section) {
+      return (
+        <div className='form-group'>
+          <div className={`alert alert-${formItem.type}`}>
+            {record[formItem.name]}
+          </div>
+        </div>
+      )
+    } else {
+      return null
+    }
+  } else if (formItem.element === 'input') {
     if (formItem.type === 'checkbox') {
       const checked = record[formItem.name] === true ? 'on' : 'off'
       return (
@@ -166,6 +178,7 @@ const EditAndNewRecord = props => {
                     <FormItem
                       key={key}
                       record={record}
+                      section={section}
                       formItem={formItem}
                       formName={formName}
                     />
