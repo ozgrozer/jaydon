@@ -1,4 +1,14 @@
-const { updateNginxSite, updateGitSupport, deleteGitSupport, createGitSupport } = require.main.require('./nginx/nginx')
+const {
+  updateNginxSite,
+
+  createGitSupport,
+  updateGitSupport,
+  deleteGitSupport,
+
+  createSslSupport,
+  updateSslSupport,
+  deleteSslSupport
+} = require.main.require('./nginx/nginx')
 const { findDocuments, updateDocument } = require.main.require('./db/db')
 
 const ifDomainExists = async props => {
@@ -26,7 +36,7 @@ const getDomainDocument = async props => {
   })
 
   if (Object.keys(findDomains).length) {
-    return findDomains[0]
+    return findDomains[0].toObject()
   } else {
     throw new Error('Domain couldn\'t found')
   }
@@ -51,11 +61,6 @@ const updateDomain = async (req, res) => {
     const newDomain = data.domain
     const newDomainGitSupport = gitSupport === 'on' || gitSupport === true
     const newDomainSslSupport = sslSupport === 'on' || sslSupport === true
-    const updateDocumentData = {
-      domain: newDomain,
-      gitSupport: newDomainGitSupport,
-      sslSupport: newDomainSslSupport
-    }
 
     const getOldDomainDocument = await getDomainDocument({ id })
     const oldDomain = getOldDomainDocument.domain
@@ -65,19 +70,33 @@ const updateDomain = async (req, res) => {
     if (oldDomain !== newDomain) {
       await ifDomainExists({ domain: newDomain })
       await updateNginxSite({ oldDomain, newDomain })
-      if (oldDomainGitSupport) {
+
+      if (oldDomainGitSupport && newDomainGitSupport) {
         await updateGitSupport({ oldDomain, newDomain })
       }
-    }
 
-    if (oldDomain === newDomain) {
-      if (oldDomainGitSupport && !newDomainGitSupport) {
-        await deleteGitSupport({ domain: newDomain })
-      } else if (!oldDomainGitSupport && newDomainGitSupport) {
-        await createGitSupport({ domain: newDomain })
+      if (oldDomainSslSupport && newDomainSslSupport) {
+        await updateSslSupport({ oldDomain, newDomain })
       }
     }
 
+    if (oldDomainGitSupport && !newDomainGitSupport) {
+      await deleteGitSupport({ domain: oldDomain })
+    } else if (!oldDomainGitSupport && newDomainGitSupport) {
+      await createGitSupport({ domain: newDomain })
+    }
+
+    if (oldDomainSslSupport && !newDomainSslSupport) {
+      await deleteSslSupport({ domain: oldDomain })
+    } else if (!oldDomainSslSupport && newDomainSslSupport) {
+      await createSslSupport({ domain: newDomain })
+    }
+
+    const updateDocumentData = {
+      domain: newDomain,
+      gitSupport: newDomainGitSupport,
+      sslSupport: newDomainSslSupport
+    }
     const _updateDomainDocument = await updateDomainDocument({
       id,
       data: updateDocumentData
