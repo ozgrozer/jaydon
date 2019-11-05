@@ -1,5 +1,6 @@
-const createSslSupport = () => {
-  console.log('createSslSupport')
+const createSslSupport = props => {
+  const { domain } = props
+  console.log('createSslSupport', domain)
 }
 
 module.exports = createSslSupport
