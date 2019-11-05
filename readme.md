@@ -97,6 +97,10 @@ And just run it.
 ./update.sh
 ```
 
+## API
+
+Coming soon.
+
 ## Preview
 
 <img src="preview.jpg" alt="" width="600" />
@@ -104,9 +108,8 @@ And just run it.
 ## Todo
 
 - [ ] Domains
-- [ ] Users
-- [ ] DNS
 - [ ] SSL
+- [ ] DNS
 - [ ] Cron
 - [ ] Logs
 - [ ] Monitor
