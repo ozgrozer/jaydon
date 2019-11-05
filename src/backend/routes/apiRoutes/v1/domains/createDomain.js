@@ -1,4 +1,4 @@
-const { createNginxSite, createGitSupport } = require.main.require('./nginx/nginx')
+const { createNginxSite, createGitSupport, createSslSupport } = require.main.require('./nginx/nginx')
 const { findDocuments, newDocument } = require.main.require('./db/db')
 
 const ifDomainExists = async props => {
@@ -29,13 +29,20 @@ const createDomain = async (req, res) => {
 
   try {
     const { domain } = req.body.data
-    let { gitSupport } = req.body.data
+    let { gitSupport, sslSupport } = req.body.data
     gitSupport = gitSupport === 'on' || gitSupport === true
+    sslSupport = sslSupport === 'on' || sslSupport === true
+    const newDocumentData = {
+      domain,
+      gitSupport,
+      sslSupport
+    }
 
     await ifDomainExists({ domain })
     await createNginxSite({ domain })
-    const _newDomain = await newDomain({ domain, gitSupport })
+    const _newDomain = await newDomain(newDocumentData)
     if (gitSupport) await createGitSupport({ domain })
+    if (sslSupport) await createSslSupport({ domain })
 
     result.success = true
     result.data = _newDomain

@@ -6,6 +6,8 @@ const createGitSupport = require('./createGitSupport')
 const updateGitSupport = require('./updateGitSupport')
 const deleteGitSupport = require('./deleteGitSupport')
 
+const createSslSupport = require('./createSslSupport')
+
 module.exports = {
   createNginxSite,
   updateNginxSite,
@@ -13,5 +15,7 @@ module.exports = {
 
   createGitSupport,
   updateGitSupport,
-  deleteGitSupport
+  deleteGitSupport,
+
+  createSslSupport
 }
