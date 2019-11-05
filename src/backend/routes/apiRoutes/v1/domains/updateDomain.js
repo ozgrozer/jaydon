@@ -22,7 +22,7 @@ const getDomainDocument = async props => {
   const findDomains = await findDocuments({
     model: 'domains',
     find: { _id: id },
-    select: 'domain gitSupport'
+    select: 'domain gitSupport sslSupport'
   })
 
   if (Object.keys(findDomains).length) {
@@ -46,14 +46,21 @@ const updateDomain = async (req, res) => {
   const result = { success: false }
 
   try {
-    const data = req.body.data
-    const id = data.id
+    const { data } = req.body
+    const { id, gitSupport, sslSupport } = data
     const newDomain = data.domain
-    const newDomainGitSupport = data.gitSupport === 'on' || data.gitSupport === true
+    const newDomainGitSupport = gitSupport === 'on' || gitSupport === true
+    const newDomainSslSupport = sslSupport === 'on' || sslSupport === true
+    const updateDocumentData = {
+      domain: newDomain,
+      gitSupport: newDomainGitSupport,
+      sslSupport: newDomainSslSupport
+    }
 
-    const getOldDomain = await getDomainDocument({ id })
-    const oldDomain = getOldDomain.domain
-    const oldDomainGitSupport = getOldDomain.gitSupport === 'on' || getOldDomain.gitSupport === true
+    const getOldDomainDocument = await getDomainDocument({ id })
+    const oldDomain = getOldDomainDocument.domain
+    const oldDomainGitSupport = getOldDomainDocument.gitSupport === true
+    const oldDomainSslSupport = getOldDomainDocument.sslSupport === true
 
     if (oldDomain !== newDomain) {
       await ifDomainExists({ domain: newDomain })
@@ -73,10 +80,7 @@ const updateDomain = async (req, res) => {
 
     const _updateDomainDocument = await updateDomainDocument({
       id,
-      data: {
-        domain: newDomain,
-        gitSupport: newDomainGitSupport
-      }
+      data: updateDocumentData
     })
 
     result.success = true
