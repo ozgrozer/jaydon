@@ -22,6 +22,7 @@ curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install.sh | ba
 Before you install Jaydon you need:
 
 - [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
+- [Certbot](https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx)
 - [Nginx](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Node.js](https://nodejs.org/en/download/package-manager/) & [NPM](https://www.npmjs.com/get-npm)
@@ -39,6 +40,13 @@ sudo apt update -y
 sudo apt install mongodb-org -y
 sudo service mongod start
 systemctl enable mongod.service
+
+# Install Certbot
+sudo apt install software-properties-common -y
+sudo add-apt-repository universe -y
+sudo add-apt-repository ppa:certbot/certbot -y
+sudo apt update -y
+sudo apt install certbot python-certbot-nginx -y
 
 # Install Nginx
 sudo apt install nginx -y
