@@ -8,7 +8,7 @@ const nginxConfigurationGenerator = props => {
   const str = `
     server {
       listen 80;
-      server_name ${domain};
+      server_name ${domain} www.${domain};
       root ${domainDirectory};
     }
   `
