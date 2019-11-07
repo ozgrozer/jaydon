@@ -7,7 +7,7 @@ import Page from '~/src/frontend/js/dashboard/common/Page'
 const Domains = props => {
   const { state, setState } = useContext(MainContext)
 
-  const getDomains = async () => {
+  const getRecords = async () => {
     const apiResults = await connectApi({
       meta: {
         category: 'domains',
@@ -21,7 +21,7 @@ const Domains = props => {
   }
 
   useEffect(() => {
-    if (props.location.pathname === '/domains') getDomains()
+    if (props.location.pathname === '/domains') getRecords()
   }, [props.location.pathname])
 
   const component = {
