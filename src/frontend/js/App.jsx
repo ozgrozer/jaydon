@@ -16,7 +16,7 @@ import ForgotPassword from './auth/ForgotPassword'
 
 import DashboardHome from './dashboard/DashboardHome'
 import Domains from './dashboard/Domains'
-import Cron from './dashboard/Cron'
+import CronJobs from './dashboard/CronJobs'
 
 import NotFound from './other/NotFound'
 
@@ -29,9 +29,9 @@ const dashboardRoutes = {
     linkTitle: 'Domains',
     component: Domains
   },
-  '/cron': {
-    linkTitle: 'Cron',
-    component: Cron
+  '/cron-jobs': {
+    linkTitle: 'Cron Jobs',
+    component: CronJobs
   }
 }
 
