@@ -14,23 +14,28 @@ import { MainContext, MainProvider } from './context/MainContext'
 import SignIn from './auth/SignIn'
 import ForgotPassword from './auth/ForgotPassword'
 
-import Dashboard from './dashboard/Dashboard'
+import DashboardHome from './dashboard/DashboardHome'
 import Domains from './dashboard/Domains'
+import Cron from './dashboard/Cron'
 
 import NotFound from './other/NotFound'
 
-const routes = {
+const dashboardRoutes = {
   '/': {
-    title: 'Dashboard',
-    component: Dashboard
+    linkTitle: 'Dashboard',
+    component: DashboardHome
   },
   '/domains': {
-    title: 'Domains',
+    linkTitle: 'Domains',
     component: Domains
+  },
+  '/cron': {
+    linkTitle: 'Cron',
+    component: Cron
   }
 }
 
-const App = () => {
+const Dashboard = () => {
   const { state, setState } = useContext(MainContext)
 
   const signOut = () => {
@@ -52,18 +57,18 @@ const App = () => {
     (state.isAuthenticated ? (
       <div id='dashboard'>
         <div id='menu'>
-          {Object.keys(routes).map((path) => {
-            const route = routes[path]
+          {Object.keys(dashboardRoutes).map((path, key) => {
+            const route = dashboardRoutes[path]
             const exact = path === '/'
 
             return (
               <NavLink
                 to={path}
-                key={path}
+                key={key}
                 exact={exact}
                 activeClassName='active'
               >
-                {route.title}
+                {route.linkTitle}
               </NavLink>
             )
           })}
@@ -71,8 +76,8 @@ const App = () => {
         </div>
 
         <div id='main'>
-          {Object.keys(routes).map((path) => {
-            const route = routes[path]
+          {Object.keys(dashboardRoutes).map((path) => {
+            const route = dashboardRoutes[path]
             const exact = path === '/'
 
             return (
@@ -114,13 +119,24 @@ const Main = () => {
 
       <BrowserRouter>
         <Switch>
-          <Route path='/sign-in' component={Auth} />} />
-          <Route path='/forgot-passwords' component={Auth} />} />
+          <Route path='/sign-in' component={Auth} />
+          <Route path='/forgot-password' component={Auth} />
 
-          <Route path='/' exact component={App} />} />
-          <Route path='/domains' component={App} />} />
+          {Object.keys(dashboardRoutes).map((path, key) => {
+            const route = dashboardRoutes[path]
+            const exact = path === '/'
 
-          <Route component={NotFound} />} />
+            return (
+              <Route
+                key={key}
+                path={path}
+                exact={exact}
+                component={Dashboard}
+              />
+            )
+          })}
+
+          <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
     </MainProvider>
