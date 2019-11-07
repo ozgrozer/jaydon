@@ -22,8 +22,9 @@ const Domains = props => {
       data: {}
     })
 
-    const domain = apiResults.data
-    setState({ domain })
+    setState({
+      [category]: apiResults.data
+    })
   }
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const Domains = props => {
     pluralTitle,
     newButton: true,
     listingTitleReference,
-    data: state.domain,
+    data: state[category],
     form: {
       items: [
         {
