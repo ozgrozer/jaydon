@@ -18,11 +18,11 @@ const getDomainDocument = async props => {
 
 const deleteDomainDocument = async props => {
   const { id } = props
-  const deleteDomain = await deleteDocuments({
+  const deleteDocument = await deleteDocuments({
     model: 'domains',
     select: { _id: id }
   })
-  return deleteDomain
+  return deleteDocument
 }
 
 const deleteDomain = async (req, res) => {
