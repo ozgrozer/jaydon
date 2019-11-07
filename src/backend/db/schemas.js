@@ -4,14 +4,18 @@ const schemas = {
     password: { type: String, required: true },
     apiKey: { type: String, required: true }
   },
+  settings: {
+    key: { type: String },
+    value: { type: Object }
+  },
   domains: {
     domain: { type: String, required: true },
     gitSupport: { type: Boolean },
     sslSupport: { type: Boolean }
   },
-  settings: {
-    key: { type: String },
-    value: { type: Object }
+  cronJobs: {
+    command: { type: String, required: true },
+    interval: { type: String, required: true }
   }
 }
 
