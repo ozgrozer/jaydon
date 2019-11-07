@@ -150,8 +150,8 @@ const EditAndNewRecord = props => {
         props.history.push(`/${link}`)
 
         const message = section === 'new'
-          ? 'Domain added'
-          : 'Domain updated'
+          ? `${singularTitle} added`
+          : `${singularTitle} updated`
 
         notification({
           type: 'success',
@@ -187,7 +187,7 @@ const EditAndNewRecord = props => {
 
         notification({
           type: 'success',
-          message: 'Domain deleted'
+          message: `${singularTitle} deleted`
         })
       } else {
         notification({
