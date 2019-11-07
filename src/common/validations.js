@@ -33,6 +33,20 @@ const premade = {
       args: 'on',
       invalidFeedback: 'Please check'
     }
+  ],
+  command: [
+    {
+      rule: 'isLength',
+      args: { min: 1 },
+      invalidFeedback: 'Please provide a command'
+    }
+  ],
+  interval: [
+    {
+      rule: 'isLength',
+      args: { min: 1 },
+      invalidFeedback: 'Please provide an interval'
+    }
   ]
 }
 
@@ -52,6 +66,21 @@ const validations = {
     domain: premade.domain
   },
   deleteDomain: {
+    id: premade.id
+  },
+
+  createCronJob: {
+    command: premade.command,
+    interval: premade.interval
+  },
+  readCronJob: {
+  },
+  updateCronJob: {
+    id: premade.id,
+    command: premade.command,
+    interval: premade.interval
+  },
+  deleteCronJob: {
     id: premade.id
   }
 }
