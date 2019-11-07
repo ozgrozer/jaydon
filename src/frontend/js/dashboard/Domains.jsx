@@ -47,14 +47,14 @@ const Domains = props => {
           name: 'gitSupport',
           label: 'Git support',
           helpButtonTargetReference: 'gitSupportDetails'
-        },
+        }/* ,
         {
           section: 'all',
           element: 'input',
           type: 'checkbox',
           name: 'sslSupport',
           label: 'SSL support'
-        }
+        } */
       ]
     }
   }
