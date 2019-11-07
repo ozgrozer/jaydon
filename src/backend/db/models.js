@@ -2,6 +2,7 @@ const createModel = require('./createModel')
 
 module.exports = {
   adminUsers: createModel({ name: 'adminUsers' }),
+  settings: createModel({ name: 'settings' }),
   domains: createModel({ name: 'domains' }),
-  settings: createModel({ name: 'settings' })
+  cronJobs: createModel({ name: 'cronJobs' })
 }
