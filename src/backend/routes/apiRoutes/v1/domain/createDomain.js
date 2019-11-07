@@ -16,12 +16,12 @@ const ifDomainExists = async props => {
   }
 }
 
-const newDomain = async data => {
-  const _newDomain = await newDocument({
+const newDomainDocument = async data => {
+  const _newDocument = await newDocument({
     model: 'domains',
     data
   })
-  return _newDomain
+  return _newDocument
 }
 
 const createDomain = async (req, res) => {
@@ -40,12 +40,12 @@ const createDomain = async (req, res) => {
 
     await ifDomainExists({ domain })
     await createNginxSite({ domain })
-    const _newDomain = await newDomain(newDocumentData)
+    const _newDomainDocument = await newDomainDocument(newDocumentData)
     if (gitSupport) await createGitSupport({ domain })
     if (sslSupport) await createSslSupport({ domain })
 
     result.success = true
-    result.data = _newDomain
+    result.data = _newDomainDocument
     res.json(result)
   } catch (err) {
     result.error = err.message
