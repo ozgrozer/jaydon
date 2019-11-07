@@ -15,10 +15,8 @@ const readCronJob = async (req, res) => {
     })
 
     if (ifIdExists) {
-      console.log('1')
       result.data = _findCronJobs[0].toObject()
     } else {
-      console.log('2')
       result.data = _findCronJobs
     }
 
