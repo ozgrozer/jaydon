@@ -10,7 +10,7 @@ const siteRoutesIndex = async (req, res) => {
         title: `Domains - ${defaults.site.name}`
       },
       '/cron-jobs': {
-        title: `Cron - ${defaults.site.name}`
+        title: `Cron Jobs - ${defaults.site.name}`
       },
 
       '/sign-in': {
