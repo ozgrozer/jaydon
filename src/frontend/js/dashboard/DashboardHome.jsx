@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 
-const Dashboard = () => {
+const DashboardHome = () => {
   useEffect(() => {
     document.title = window.defaults.routes['/'].title
   }, [])
 
   return (
-    <div id='dashboard'>
+    <div id='dashboardHome'>
       <div className='header'>
         <h1>Dashboard</h1>
       </div>
@@ -20,4 +20,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default DashboardHome
