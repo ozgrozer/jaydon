@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom'
 const ListRecords = props => {
   const { component } = props
   component.data = component.data || {}
+  const componentLink = component.link
 
   useEffect(() => {
-    document.title = window.defaults.routes[`/${component.id}`].title
+    document.title = window.defaults.routes[`/${componentLink}`].title
   }, [])
 
   return (
@@ -16,7 +17,7 @@ const ListRecords = props => {
 
         {component.newButton ? (
           <Link
-            to={`/${component.id}/new`}
+            to={`/${componentLink}/new`}
             className='btn btn-primary btn-lg'
           >
             New {component.singularTitle}
@@ -36,7 +37,7 @@ const ListRecords = props => {
                 className='box1 list'
                 to={{
                   state: { key },
-                  pathname: `/${component.id}/${record.id}`
+                  pathname: `/${componentLink}/${record.id}`
                 }}
               >
                 {recordTitle}

@@ -42,16 +42,16 @@ const validations = {
     password: premade.password
   },
 
-  createDomains: {
+  createDomain: {
     domain: premade.domain
   },
-  readDomains: {
+  readDomain: {
   },
-  updateDomains: {
+  updateDomain: {
     id: premade.id,
     domain: premade.domain
   },
-  deleteDomains: {
+  deleteDomain: {
     id: premade.id
   }
 }

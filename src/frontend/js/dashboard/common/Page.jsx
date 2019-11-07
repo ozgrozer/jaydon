@@ -6,12 +6,13 @@ import EditAndNewRecord from '~/src/frontend/js/dashboard/common/EditAndNewRecor
 
 const Page = props => {
   const { component } = props
+  const componentLink = component.link
 
   return (
     <div id='page'>
       <Route
         exact
-        path={`/${component.id}/:recordId`}
+        path={`/${componentLink}/:recordId`}
         component={_props => (
           <EditAndNewRecord
             {..._props}
@@ -21,7 +22,7 @@ const Page = props => {
       />
       <Route
         exact
-        path={`/${component.id}`}
+        path={`/${componentLink}`}
         component={_props => (
           <ListRecords
             {..._props}

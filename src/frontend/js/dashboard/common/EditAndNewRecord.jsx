@@ -9,14 +9,14 @@ import validations from '~/src/common/validations'
 const ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
 
 const FormItem = props => {
-  const { formItem, record, formName, stateKey, componentId, section } = props
+  const { formItem, record, formName, stateKey, categoryId, section } = props
   const formItemId = `${formName}-${formItem.name}`
   const { state } = useContext(MainContext)
 
   let value = ''
   if (section === 'edit') {
-    if (Object.prototype.hasOwnProperty.call(state, componentId)) {
-      const getRecords = state[componentId]
+    if (Object.prototype.hasOwnProperty.call(state, categoryId)) {
+      const getRecords = state[categoryId]
       value = getRecords[stateKey][formItem.name]
     } else {
       value = record[formItem.name]
@@ -97,6 +97,8 @@ const FormItem = props => {
 
 const EditAndNewRecord = props => {
   const { component, location } = props
+  const { categoryId, link, singularTitle, form } = component
+
   const stateKey = location.state !== undefined
     ? location.state.key
     : ''
@@ -104,16 +106,15 @@ const EditAndNewRecord = props => {
   const section = recordId === 'new' ? 'new' : 'edit'
   const sectionTitle = section === 'new' ? 'New' : 'Edit'
   let buttonTitle = section === 'new' ? 'Add' : 'Update'
-  buttonTitle += ` ${component.singularTitle}`
+  buttonTitle += ` ${singularTitle}`
   const formEvent = section === 'new' ? 'create' : 'update'
-  const componentId = component.id
-  const formName = formEvent + ucFirst(componentId)
+  const formName = formEvent + ucFirst(categoryId)
 
   const [record, setRecord] = useState({})
   const readApi = async () => {
     const apiResults = await connectApi({
       meta: {
-        category: component.id,
+        category: categoryId,
         event: 'read'
       },
       data: {
@@ -125,7 +126,7 @@ const EditAndNewRecord = props => {
   }
 
   useEffect(() => {
-    document.title = sectionTitle + ' - ' + window.defaults.routes[`/${component.id}`].title
+    document.title = sectionTitle + ' - ' + window.defaults.routes[`/${link}`].title
 
     if (section === 'edit') readApi()
   }, [])
@@ -137,7 +138,7 @@ const EditAndNewRecord = props => {
 
       const apiResults = await connectApi({
         meta: {
-          category: component.id,
+          category: categoryId,
           event: formEvent
         },
         data: res.items
@@ -146,7 +147,7 @@ const EditAndNewRecord = props => {
       setFormIsSubmitting(false)
 
       if (apiResults.success) {
-        props.history.push(`/${component.id}`)
+        props.history.push(`/${link}`)
 
         const message = section === 'new'
           ? 'Domain added'
@@ -171,7 +172,7 @@ const EditAndNewRecord = props => {
 
       const apiResults = await connectApi({
         meta: {
-          category: component.id,
+          category: categoryId,
           event: 'delete'
         },
         data: {
@@ -182,7 +183,7 @@ const EditAndNewRecord = props => {
       setFormIsSubmitting(false)
 
       if (apiResults.success) {
-        props.history.push(`/${component.id}`)
+        props.history.push(`/${link}`)
 
         notification({
           type: 'success',
@@ -200,7 +201,7 @@ const EditAndNewRecord = props => {
   return (
     <div id='editAndNewRecord'>
       <div className='header'>
-        <h1>{sectionTitle} {component.singularTitle}</h1>
+        <h1>{sectionTitle} {singularTitle}</h1>
       </div>
 
       <div className='content'>
@@ -208,7 +209,7 @@ const EditAndNewRecord = props => {
           <div className='container1'>
             <Form className='form1' onSubmit={onSubmit}>
               <fieldset disabled={formIsSubmitting}>
-                {component.form.items.map((formItem, key) => {
+                {form.items.map((formItem, key) => {
                   if (formItem.section === 'all' || section === formItem.section) {
                     return (
                       <FormItem
@@ -218,7 +219,7 @@ const EditAndNewRecord = props => {
                         stateKey={stateKey}
                         formItem={formItem}
                         formName={formName}
-                        componentId={componentId}
+                        categoryId={categoryId}
                       />
                     )
                   } else {
@@ -246,7 +247,7 @@ const EditAndNewRecord = props => {
                 onClick={deleteRecord}
                 className='link text-danger mt1 d-inline-block'
               >
-                Delete {component.singularTitle}?
+                Delete {singularTitle}?
               </a>
             )}
           </div>

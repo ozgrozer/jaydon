@@ -10,14 +10,14 @@ const Domains = props => {
   const getRecords = async () => {
     const apiResults = await connectApi({
       meta: {
-        category: 'domains',
+        category: 'domain',
         event: 'read'
       },
       data: {}
     })
 
-    const domains = apiResults.data
-    setState({ domains })
+    const domain = apiResults.data
+    setState({ domain })
   }
 
   useEffect(() => {
@@ -25,12 +25,13 @@ const Domains = props => {
   }, [props.location.pathname])
 
   const component = {
-    id: 'domains',
+    categoryId: 'domain',
+    link: 'domains',
     singularTitle: 'Domain',
     pluralTitle: 'Domains',
     newButton: true,
     listTitleReference: 'domain',
-    data: state.domains,
+    data: state.domain,
     form: {
       items: [
         {

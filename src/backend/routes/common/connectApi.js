@@ -2,12 +2,11 @@ const { findDocuments } = require.main.require('./db/db')
 const validatePost = require.main.require('./middleware/validatePost')
 
 const ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
-const removeLast = str => str.substring(0, str.length - 1)
 
 const connectApi = async props => {
   const result = { success: false }
 
-  const categories = ['domains']
+  const categories = ['domain', 'cron']
   const events = ['create', 'read', 'update', 'delete']
 
   const { apiKey, category, event, version } = props.meta
@@ -35,8 +34,7 @@ const connectApi = async props => {
       throw new Error('Event couldn\'t found')
     }
 
-    const categoryRemoveLast = removeLast(category)
-    const categoryUcFirst = ucFirst(categoryRemoveLast)
+    const categoryUcFirst = ucFirst(category)
 
     validatePost(req, res, next)
 
