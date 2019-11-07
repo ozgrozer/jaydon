@@ -81,8 +81,13 @@ const FormItem = props => {
     } else {
       return (
         <div className='form-group'>
+          <label htmlFor={formItemId}>
+            {formItem.label}
+          </label>
+
           <Input
             value={value}
+            id={formItemId}
             name={formItem.name}
             type={formItem.type}
             placeholder={formItem.placeholder}

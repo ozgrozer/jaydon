@@ -43,17 +43,19 @@ const CronJobs = props => {
       items: [
         {
           section: 'all',
+          label: 'Command',
           element: 'input',
           type: 'text',
           name: 'command',
-          placeholder: 'Command'
+          placeholder: '/usr/bin/node ~/script.js'
         },
         {
           section: 'all',
+          label: 'Interval',
           element: 'input',
           type: 'text',
           name: 'interval',
-          placeholder: 'Interval'
+          placeholder: '* * * * * (m h d m d)'
         }
       ]
     }

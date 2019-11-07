@@ -43,25 +43,26 @@ const Domains = props => {
       items: [
         {
           section: 'all',
+          label: 'Domain',
           element: 'input',
           type: 'text',
           name: 'domain',
-          placeholder: 'Domain (example.com)'
+          placeholder: 'example.com'
         },
         {
           section: 'all',
+          label: 'Git support',
           element: 'input',
           type: 'checkbox',
           name: 'gitSupport',
-          label: 'Git support',
           helpButtonTargetReference: 'gitSupportDetails'
         }/* ,
         {
           section: 'all',
+          label: 'SSL support',
           element: 'input',
           type: 'checkbox',
-          name: 'sslSupport',
-          label: 'SSL support'
+          name: 'sslSupport'
         } */
       ]
     }
