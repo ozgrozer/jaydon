@@ -9,14 +9,14 @@ import validations from '~/src/common/validations'
 const ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
 
 const FormItem = props => {
-  const { formItem, record, formName, stateKey, categoryId, section } = props
+  const { formItem, record, formName, stateKey, category, section } = props
   const formItemId = `${formName}-${formItem.name}`
   const { state } = useContext(MainContext)
 
   let value = ''
   if (section === 'edit') {
-    if (Object.prototype.hasOwnProperty.call(state, categoryId)) {
-      const getRecords = state[categoryId]
+    if (Object.prototype.hasOwnProperty.call(state, category)) {
+      const getRecords = state[category]
       value = getRecords[stateKey][formItem.name]
     } else {
       value = record[formItem.name]
@@ -97,7 +97,7 @@ const FormItem = props => {
 
 const EditAndNewRecord = props => {
   const { component, location } = props
-  const { categoryId, link, singularTitle, form } = component
+  const { category, link, singularTitle, form } = component
 
   const stateKey = location.state !== undefined
     ? location.state.key
@@ -108,13 +108,13 @@ const EditAndNewRecord = props => {
   let buttonTitle = section === 'new' ? 'Add' : 'Update'
   buttonTitle += ` ${singularTitle}`
   const formEvent = section === 'new' ? 'create' : 'update'
-  const formName = formEvent + ucFirst(categoryId)
+  const formName = formEvent + ucFirst(category)
 
   const [record, setRecord] = useState({})
   const readApi = async () => {
     const apiResults = await connectApi({
       meta: {
-        category: categoryId,
+        category,
         event: 'read'
       },
       data: {
@@ -138,7 +138,7 @@ const EditAndNewRecord = props => {
 
       const apiResults = await connectApi({
         meta: {
-          category: categoryId,
+          category,
           event: formEvent
         },
         data: res.items
@@ -172,7 +172,7 @@ const EditAndNewRecord = props => {
 
       const apiResults = await connectApi({
         meta: {
-          category: categoryId,
+          category,
           event: 'delete'
         },
         data: {
@@ -219,7 +219,7 @@ const EditAndNewRecord = props => {
                         stateKey={stateKey}
                         formItem={formItem}
                         formName={formName}
-                        categoryId={categoryId}
+                        category={category}
                       />
                     )
                   } else {

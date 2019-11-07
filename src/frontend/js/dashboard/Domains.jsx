@@ -5,12 +5,18 @@ import connectApi from '~/src/frontend/js/dashboard/common/connectApi'
 import Page from '~/src/frontend/js/dashboard/common/Page'
 
 const Domains = props => {
+  const category = 'domain'
+  const link = 'domains'
+  const listTitleReference = 'domain'
+  const singularTitle = 'Domain'
+  const pluralTitle = 'Domains'
+
   const { state, setState } = useContext(MainContext)
 
   const getRecords = async () => {
     const apiResults = await connectApi({
       meta: {
-        category: 'domain',
+        category,
         event: 'read'
       },
       data: {}
@@ -21,16 +27,16 @@ const Domains = props => {
   }
 
   useEffect(() => {
-    if (props.location.pathname === '/domains') getRecords()
+    if (props.location.pathname === `/${link}`) getRecords()
   }, [props.location.pathname])
 
   const component = {
-    categoryId: 'domain',
-    link: 'domains',
-    singularTitle: 'Domain',
-    pluralTitle: 'Domains',
+    category,
+    link,
+    singularTitle,
+    pluralTitle,
     newButton: true,
-    listTitleReference: 'domain',
+    listTitleReference,
     data: state.domain,
     form: {
       items: [
