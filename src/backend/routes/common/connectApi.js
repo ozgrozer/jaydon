@@ -6,7 +6,7 @@ const ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
 const connectApi = async props => {
   const result = { success: false }
 
-  const categories = ['domain', 'cron']
+  const categories = ['domain', 'cronJob']
   const events = ['create', 'read', 'update', 'delete']
 
   const { apiKey, category, event, version } = props.meta
