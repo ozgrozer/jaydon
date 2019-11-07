@@ -16,6 +16,9 @@ const defaults = {
       bare: '/var/git',
       www: '/var/www'
     }
+  },
+  cron: {
+    dir: '/etc/cron.d'
   }
 }
 
