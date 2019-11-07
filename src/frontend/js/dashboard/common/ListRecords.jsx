@@ -3,33 +3,33 @@ import { Link } from 'react-router-dom'
 
 const ListRecords = props => {
   const { component } = props
-  component.data = component.data || {}
-  const componentLink = component.link
+  const { link, singularTitle, pluralTitle, newButton, listingTitleReference } = component
+  const data = component.data = component.data || {}
 
   useEffect(() => {
-    document.title = window.defaults.routes[`/${componentLink}`].title
+    document.title = window.defaults.routes[`/${link}`].title
   }, [])
 
   return (
     <div id='listRecords'>
       <div className='header'>
-        <h1>{component.pluralTitle}</h1>
+        <h1>{pluralTitle}</h1>
 
-        {component.newButton ? (
+        {newButton ? (
           <Link
-            to={`/${componentLink}/new`}
+            to={`/${link}/new`}
             className='btn btn-primary btn-lg'
           >
-            New {component.singularTitle}
+            New {singularTitle}
           </Link>
         ) : null}
       </div>
 
       <div className='content'>
-        {Object.keys(component.data).length ? (
-          Object.keys(component.data).map((key) => {
-            const record = component.data[key]
-            const recordTitle = record[component.listTitleReference]
+        {Object.keys(data).length ? (
+          Object.keys(data).map((key) => {
+            const record = data[key]
+            const recordTitle = record[listingTitleReference]
 
             return (
               <Link
@@ -37,7 +37,7 @@ const ListRecords = props => {
                 className='box1 list'
                 to={{
                   state: { key },
-                  pathname: `/${componentLink}/${record.id}`
+                  pathname: `/${link}/${record.id}`
                 }}
               >
                 {recordTitle}

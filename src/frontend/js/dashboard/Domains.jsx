@@ -7,7 +7,7 @@ import Page from '~/src/frontend/js/dashboard/common/Page'
 const Domains = props => {
   const category = 'domain'
   const link = 'domains'
-  const listTitleReference = 'domain'
+  const listingTitleReference = 'domain'
   const singularTitle = 'Domain'
   const pluralTitle = 'Domains'
 
@@ -36,7 +36,7 @@ const Domains = props => {
     singularTitle,
     pluralTitle,
     newButton: true,
-    listTitleReference,
+    listingTitleReference,
     data: state.domain,
     form: {
       items: [
