@@ -1,10 +1,12 @@
 const models = require('./models')
 
-const deleteDocuments = (opts) => {
+const deleteDocuments = props => {
   return new Promise((resolve, reject) => {
-    const Model = models[opts.model]
+    const { model, select } = props
 
-    Model.deleteMany(opts.select, (err) => {
+    const Model = models[model]
+
+    Model.deleteMany(select, (err) => {
       const error = {}
 
       if (err) {
@@ -13,7 +15,7 @@ const deleteDocuments = (opts) => {
         error.detail = err
         reject(error)
       } else {
-        resolve(opts.select)
+        resolve(select)
       }
     })
   })
