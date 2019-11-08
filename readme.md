@@ -222,7 +222,8 @@ axios
 
 ## Preview
 
-<img src="preview.jpg" alt="" width="600" />
+<img src="./preview/domains.jpg" alt="" width="600" />
+<img src="./preview/edit-domain.jpg" alt="" width="600" />
 
 ## Todo
 
