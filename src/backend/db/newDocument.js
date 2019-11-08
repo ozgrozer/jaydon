@@ -1,10 +1,12 @@
 const models = require('./models')
 
-const newDocument = (opts) => {
+const newDocument = props => {
   return new Promise((resolve, reject) => {
-    const Model = models[opts.model]
+    const { model, data } = props
 
-    const instance = new Model(opts.data)
+    const Model = models[model]
+
+    const instance = new Model(data)
     instance.save((err) => {
       const error = {}
 
@@ -14,7 +16,11 @@ const newDocument = (opts) => {
         error.detail = err
         reject(error)
       } else {
-        resolve(instance)
+        const newInstance = instance.toObject()
+        newInstance.id = newInstance._id
+        delete newInstance._id
+        delete newInstance.__v
+        resolve(newInstance)
       }
     })
   })
