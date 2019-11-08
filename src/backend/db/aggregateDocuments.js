@@ -2,9 +2,11 @@ const models = require('./models')
 
 const aggregateDocuments = props => {
   return new Promise((resolve, reject) => {
-    const Model = models[props.model]
+    const { model, pipeline } = props
 
-    Model.aggregate(props.pipeline, (err, res) => {
+    const Model = models[model]
+
+    Model.aggregate(pipeline, (err, res) => {
       const error = {}
 
       if (err) {
