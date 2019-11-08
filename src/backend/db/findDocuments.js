@@ -16,7 +16,11 @@ const findDocuments = (opts) => {
         } else {
           const itemsMap = {}
 
-          items.forEach((item, i) => {
+          items.forEach((_item, i) => {
+            const item = _item.toObject()
+            item.id = item._id
+            delete item._id
+            delete item.__v
             itemsMap[i] = item
           })
 

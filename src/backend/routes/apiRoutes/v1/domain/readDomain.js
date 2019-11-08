@@ -12,7 +12,7 @@ const getServerIp = async () => {
   })
 
   if (Object.keys(getSettings).length) {
-    const getServerSettings = getSettings[0].toObject().value
+    const getServerSettings = getSettings[0].value
     return getServerSettings.ip
   }
 }
@@ -32,7 +32,7 @@ const readDomain = async (req, res) => {
     })
 
     if (ifIdExists) {
-      const getDomain = _findDomains[0].toObject()
+      const getDomain = _findDomains[0]
       result.data = getDomain
 
       const osUsername = os.userInfo().username

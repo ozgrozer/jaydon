@@ -36,7 +36,7 @@ const getDomainDocument = async props => {
   })
 
   if (Object.keys(findDomains).length) {
-    return findDomains[0].toObject()
+    return findDomains[0]
   } else {
     throw new Error('Domain couldn\'t found')
   }
