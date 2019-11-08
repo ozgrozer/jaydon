@@ -1,4 +1,5 @@
 const { deleteDocuments } = require.main.require('./db/db')
+const saveAllCronJobsToDisk = require('./saveAllCronJobsToDisk')
 
 const deleteCronJobDocument = async props => {
   const { id } = props
@@ -16,9 +17,11 @@ const deleteCronJob = async (req, res) => {
     const { id } = req.body.data
 
     const _deleteCronJobDocument = await deleteCronJobDocument({ id })
+    result.data = _deleteCronJobDocument
+
+    await saveAllCronJobsToDisk()
 
     result.success = true
-    result.data = _deleteCronJobDocument
     res.json(result)
   } catch (err) {
     result.error = err.message
