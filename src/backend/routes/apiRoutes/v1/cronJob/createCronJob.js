@@ -1,4 +1,5 @@
 const { newDocument } = require.main.require('./db/db')
+const saveAllCronJobsToDisk = require('./saveAllCronJobsToDisk')
 
 const newCronJobDocument = async data => {
   const _newDocument = await newDocument({
@@ -14,15 +15,13 @@ const createCronJob = async (req, res) => {
   try {
     const { command, schedule } = req.body.data
 
-    const newDocumentData = {
-      command,
-      schedule
-    }
-
+    const newDocumentData = { command, schedule }
     const _newCronJobDocument = await newCronJobDocument(newDocumentData)
+    result.data = _newCronJobDocument
+
+    await saveAllCronJobsToDisk()
 
     result.success = true
-    result.data = _newCronJobDocument
     res.json(result)
   } catch (err) {
     result.error = err.message
