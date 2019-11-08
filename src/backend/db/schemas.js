@@ -15,7 +15,7 @@ const schemas = {
   },
   cronJobs: {
     command: { type: String, required: true },
-    interval: { type: String, required: true }
+    schedule: { type: String, required: true }
   }
 }
 

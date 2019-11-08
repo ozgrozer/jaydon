@@ -12,11 +12,11 @@ const createCronJob = async (req, res) => {
   const result = { success: false }
 
   try {
-    const { command, interval } = req.body.data
+    const { command, schedule } = req.body.data
 
     const newDocumentData = {
       command,
-      interval
+      schedule
     }
 
     const _newCronJobDocument = await newCronJobDocument(newDocumentData)

@@ -15,11 +15,11 @@ const updateCronJob = async (req, res) => {
 
   try {
     const { data } = req.body
-    const { id, command, interval } = data
+    const { id, command, schedule } = data
 
     const updateDocumentData = {
-      command: command,
-      interval: interval
+      command,
+      schedule
     }
     const _updateCronJobDocument = await updateCronJobDocument({
       id,

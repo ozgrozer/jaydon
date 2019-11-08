@@ -51,10 +51,10 @@ const CronJobs = props => {
         },
         {
           section: 'all',
-          label: 'Interval',
+          label: 'Schedule',
           element: 'input',
           type: 'text',
-          name: 'interval',
+          name: 'schedule',
           placeholder: '* * * * * (m h d m d)'
         }
       ]

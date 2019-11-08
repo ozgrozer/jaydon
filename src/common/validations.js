@@ -41,11 +41,11 @@ const premade = {
       invalidFeedback: 'Please provide a command'
     }
   ],
-  interval: [
+  schedule: [
     {
       rule: 'isLength',
       args: { min: 1 },
-      invalidFeedback: 'Please provide an interval'
+      invalidFeedback: 'Please provide a schedule'
     }
   ]
 }
@@ -71,14 +71,14 @@ const validations = {
 
   createCronJob: {
     command: premade.command,
-    interval: premade.interval
+    schedule: premade.schedule
   },
   readCronJob: {
   },
   updateCronJob: {
     id: premade.id,
     command: premade.command,
-    interval: premade.interval
+    schedule: premade.schedule
   },
   deleteCronJob: {
     id: premade.id
