@@ -1,10 +1,12 @@
 const models = require('./models')
 
-const countDocuments = (opts) => {
+const countDocuments = props => {
   return new Promise((resolve, reject) => {
-    const Model = models[opts.model]
+    const { model, find } = props
 
-    Model.countDocuments(opts.find, (err, _count) => {
+    const Model = models[model]
+
+    Model.countDocuments(find, (err, _count) => {
       const error = {}
 
       if (err) {
