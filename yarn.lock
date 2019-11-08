@@ -4544,10 +4544,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.7.7:
-  version "5.7.7"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.7.7.tgz#038b47d10434ea6cc9ec9b45d88bfcf9ab401a1a"
-  integrity sha512-FU59waB4LKBa9KOnqBUcCcMIVRc09TFo1F8nMxrzSiIWATaJpjxxSSH5FBVUDxQfNdJLfg9uFHxaTxhhwjsZOQ==
+mongoose@^5.7.8:
+  version "5.7.8"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.7.8.tgz#ae86bff72687e8950dd95690a5eb3365ad9d57a0"
+  integrity sha512-GsFXYo7z3ebnIDdnqlDJYQXQFqEGS+yxfdY9G0B7fxpvUJchDpwLGuGJdVd1QbGxu2l0DscCYBO0ntl3G6OACA==
   dependencies:
     bson "~1.1.1"
     kareem "2.3.1"
@@ -6105,10 +6105,10 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
   integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
 
-react-notifications-component@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-notifications-component/-/react-notifications-component-2.1.0.tgz#c0ff1ab754bf25f0b00d6430b1fd38133be5cc0e"
-  integrity sha512-qCjPVmrdz96t1/oOCdJzJYAAKha5r2LhiVcE2uM/3DIHOZlkQ0MqZtmoPzLiZoQ2kOUom5HeVX6gEbp+lRSnEw==
+react-notifications-component@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/react-notifications-component/-/react-notifications-component-2.2.3.tgz#38045b34dfe8c9eb851e9f266341c4f82867595b"
+  integrity sha512-EVRAfxbRSL46PnvIz4pwtFiUUWZLj7s0g6X9yE2ZK2W4epL2fGiuWdlldDITMbSYdmy7O3cuIZa2S33becu0Tg==
   dependencies:
     prop-types "^15.6.2"
 
