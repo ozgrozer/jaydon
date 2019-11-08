@@ -1,17 +1,17 @@
 const models = require('./models')
 
-const updateDocument = (opts) => {
+const updateDocument = (props) => {
   return new Promise((resolve, reject) => {
-    const Model = models[opts.model]
+    const { model, query, data } = props
+
+    const Model = models[model]
 
     const setData = {}
-    Object.keys(opts.data).map((itemName) => {
+    Object.keys(data).map(itemName => {
       if (itemName !== 'controllerName' && itemName !== '_id') {
-        setData[itemName] = opts.data[itemName]
+        setData[itemName] = data[itemName]
       }
     })
-
-    const query = opts.data._id ? { _id: opts.data._id } : opts.query
 
     Model.updateMany(query, { $set: setData }, (err) => {
       const error = {}
@@ -22,7 +22,10 @@ const updateDocument = (opts) => {
         error.detail = err
         reject(error)
       } else {
-        resolve(opts.data)
+        if (Object.prototype.hasOwnProperty.call(query, '_id')) {
+          data.id = query._id
+        }
+        resolve(data)
       }
     })
   })
