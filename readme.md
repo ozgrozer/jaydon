@@ -108,7 +108,117 @@ And just run it.
 
 ## API
 
-Coming soon.
+Jaydon API built on [REST](https://en.wikipedia.org/wiki/Representational_state_transfer). It accepts requests as JSON and returns responses as JSON too.
+
+Base URL.
+
+```
+http://your-ip:1148/api/v1
+```
+
+Example POST request.
+
+```json
+{
+  "meta": {
+    "apiKey": "YOUR_API_KEY",
+    "category": "domain|cronJob",
+    "event": "create|read|update|delete"
+  },
+  "data": {
+  }
+}
+```
+
+"data" object.
+
+```json
+// create domain
+"data": {
+  "domain": "example.com",
+  "gitSupport": true
+}
+
+// read domain
+"data": {
+  "id": "domain id"
+}
+
+// update domain
+{
+  "id": "domain id",
+  "domain": "example.com",
+  "gitSupport": false
+}
+
+// delete domain
+{
+  "id": "domain id"
+}
+
+---
+
+// create cronJob
+{
+  "command": "node script.js",
+  "schedule": "* * * * *"
+}
+
+// read cronJob
+{
+  "id": "cron job id"
+}
+
+// update cronJob
+{
+  "id": "cron job id",
+  "command": "node script.js",
+  "schedule": "* * * * *"
+}
+
+// delete cronJob
+{
+  "id": "cron job id"
+}
+```
+
+Example 1: Create a domain with cURL.
+
+```bash
+curl http://your-ip:1148/api/v1 \
+-X POST \
+-H "Content-Type: application/json" \
+--data-binary @- << EOF
+{
+  "meta": { "apiKey": "YOUR_API_KEY", "category": "domain", "event": "create" },
+  "data": { "domain": "test.com", "gitSupport": false }
+}
+EOF
+# {"success":true}
+# {"success":false,"error":"error"}
+```
+
+Example 2: Update a cron job with Axios.
+
+```js
+const axios = require('axios')
+
+const postUrl = 'http://your-ip:1148/api/v1'
+const postData = {
+  meta: { apiKey: 'YOUR_API_KEY', category: 'cronJob', event: 'update' },
+  data: { id: 'CRON_JOB_ID', command: '/usr/bin/node ~/script.js', schedule: '0 * * * *' }
+}
+axios
+  .post(postUrl, postData)
+  .then(res => {
+    console.log(res.data)
+    // {"success":true}
+    // {"success":false,"error":"error"}
+  })
+  .catch(err => {
+    console.log(err)
+  })
+```
 
 ## Preview
 
