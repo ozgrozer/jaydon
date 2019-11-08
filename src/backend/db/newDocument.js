@@ -16,11 +16,11 @@ const newDocument = props => {
         error.detail = err
         reject(error)
       } else {
-        const newInstance = instance.toObject()
-        newInstance.id = newInstance._id
-        delete newInstance._id
-        delete newInstance.__v
-        resolve(newInstance)
+        const result = instance.toObject()
+        result.id = result._id
+        delete result._id
+        delete result.__v
+        resolve(result)
       }
     })
   })

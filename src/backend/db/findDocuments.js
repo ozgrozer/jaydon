@@ -16,17 +16,17 @@ const findDocuments = props => {
           }
           reject(error)
         } else {
-          const itemsMap = {}
+          const result = {}
 
           items.forEach((_item, i) => {
             const item = _item.toObject()
             item.id = item._id
             delete item._id
             delete item.__v
-            itemsMap[i] = item
+            result[i] = item
           })
 
-          resolve(itemsMap)
+          resolve(result)
         }
       })
       .sort(sort)

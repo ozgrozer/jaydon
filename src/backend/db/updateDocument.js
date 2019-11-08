@@ -22,10 +22,11 @@ const updateDocument = props => {
         error.detail = err
         reject(error)
       } else {
+        const result = data
         if (Object.prototype.hasOwnProperty.call(query, '_id')) {
-          data.id = query._id
+          result.id = query._id
         }
-        resolve(data)
+        resolve(result)
       }
     })
   })

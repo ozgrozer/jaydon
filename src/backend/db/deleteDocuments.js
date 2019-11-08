@@ -15,7 +15,10 @@ const deleteDocuments = props => {
         error.detail = err
         reject(error)
       } else {
-        resolve(select)
+        const result = select
+        result.id = result._id
+        delete result._id
+        resolve(result)
       }
     })
   })
