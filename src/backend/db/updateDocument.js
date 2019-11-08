@@ -1,6 +1,6 @@
 const models = require('./models')
 
-const updateDocument = (props) => {
+const updateDocument = props => {
   return new Promise((resolve, reject) => {
     const { model, query, data } = props
 
