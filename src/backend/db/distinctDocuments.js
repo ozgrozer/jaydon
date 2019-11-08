@@ -1,10 +1,12 @@
 const models = require('./models')
 
-const distinctDocuments = (opts) => {
+const distinctDocuments = props => {
   return new Promise((resolve, reject) => {
-    const Model = models[opts.model]
+    const { model, field, find } = props
 
-    Model.distinct(opts.field, opts.find, (err, count) => {
+    const Model = models[model]
+
+    Model.distinct(field, find, (err, count) => {
       const error = {}
 
       if (err) {
