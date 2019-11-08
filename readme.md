@@ -145,39 +145,39 @@ Example POST request.
 }
 
 // update domain
-{
+"data": {
   "id": "domain id",
   "domain": "example.com",
   "gitSupport": false
 }
 
 // delete domain
-{
+"data": {
   "id": "domain id"
 }
 
 ---
 
 // create cronJob
-{
+"data": {
   "command": "node script.js",
   "schedule": "* * * * *"
 }
 
 // read cronJob
-{
+"data": {
   "id": "cron job id"
 }
 
 // update cronJob
-{
+"data": {
   "id": "cron job id",
   "command": "node script.js",
   "schedule": "* * * * *"
 }
 
 // delete cronJob
-{
+"data": {
   "id": "cron job id"
 }
 ```
