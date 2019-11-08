@@ -1,11 +1,13 @@
 const models = require('./models')
 
-const findDocuments = (opts) => {
+const findDocuments = props => {
   return new Promise((resolve, reject) => {
-    const Model = models[opts.model]
+    const { model, find, select, sort, limit, skip } = props
+
+    const Model = models[model]
 
     Model
-      .find(opts.find, opts.select, (err, items) => {
+      .find(find, select, (err, items) => {
         if (err) {
           const error = {
             code: 2,
@@ -27,9 +29,9 @@ const findDocuments = (opts) => {
           resolve(itemsMap)
         }
       })
-      .sort(opts.sort)
-      .limit(opts.limit)
-      .skip(opts.skip)
+      .sort(sort)
+      .limit(limit)
+      .skip(skip)
   })
 }
 
