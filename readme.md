@@ -1,7 +1,8 @@
 # jaydon
 
-[![tag](https://img.shields.io/github/tag/ozgrozer/jaydon.svg)](https://github.com/ozgrozer/jaydon/tags)
+[![tag](https://img.shields.io/github/tag/ozgrozer/jaydon.svg?style=flat-square)](https://github.com/ozgrozer/jaydon/tags)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ozgrozer/jaydon/blob/master/license)
+[![Follow new releases](https://app.releasly.co/assets/badges/badge-green.svg)](https://app.releasly.co/sites/ozgrozer/jaydon)
 
 Nginx Control Panel
 
