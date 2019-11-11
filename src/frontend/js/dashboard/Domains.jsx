@@ -56,14 +56,14 @@ const Domains = props => {
           type: 'checkbox',
           name: 'gitSupport',
           helpButtonTargetReference: 'gitSupportDetails'
-        }/* ,
+        },
         {
           section: 'all',
           label: 'SSL support',
           element: 'input',
           type: 'checkbox',
           name: 'sslSupport'
-        } */
+        }
       ]
     }
   }
