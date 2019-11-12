@@ -87,9 +87,9 @@ const updateDomain = async (req, res) => {
     }
 
     if (oldDomainSslSupport && !newDomainSslSupport) {
-      await deleteSslSupport({ domain: oldDomain })
+      deleteSslSupport({ domain: oldDomain })
     } else if (!oldDomainSslSupport && newDomainSslSupport) {
-      await createSslSupport({ domain: newDomain })
+      createSslSupport({ domain: newDomain })
     }
 
     const updateDocumentData = {
