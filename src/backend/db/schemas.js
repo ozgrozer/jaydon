@@ -11,7 +11,8 @@ const schemas = {
   domains: {
     domain: { type: String, required: true },
     gitSupport: { type: Boolean },
-    sslSupport: { type: Boolean }
+    sslSupport: { type: Boolean },
+    sslCertificate: { type: Object }
   },
   cronJobs: {
     command: { type: String, required: true },
