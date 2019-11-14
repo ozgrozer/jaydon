@@ -2,6 +2,7 @@ const os = require('os')
 
 const defaults = require.main.require('./defaults')
 const exec = require.main.require('./common/exec')
+const spawn = require.main.require('./common/spawn')
 const { updateDocument } = require.main.require('./db/db')
 const nginxConfigurationGenerator = require('./nginxConfigurationGenerator')
 const restartNginxServiceCommand = require('./restartNginxServiceCommand')
@@ -44,13 +45,42 @@ const obtainCertificate = props => {
     const { domain } = props
     const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
 
-    const command = os.type() === 'Darwin'
-      ? `sh ${defaults.nginx.dir.www}/certbotDemo.sh --domain ${domain} --path ${wwwDirectoryPath}`
-      : `certbot certonly --noninteractive --agree-tos --register-unsafely-without-email --webroot --webroot-path ${wwwDirectoryPath} --domain ${domain} --domain www.${domain}`
+    let spawnProps = {}
+    if (os.type() === 'Darwin') {
+      spawnProps = {
+        command: 'sh',
+        args: [
+          `${defaults.nginx.dir.www}/certbotDemo.sh`,
+          '--domain',
+          domain,
+          '--path',
+          wwwDirectoryPath
+        ]
+      }
+    } else {
+      spawnProps = {
+        command: 'certbot',
+        args: [
+          'certonly',
+          '--noninteractive',
+          '--agree-tos',
+          '--register-unsafely-without-email',
+          '--webroot',
+          '--webroot-path',
+          wwwDirectoryPath,
+          '--domain',
+          domain,
+          '--domain',
+          `www.${domain}`
+        ]
+      }
+    }
 
-    exec(command)
+    spawn(spawnProps)
       .then(res => {
+        console.log('obtainCertificate')
         console.log(res)
+
         const isObtainingSuccessful = /Congratulations/.test(res)
         if (isObtainingSuccessful) {
           resolve(true)
@@ -59,7 +89,7 @@ const obtainCertificate = props => {
         }
       })
       .catch(err => {
-        reject(err.message)
+        reject(err)
       })
   })
 }
@@ -91,10 +121,16 @@ const createSslSupport = async props => {
     await updateNginxConfiguration({ domain })
     await updateDomainDocument({ domainId, status: 'active' })
   } catch (err) {
+    console.log('createSslSupport error')
     console.log(err)
-    const errorMessage = Object.prototype.hasOwnProperty.call(err, 'message')
-      ? err.message
-      : err
+
+    let errorMessage = err
+    if (typeof err === 'object') {
+      errorMessage = Object.prototype.hasOwnProperty.call(err, 'message')
+        ? err.message
+        : err
+    }
+
     await updateDomainDocument({
       domainId,
       status: 'error',
