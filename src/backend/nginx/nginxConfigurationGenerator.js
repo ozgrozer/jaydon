@@ -2,17 +2,55 @@ const defaults = require.main.require('./defaults')
 const fixContent = require('./fixContent')
 
 const nginxConfigurationGenerator = props => {
-  const { domain } = props
+  const { domain, ssl } = props
   const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
+  const sslDirectoryPath = `${defaults.letsencrypt.dir}/live/${domain}`
 
-  const str = `
-    server {
-      listen 80;
-      server_name ${domain} www.${domain};
-      root ${wwwDirectoryPath};
-    }
-  `
-  const spaces = 4
+  let str = ''
+  if (ssl) {
+    str = `
+      server {
+        listen 80;
+        server_name ${domain} www.${domain};
+
+        # redirect
+        return 301 https://${domain}$request_uri;
+      }
+
+      server {
+        listen 443 ssl http2;
+        server_name www.${domain};
+
+        # ssl
+        ssl_certificate ${sslDirectoryPath}/fullchain.pem;
+        ssl_certificate_key ${sslDirectoryPath}/privkey.pem;
+        include ${defaults.letsencrypt.dir}/options-ssl-nginx.conf;
+
+        # redirect
+        return 301 https://${domain}$request_uri;
+      }
+
+      server {
+        listen 443 ssl http2;
+        server_name ${domain};
+        root ${wwwDirectoryPath};
+
+        # ssl
+        ssl_certificate ${sslDirectoryPath}/fullchain.pem;
+        ssl_certificate_key ${sslDirectoryPath}/privkey.pem;
+        include ${defaults.letsencrypt.dir}/options-ssl-nginx.conf;
+      }
+    `
+  } else {
+    str = `
+      server {
+        listen 80;
+        server_name ${domain} www.${domain};
+        root ${wwwDirectoryPath};
+      }
+    `
+  }
+  const spaces = 6
 
   return fixContent({ str, spaces })
 }
