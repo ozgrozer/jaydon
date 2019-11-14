@@ -1,6 +1,6 @@
 const { exec } = require('child_process')
 
-const _exec = (command) => {
+const _exec = command => {
   return new Promise((resolve, reject) => {
     exec(command, (error, stdout, stderr) => {
       if (error) reject(error)
