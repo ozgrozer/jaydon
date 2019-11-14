@@ -50,6 +50,7 @@ const obtainCertificate = props => {
 
     exec(command)
       .then(res => {
+        console.log(res)
         const isObtainingSuccessful = /Congratulations/.test(res)
         if (isObtainingSuccessful) {
           resolve(true)
@@ -91,10 +92,13 @@ const createSslSupport = async props => {
     await updateDomainDocument({ domainId, status: 'active' })
   } catch (err) {
     console.log(err)
+    const errorMessage = Object.prototype.hasOwnProperty.call(err, 'message')
+      ? err.message
+      : err
     await updateDomainDocument({
       domainId,
       status: 'error',
-      error: err.message
+      error: errorMessage
     })
   }
 }
