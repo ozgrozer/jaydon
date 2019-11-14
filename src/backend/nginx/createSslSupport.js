@@ -39,25 +39,28 @@ const updateDomainDocument = async props => {
   return _updateDocument
 }
 
-const obtainCertificate = async props => {
-  let obtainCertificateCommand = ''
-  if (os.type() === 'Darwin') {
-    obtainCertificateCommand = await exec(`sh ${defaults.nginx.dir.www}/certbotDemo.sh`)
-  } else {
+const obtainCertificate = props => {
+  return new Promise((resolve, reject) => {
     const { domain } = props
     const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
-    obtainCertificateCommand = await exec(`certbot certonly --noninteractive --agree-tos --register-unsafely-without-email --webroot --webroot-path ${wwwDirectoryPath} --domain ${domain} --domain www.${domain}`)
-  }
 
-  const isObtainingSuccessful = /Congratulations/.test(obtainCertificateCommand)
+    const command = os.type() === 'Darwin'
+      ? `sh ${defaults.nginx.dir.www}/certbotDemo.sh --domain ${domain} --path ${wwwDirectoryPath}`
+      : `certbot certonly --noninteractive --agree-tos --register-unsafely-without-email --webroot --webroot-path ${wwwDirectoryPath} --domain ${domain} --domain www.${domain}`
 
-  if (isObtainingSuccessful) {
-    return true
-  } else {
-    /* create a cron job here */
-
-    throw new Error(obtainCertificateCommand)
-  }
+    exec(command)
+      .then(res => {
+        const isObtainingSuccessful = /Congratulations/.test(res)
+        if (isObtainingSuccessful) {
+          resolve(true)
+        } else {
+          reject(res)
+        }
+      })
+      .catch(err => {
+        reject(err.message)
+      })
+  })
 }
 
 const updateNginxConfiguration = async props => {
