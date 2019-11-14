@@ -19,7 +19,7 @@ const _spawn = props => {
       scriptOutput += data
     })
 
-    child.on('close', code => {
+    child.on('exit', code => {
       resolve(scriptOutput)
     })
   })
