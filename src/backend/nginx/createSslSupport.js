@@ -10,13 +10,14 @@ const updateDomainDocument = async props => {
   const { domainId, status, error } = props
   const unixTime = Math.round(+new Date() / 1000)
 
+  /* status: obtaining|active|deleted|error */
   let data = {}
-  if (status === 'started') {
+  if (status === 'obtaining') {
     data = {
       'sslCertificate.status': status,
       'sslCertificate.createdAt': unixTime
     }
-  } else if (status === 'active') {
+  } else if (status === 'active' || status === 'deleted') {
     data = {
       'sslCertificate.status': status,
       'sslCertificate.updatedAt': unixTime
@@ -38,24 +39,24 @@ const updateDomainDocument = async props => {
   return _updateDocument
 }
 
-const issueCertificate = async props => {
-  let runIssuingCertificateCommand = ''
+const obtainCertificate = async props => {
+  let obtainCertificateCommand = ''
   if (os.type() === 'Darwin') {
-    runIssuingCertificateCommand = await exec(`sh ${defaults.nginx.dir.www}/certbotDemo.sh`)
+    obtainCertificateCommand = await exec(`sh ${defaults.nginx.dir.www}/certbotDemo.sh`)
   } else {
     const { domain } = props
     const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
-    runIssuingCertificateCommand = await exec(`certbot certonly --noninteractive --agree-tos --register-unsafely-without-email --webroot --webroot-path ${wwwDirectoryPath} --domain ${domain} --domain www.${domain}`)
+    obtainCertificateCommand = await exec(`certbot certonly --noninteractive --agree-tos --register-unsafely-without-email --webroot --webroot-path ${wwwDirectoryPath} --domain ${domain} --domain www.${domain}`)
   }
 
-  const isIssuingSuccessful = /Congratulations/.test(runIssuingCertificateCommand)
+  const isObtainingSuccessful = /Congratulations/.test(obtainCertificateCommand)
 
-  if (isIssuingSuccessful) {
+  if (isObtainingSuccessful) {
     return true
   } else {
     /* create a cron job here */
 
-    throw new Error(runIssuingCertificateCommand)
+    throw new Error(obtainCertificateCommand)
   }
 }
 
@@ -81,8 +82,8 @@ const createSslSupport = async props => {
   const { domain, domainId } = props
 
   try {
-    await updateDomainDocument({ domainId, status: 'started' })
-    await issueCertificate({ domain })
+    await updateDomainDocument({ domainId, status: 'obtaining' })
+    await obtainCertificate({ domain })
     await updateNginxConfiguration({ domain })
     await updateDomainDocument({ domainId, status: 'active' })
   } catch (err) {
