@@ -17,7 +17,7 @@ const updateDomainDocument = async props => {
       'sslCertificate.status': status,
       'sslCertificate.createdAt': unixTime
     }
-  } else if (status === 'active' || status === 'deleted') {
+  } else if (status === 'active') {
     data = {
       'sslCertificate.status': status,
       'sslCertificate.updatedAt': unixTime
