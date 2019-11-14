@@ -82,7 +82,7 @@ const obtainCertificate = props => {
         if (isObtainingSuccessful) {
           resolve(true)
         } else {
-          reject(isObtainingSuccessful)
+          reject(res)
         }
       })
   })
