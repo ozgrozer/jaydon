@@ -24,7 +24,6 @@ const nginxConfigurationGenerator = props => {
         # ssl
         ssl_certificate ${sslDirectoryPath}/fullchain.pem;
         ssl_certificate_key ${sslDirectoryPath}/privkey.pem;
-        include ${defaults.letsencrypt.dir}/options-ssl-nginx.conf;
 
         # redirect
         return 301 https://${domain}$request_uri;
