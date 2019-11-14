@@ -4,18 +4,23 @@ const _spawn = props => {
   return new Promise((resolve, reject) => {
     const { command, args } = props
     const child = spawn(command, args)
-    const combineStdOuts = []
+    let scriptOutput = ''
+
+    child.stdout.setEncoding('utf8')
+    child.stderr.setEncoding('utf8')
 
     child.stdout.on('data', data => {
-      combineStdOuts.push(data)
+      data = data.toString()
+      scriptOutput += data
     })
 
     child.stderr.on('data', data => {
-      reject(data)
+      data = data.toString()
+      scriptOutput += data
     })
 
     child.on('close', code => {
-      resolve(combineStdOuts.join('\n'))
+      resolve(scriptOutput)
     })
   })
 }
