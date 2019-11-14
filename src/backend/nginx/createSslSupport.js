@@ -45,8 +45,6 @@ const obtainCertificate = props => {
     const { domain } = props
     const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
 
-    console.log('obtainCertificate')
-
     let spawnProps = {}
     if (os.type() === 'Darwin') {
       spawnProps = {
@@ -78,23 +76,14 @@ const obtainCertificate = props => {
       }
     }
 
-    console.log(spawnProps)
-
     spawn(spawnProps)
       .then(res => {
-        console.log('obtainCertificate')
-        console.log(res)
-
         const isObtainingSuccessful = /Congratulations/.test(res)
         if (isObtainingSuccessful) {
           resolve(true)
         } else {
-          reject(res)
+          reject(isObtainingSuccessful)
         }
-      })
-      .catch(err => {
-        console.log('spawn error catch')
-        reject(err)
       })
   })
 }
