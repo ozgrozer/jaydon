@@ -19,6 +19,9 @@ const defaults = {
   },
   cron: {
     dir: '/etc/cron.d'
+  },
+  letsencrypt: {
+    dir: '/etc/letsencrypt'
   }
 }
 
