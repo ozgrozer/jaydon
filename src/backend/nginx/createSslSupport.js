@@ -1,30 +1,47 @@
+const os = require('os')
+
 const defaults = require.main.require('./defaults')
 const exec = require.main.require('./common/exec')
 const { updateDocument } = require.main.require('./db/db')
+const nginxConfigurationGenerator = require('./nginxConfigurationGenerator')
+const restartNginxServiceCommand = require('./restartNginxServiceCommand')
 
 const updateDomainDocument = async props => {
-  const { domainId } = props
+  const { domainId, status, error } = props
   const unixTime = Math.round(+new Date() / 1000)
+
+  let data = {}
+  if (status === 'started') {
+    data = {
+      'sslCertificate.status': status,
+      'sslCertificate.createdAt': unixTime
+    }
+  } else if (status === 'active') {
+    data = {
+      'sslCertificate.status': status,
+      'sslCertificate.updatedAt': unixTime
+    }
+  } else if (status === 'error') {
+    data = {
+      'sslCertificate.error': error,
+      'sslCertificate.status': status,
+      'sslCertificate.updatedAt': unixTime
+    }
+  }
+
   const _updateDocument = await updateDocument({
     model: 'domains',
     query: { _id: domainId },
-    data: {
-      sslCertificate: {
-        status: 'started',
-        createdAt: unixTime
-      }
-    }
+    data
   })
+
   return _updateDocument
 }
 
 const issueCertificate = async props => {
-  const result = { success: false }
-
-  const test = true
   let runIssuingCertificateCommand = ''
-  if (test) {
-    runIssuingCertificateCommand = await exec('sh /var/www/certbotDemo.sh')
+  if (os.type() === 'Darwin') {
+    runIssuingCertificateCommand = await exec(`sh ${defaults.nginx.dir.www}/certbotDemo.sh`)
   } else {
     const { domain } = props
     const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
@@ -34,22 +51,47 @@ const issueCertificate = async props => {
   const isIssuingSuccessful = /Congratulations/.test(runIssuingCertificateCommand)
 
   if (isIssuingSuccessful) {
-    result.success = true
+    return true
   } else {
-    result.error = runIssuingCertificateCommand
-  }
+    /* create a cron job here */
 
+    throw new Error(runIssuingCertificateCommand)
+  }
+}
+
+const updateNginxConfiguration = async props => {
+  const { domain } = props
+  const nginxConfigurationFileContent = nginxConfigurationGenerator({
+    domain,
+    ssl: true
+  })
+  const nginxConfigurationFilePath = `${defaults.nginx.dir.core}/sites-available/${domain}`
+
+  const commands = [
+    `echo "${nginxConfigurationFileContent}" > ${nginxConfigurationFilePath}`,
+    restartNginxServiceCommand
+  ]
+
+  const joinCommands = commands.join(' && ')
+  const result = await exec(joinCommands)
   return result
 }
 
 const createSslSupport = async props => {
+  const { domain, domainId } = props
+
   try {
-    const { domain, domainId } = props
-    await updateDomainDocument({ domainId })
-    const _issueCertificate = await issueCertificate({ domain })
-    console.log(_issueCertificate)
+    await updateDomainDocument({ domainId, status: 'started' })
+    await issueCertificate({ domain })
+    await updateNginxConfiguration({ domain })
+    await updateDomainDocument({ domainId, status: 'active' })
   } catch (err) {
     console.log(err)
+    await updateDomainDocument({
+      domainId,
+      status: 'error',
+      error: err.message
+    })
   }
 }
 
