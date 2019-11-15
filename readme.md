@@ -136,19 +136,24 @@ Example POST request.
 // create domain
 "data": {
   "domain": "example.com",
-  "gitSupport": true
+  "gitSupport": true,
+  "sslSupport": true
 }
 
 // read domain
 "data": {
   "id": "domain id"
 }
+// read domains
+"data": {
+}
 
 // update domain
 "data": {
   "id": "domain id",
   "domain": "example.com",
-  "gitSupport": false
+  "gitSupport": false,
+  "sslSupport": false
 }
 
 // delete domain
@@ -167,6 +172,9 @@ Example POST request.
 // read cronJob
 "data": {
   "id": "cron job id"
+}
+// read cronJobs
+"data": {
 }
 
 // update cronJob
