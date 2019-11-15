@@ -236,9 +236,10 @@ axios
 ## Todo
 
 - [ ] Domains
+- [ ] Git
 - [ ] SSL
+- [ ] Cron Jobs
 - [ ] DNS
-- [ ] Cron
 - [ ] Logs
 - [ ] Monitor
 - [ ] API
