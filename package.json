@@ -21,7 +21,7 @@
     "server": "node ./src/backend/server.js",
     "start": "parcel ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --port 1147 --hmr-port 1150",
     "build": "parcel build ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --no-source-maps",
-    "rebuild": "npm rebuild"
+    "copy-images": "cp -r ./src/frontend/img ./dist/"
   },
   "dependencies": {
     "animate.css": "^3.7.2",
