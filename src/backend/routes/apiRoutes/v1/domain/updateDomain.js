@@ -76,7 +76,7 @@ const updateDomain = async (req, res) => {
       }
 
       if (oldDomainSslSupport && newDomainSslSupport) {
-        await updateSslSupport({ oldDomain, newDomain })
+        updateSslSupport({ oldDomain, newDomain, domainId: id })
       }
     }
 
