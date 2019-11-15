@@ -11,19 +11,19 @@ const updateDomainDocument = async props => {
   const { domainId, status, error } = props
   const unixTime = Math.round(+new Date() / 1000)
 
-  /* status: obtaining|active|deleted|error */
+  /* status: obtaining, obtained, obtainingError, deleting, deleted, deletingError */
   let data = {}
   if (status === 'obtaining') {
     data = {
       'sslCertificate.status': status,
       'sslCertificate.createdAt': unixTime
     }
-  } else if (status === 'active') {
+  } else if (status === 'obtained') {
     data = {
       'sslCertificate.status': status,
       'sslCertificate.updatedAt': unixTime
     }
-  } else if (status === 'error') {
+  } else if (status === 'obtainingError') {
     data = {
       'sslCertificate.error': error,
       'sslCertificate.status': status,
@@ -113,7 +113,7 @@ const createSslSupport = async props => {
     await updateDomainDocument({ domainId, status: 'obtaining' })
     await obtainCertificate({ domain })
     await updateNginxConfiguration({ domain })
-    await updateDomainDocument({ domainId, status: 'active' })
+    await updateDomainDocument({ domainId, status: 'obtained' })
   } catch (err) {
     console.log(err)
 
@@ -126,8 +126,8 @@ const createSslSupport = async props => {
 
     await updateDomainDocument({
       domainId,
-      status: 'error',
-      error: errorMessage
+      error: errorMessage,
+      status: 'obtainingError'
     })
   }
 }
