@@ -115,7 +115,6 @@ const createSslSupport = async props => {
     await updateNginxConfiguration({ domain })
     await updateDomainDocument({ domainId, status: 'active' })
   } catch (err) {
-    console.log('createSslSupport error')
     console.log(err)
 
     let errorMessage = err
