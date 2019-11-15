@@ -33,7 +33,7 @@ const deleteDomain = async (req, res) => {
 
     const { domain, gitSupport, sslSupport } = await getDomainDocument({ id })
     if (gitSupport) await deleteGitSupport({ domain })
-    if (sslSupport) deleteSslSupport({ domain })
+    if (sslSupport) deleteSslSupport({ domain, noNginxConfiguration: true })
     await deleteNginxSite({ domain })
     const _deleteDomainDocument = await deleteDomainDocument({ id })
 
