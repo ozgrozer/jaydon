@@ -22,20 +22,52 @@
     float: left;
     height: 100%;
     position: fixed;
-    overflow-x: auto;
     background-color: #fff;
     width: $menuDesktopWidth;
-    padding: $menuTopPadding 0;
-    -webkit-overflow-scrolling: touch;
 
-    a {
-      display: block;
-      color: $gray-500;
-      line-height: $buttonHeight1;
+    .menuLinks {
+      width: 100%;
+      overflow-x: auto;
+      position: relative;
+      height: calc(100% - 50px);
+      padding: $menuTopPadding 0;
+      -webkit-overflow-scrolling: touch;
+
+      a {
+        display: block;
+        color: $gray-500;
+        line-height: $buttonHeight1;
+        padding: 0 ($buttonHeight1 / 1.5);
+        &:hover, &.active {
+          color: $gray-600;
+          background-color: $gray-100;
+        }
+      }
+    }
+
+    .menuBottom {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      position: relative;
       padding: 0 ($buttonHeight1 / 1.5);
-      &:hover, &.active {
-        color: $gray-600;
-        background-color: $gray-100;
+      &:after {
+        content: '';
+        clear: both;
+        display: table;
+      }
+
+      a {
+        font-size: 14px;
+        color: $gray-500;
+      }
+
+      .versionLink {
+        float: left;
+      }
+
+      .signOutLink {
+        float: right;
       }
     }
   }

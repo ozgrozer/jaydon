@@ -57,22 +57,41 @@ const Dashboard = () => {
     (state.isAuthenticated ? (
       <div id='dashboard'>
         <div id='menu'>
-          {Object.keys(dashboardRoutes).map((path, key) => {
-            const route = dashboardRoutes[path]
-            const exact = path === '/'
+          <div className='menuLinks'>
+            {Object.keys(dashboardRoutes).map((path, key) => {
+              const route = dashboardRoutes[path]
+              const exact = path === '/'
 
-            return (
-              <NavLink
-                to={path}
-                key={key}
-                exact={exact}
-                activeClassName='active'
-              >
-                {route.linkTitle}
-              </NavLink>
-            )
-          })}
-          <a onClick={signOut} className='link'>Sign Out</a>
+              return (
+                <NavLink
+                  to={path}
+                  key={key}
+                  exact={exact}
+                  activeClassName='active'
+                >
+                  {route.linkTitle}
+                </NavLink>
+              )
+            })}
+          </div>
+
+          <div className='menuBottom'>
+            <a
+              target='_blank'
+              className='versionLink'
+              rel='noopener noreferrer'
+              href='https://github.com/ozgrozer/jaydon'
+            >
+              Jaydon v{window.defaults.version}
+            </a>
+
+            <a
+              onClick={signOut}
+              className='signOutLink link'
+            >
+              <i className='icon icon-sign-out' />
+            </a>
+          </div>
         </div>
 
         <div id='main'>
