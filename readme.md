@@ -140,7 +140,7 @@ Example POST request.
   "sslSupport": true
 }
 
-// read domain
+// read a domain
 "data": {
   "id": "domain id"
 }
@@ -163,28 +163,28 @@ Example POST request.
 
 ---
 
-// create cronJob
+// create cron job
 "data": {
   "command": "node script.js",
   "schedule": "* * * * *"
 }
 
-// read cronJob
+// read a cron job
 "data": {
   "id": "cron job id"
 }
-// read cronJobs
+// read cron jobs
 "data": {
 }
 
-// update cronJob
+// update cron job
 "data": {
   "id": "cron job id",
   "command": "node script.js",
   "schedule": "* * * * *"
 }
 
-// delete cronJob
+// delete cron job
 "data": {
   "id": "cron job id"
 }
