@@ -82,7 +82,7 @@ const Dashboard = () => {
               rel='noopener noreferrer'
               href='https://github.com/ozgrozer/jaydon'
             >
-              Jaydon v{window.defaults.version}
+              {window.defaults.siteName} v{window.defaults.version}
             </a>
 
             <a
