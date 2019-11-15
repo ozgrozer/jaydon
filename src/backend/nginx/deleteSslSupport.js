@@ -98,12 +98,12 @@ const updateNginxConfiguration = async props => {
 }
 
 const deleteSslSupport = async props => {
-  const { domain, domainId } = props
+  const { domain, domainId, noNginxConfiguration } = props
 
   try {
     await updateDomainDocument({ domainId, status: 'revoking' })
     await revokeCertificate({ domain })
-    await updateNginxConfiguration({ domain })
+    if (!noNginxConfiguration) await updateNginxConfiguration({ domain })
     await updateDomainDocument({ domainId, status: 'revoked' })
   } catch (err) {
     console.log(err)
