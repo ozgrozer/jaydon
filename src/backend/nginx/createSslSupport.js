@@ -11,15 +11,17 @@ const updateDomainDocument = async props => {
   const { domainId, status, error } = props
   const unixTime = Math.round(+new Date() / 1000)
 
-  /* status: obtaining, obtained, obtainingError, deleting, deleted, deletingError */
+  /* status: obtaining, obtained, obtainingError, revoking, revoked, revokingError */
   let data = {}
   if (status === 'obtaining') {
     data = {
+      'sslCertificate.error': '',
       'sslCertificate.status': status,
       'sslCertificate.createdAt': unixTime
     }
   } else if (status === 'obtained') {
     data = {
+      'sslCertificate.error': '',
       'sslCertificate.status': status,
       'sslCertificate.updatedAt': unixTime
     }
@@ -50,7 +52,7 @@ const obtainCertificate = props => {
       spawnProps = {
         command: 'sh',
         args: [
-          `${defaults.nginx.dir.www}/certbotDemo.sh`,
+          `${defaults.nginx.dir.www}/obtainCertificate.sh`,
           '--domain',
           domain,
           '--path',
