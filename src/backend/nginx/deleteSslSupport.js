@@ -71,6 +71,8 @@ const revokeCertificate = props => {
         if (isRevokingSuccessful) {
           resolve(true)
         } else {
+          /* create a cron job here to try to re-revoke certificate later */
+
           reject(res)
         }
       })

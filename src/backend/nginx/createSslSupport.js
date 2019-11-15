@@ -84,6 +84,8 @@ const obtainCertificate = props => {
         if (isObtainingSuccessful) {
           resolve(true)
         } else {
+          /* create a cron job here to try to re-obtain certificate later */
+
           reject(res)
         }
       })
