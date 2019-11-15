@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('icomoon.eot?3wqw1');
-  src:  url('icomoon.eot?3wqw1#iefix') format('embedded-opentype'),
-    url('icomoon.ttf?3wqw1') format('truetype'),
-    url('icomoon.woff?3wqw1') format('woff'),
-    url('icomoon.svg?3wqw1#icomoon') format('svg');
+  src:  url('icomoon.eot?akfzvr');
+  src:  url('icomoon.eot?akfzvr#iefix') format('embedded-opentype'),
+    url('icomoon.ttf?akfzvr') format('truetype'),
+    url('icomoon.woff?akfzvr') format('woff'),
+    url('icomoon.svg?akfzvr#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-sign-in:before {
-  content: "\f090";
+.icon-sign-out:before {
+  content: "\f08b";
 }
