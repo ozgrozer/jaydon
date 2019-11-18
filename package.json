@@ -24,7 +24,7 @@
     "build": "parcel build ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --no-source-maps",
     "postbuild": "npm run copy-images",
 
-    "copy-images": "cp -r ./src/frontend/img ./dist/",
+    "copyImages": "cp -r ./src/frontend/img ./dist/",
 
     "icomoon": "node ./src/scripts/icomoon.js"
   },
