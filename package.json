@@ -22,7 +22,7 @@
     "server": "node ./src/backend/server.js",
     "start": "parcel ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --port 1147 --hmr-port 1150",
     "build": "parcel build ./src/frontend/js/App.jsx --out-dir ./dist --public-url / --no-source-maps",
-    "postbuild": "npm run copy-images",
+    "postbuild": "npm run copyImages",
 
     "copyImages": "cp -r ./src/frontend/img ./dist/",
 
