@@ -28,10 +28,11 @@ const createDomain = async (req, res) => {
   const result = { success: false }
 
   try {
-    const { domain } = req.body.data
+    const { domain, nginxConf } = req.body.data
     let { gitSupport, sslSupport } = req.body.data
     gitSupport = gitSupport === 'on' || gitSupport === true
     sslSupport = sslSupport === 'on' || sslSupport === true
+
     const newDocumentData = {
       domain,
       gitSupport,
@@ -39,7 +40,7 @@ const createDomain = async (req, res) => {
     }
 
     await ifDomainExists({ domain })
-    await createNginxSite({ domain })
+    await createNginxSite({ domain, nginxConf })
     const _newDomainDocument = await newDomainDocument(newDocumentData)
     if (gitSupport) await createGitSupport({ domain })
     if (sslSupport) createSslSupport({ domain, domainId: _newDomainDocument.id })

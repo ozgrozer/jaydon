@@ -5,17 +5,18 @@ const nginxConfigurationGenerator = require('./nginxConfigurationGenerator')
 const restartNginxServiceCommand = require('./restartNginxServiceCommand')
 
 const createNginxSite = async props => {
-  const { domain } = props
+  const { domain, nginxConf } = props
   const wwwDirectoryPath = `${defaults.nginx.dir.www}/${domain}`
   const indexHtmlFileContent = indexHtmlContentGenerator({ domain })
   const nginxConfigurationFilePath = `${defaults.nginx.dir.core}/sites-available/${domain}`
-  const nginxConfigurationFileContent = nginxConfigurationGenerator({ domain })
+  const nginxConfigurationFileContent = nginxConf || nginxConfigurationGenerator({ domain })
+  const nginxConfigurationFileContentEscape = nginxConfigurationFileContent.replace(/\$/g, '\\$')
   const nginxLinkedConfigurationFolderPath = `${defaults.nginx.dir.core}/sites-enabled/`
 
   const commands = [
     `mkdir ${wwwDirectoryPath}`,
     `echo "${indexHtmlFileContent}" > ${wwwDirectoryPath}/index.html`,
-    `echo "${nginxConfigurationFileContent}" > ${nginxConfigurationFilePath}`,
+    `echo "${nginxConfigurationFileContentEscape}" > ${nginxConfigurationFilePath}`,
     `ln -s ${nginxConfigurationFilePath} ${nginxLinkedConfigurationFolderPath}`,
     restartNginxServiceCommand
   ]
