@@ -137,7 +137,8 @@ Example POST request.
 "data": {
   "domain": "example.com",
   "gitSupport": true,
-  "sslSupport": true
+  "sslSupport": true,
+  "nginxConf": "configuration"
 }
 
 // read a domain
