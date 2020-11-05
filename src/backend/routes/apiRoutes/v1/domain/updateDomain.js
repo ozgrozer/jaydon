@@ -57,7 +57,7 @@ const updateDomain = async (req, res) => {
 
   try {
     const { data } = req.body
-    const { id, gitSupport, sslSupport } = data
+    const { id, gitSupport, sslSupport, nginxConf } = data
     const newDomain = data.domain
     const newDomainGitSupport = gitSupport === 'on' || gitSupport === true
     const newDomainSslSupport = sslSupport === 'on' || sslSupport === true
@@ -69,7 +69,7 @@ const updateDomain = async (req, res) => {
 
     if (oldDomain !== newDomain) {
       await ifDomainExists({ domain: newDomain })
-      await updateNginxSite({ oldDomain, newDomain })
+      await updateNginxSite({ oldDomain, newDomain, nginxConf })
 
       if (oldDomainGitSupport && newDomainGitSupport) {
         await updateGitSupport({ oldDomain, newDomain })

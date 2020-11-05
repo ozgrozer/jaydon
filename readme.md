@@ -154,7 +154,8 @@ Example POST request.
   "id": "domain id",
   "domain": "example.com",
   "gitSupport": false,
-  "sslSupport": false
+  "sslSupport": false,
+  "nginxConf": "configuration"
 }
 
 // delete domain
