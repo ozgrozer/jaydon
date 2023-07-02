@@ -13,7 +13,7 @@ Nginx Control Panel
 If you're using Ubuntu 18 you can run this command to install everything in **Before Installation** and **Installation** sections.
 
 ```
-curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install.sh | bash
+curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install18.sh | bash
 ```
 
 ## Before Installation
@@ -30,7 +30,7 @@ Before you install Jaydon you need:
 - [Yarn](https://www.npmjs.com/package/yarn)
 - [PM2](https://www.npmjs.com/package/pm2)
 
-If you're using Ubuntu 18 you can use these commands to simply install dependencies.
+If you're using Ubuntu 18 you can use these commands to install dependencies.
 
 ```
 # Install MongoDB
