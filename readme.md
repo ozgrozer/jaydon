@@ -10,7 +10,13 @@ Nginx Control Panel
 
 ## Quick Installation
 
-If you're using Ubuntu 18 you can run this command to install everything in **Before Installation** and **Installation** sections.
+Ubuntu v22
+
+```
+curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install22.sh | bash
+```
+
+Ubuntu v18
 
 ```
 curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install18.sh | bash
@@ -30,7 +36,41 @@ Before you install Jaydon you need:
 - [Yarn](https://www.npmjs.com/package/yarn)
 - [PM2](https://www.npmjs.com/package/pm2)
 
-If you're using Ubuntu 18 you can use these commands to install dependencies.
+Ubuntu v22
+
+```
+# Install MongoDB
+wget -nc https://www.mongodb.org/static/pgp/server-6.0.asc
+cat server-6.0.asc | gpg --dearmor | sudo tee /etc/apt/keyrings/mongodb.gpg >/dev/null
+sudo sh -c 'echo "deb [ arch=amd64,arm64 signed-by=/etc/apt/keyrings/mongodb.gpg] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" >> /etc/apt/sources.list.d/mongo.list'
+sudo apt update
+sudo apt install mongodb-org -y
+sudo service mongod start
+
+# Install Certbot
+sudo snap install core
+sudo snap refresh core
+sudo snap install --classic certbot -y
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+# Install Nginx
+sudo apt install nginx -y
+
+# Install Git
+sudo apt install git -y
+
+# Install Node.js
+curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install nodejs -y
+
+# Install Yarn
+sudo npm i -g yarn
+
+# Install PM2
+sudo npm i -g pm2
+```
+
+Ubuntu v18
 
 ```
 # Install MongoDB
