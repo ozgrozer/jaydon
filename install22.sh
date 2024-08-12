@@ -1,13 +1,15 @@
 echo "1/13. Installing essential tools"
 sudo apt-get update
-sudo apt-get install -y build-essential
+sudo apt-get install build-essential -y
 
 echo "2/13. Installing MongoDB"
-curl -fsSL https://pgp.mongodb.com/server-6.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg --dearmor
-echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+curl -fsSL https://www.mongodb.org/static/pgp/server-6.0.asc | sudo gpg --dearmor -o /usr/share/keyrings/mongodb-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/mongodb-archive-keyring.gpg arch=amd64,arm64] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 sudo apt update
 sudo apt install mongodb-org -y
-sudo service mongod start
+sudo systemctl start mongod
+sudo systemctl enable mongod
+sudo systemctl status mongod
 
 echo "3/13. Installing Certbot"
 sudo snap install core
@@ -22,7 +24,7 @@ echo "5/13. Installing Git"
 sudo apt install git -y
 
 echo "6/13. Installing Node.js"
-curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt install nodejs -y
 
 echo "7/13. Installing Yarn"
