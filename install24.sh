@@ -46,6 +46,6 @@ echo "12/13. Jaydon: creating necessary database tables"
 yarn run first-run
 
 echo "13/13. Jaydon: starting server with PM2"
-pm2 start ./src/backend/server.js --name jaydon -i max
+pm2 start ./src/backend/server.js --name jaydon
 pm2 startup
 pm2 save
