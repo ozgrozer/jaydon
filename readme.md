@@ -129,10 +129,10 @@ yarn install
 yarn build
 
 # Create necessary database tables
-yarn run firstRun
+yarn run first-run
 
 # Start server with PM2
-pm2 start ./src/backend/server.js --name jaydon -i max
+pm2 start ./src/backend/server.js --name jaydon
 pm2 startup
 pm2 save
 
