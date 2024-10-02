@@ -10,7 +10,6 @@ sudo apt update
 sudo apt install mongodb-org -y
 sudo systemctl start mongod
 sudo systemctl enable mongod
-sudo systemctl status mongod
 
 echo "3/13. Installing Certbot"
 sudo snap install core
@@ -44,7 +43,7 @@ echo "11/13. Jaydon: building React app"
 yarn build
 
 echo "12/13. Jaydon: creating necessary database tables"
-yarn run firstRun
+yarn run first-run
 
 echo "13/13. Jaydon: starting server with PM2"
 pm2 start ./src/backend/server.js --name jaydon -i max

@@ -50,7 +50,6 @@ sudo apt update
 sudo apt install mongodb-org -y
 sudo systemctl start mongod
 sudo systemctl enable mongod
-sudo systemctl status mongod
 
 # Install Certbot
 sudo snap install core
