@@ -10,16 +10,16 @@ Nginx Control Panel
 
 ## Quick Installation
 
+Ubuntu v24
+
+```
+curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install24.sh | bash
+```
+
 Ubuntu v22
 
 ```
 curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install22.sh | bash
-```
-
-Ubuntu v18
-
-```
-curl -L https://raw.githubusercontent.com/ozgrozer/jaydon/master/install18.sh | bash
 ```
 
 ## Before Installation
@@ -35,6 +35,63 @@ Before you install Jaydon you need:
 - [Node.js](https://nodejs.org/en/download/package-manager/) & [NPM](https://www.npmjs.com/get-npm)
 - [Yarn](https://www.npmjs.com/package/yarn)
 - [PM2](https://www.npmjs.com/package/pm2)
+
+Ubuntu v24
+
+```
+echo "1/13. Installing essential tools"
+sudo apt-get update
+sudo apt-get install build-essential -y
+
+echo "2/13. Installing MongoDB"
+sudo apt-get install gnupg curl -y
+curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-8.0.gpg
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+sudo apt update
+sudo apt install mongodb-org -y
+sudo systemctl start mongod
+sudo systemctl enable mongod
+sudo systemctl status mongod
+
+echo "3/13. Installing Certbot"
+sudo snap install core
+sudo snap refresh core
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+echo "4/13. Installing Nginx"
+sudo apt install nginx -y
+
+echo "5/13. Installing Git"
+sudo apt install git -y
+
+echo "6/13. Installing Node.js"
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install nodejs -y
+
+echo "7/13. Installing Yarn"
+sudo npm i -g yarn
+
+echo "8/13. Installing PM2"
+sudo npm i -g pm2
+
+echo "9/13. Jaydon: cloning Git repository"
+git clone https://github.com/ozgrozer/jaydon.git && cd jaydon
+
+echo "10/13. Jaydon: installing dependencies"
+yarn install
+
+echo "11/13. Jaydon: building React app"
+yarn build
+
+echo "12/13. Jaydon: creating necessary database tables"
+yarn run firstRun
+
+echo "13/13. Jaydon: starting server with PM2"
+pm2 start ./src/backend/server.js --name jaydon -i max
+pm2 startup
+pm2 save
+```
 
 Ubuntu v22
 
@@ -65,42 +122,6 @@ sudo apt install git -y
 
 # Install Node.js
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt install nodejs -y
-
-# Install Yarn
-sudo npm i -g yarn
-
-# Install PM2
-sudo npm i -g pm2
-```
-
-Ubuntu v18
-
-```
-# Install MongoDB
-sudo apt install gnupg -y
-wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
-sudo apt update -y
-sudo apt install mongodb-org -y
-sudo service mongod start
-systemctl enable mongod.service
-
-# Install Certbot
-sudo apt install software-properties-common -y
-sudo add-apt-repository universe -y
-sudo add-apt-repository ppa:certbot/certbot -y
-sudo apt update -y
-sudo apt install certbot python-certbot-nginx -y
-
-# Install Nginx
-sudo apt install nginx -y
-
-# Install Git
-sudo apt install git -y
-
-# Install Node.js
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt install nodejs -y
 
 # Install Yarn
