@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
 const crypto = require('crypto')
+const mongoose = require('mongoose')
 const publicIp = require('public-ip')
 
 const defaults = require('./defaults')
@@ -10,17 +10,35 @@ mongoose.connect(defaults.site.dbUrl + defaults.site.dbName, {
   useUnifiedTopology: true
 })
 
+const randomString = length => {
+  let result = ''
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const charactersLength = characters.length
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+  }
+  return result
+}
+
 const createAdminUser = async () => {
   const username = 'root'
-  const password = crypto.createHash('sha256').update('root').digest('hex')
-  const apiKey = '123456'
+
+  const password = randomString(16)
+  const hashedPassword = crypto.createHash('sha256').update(password).digest('hex')
+
+  const apiKey = randomString(32)
+  const hashedApiKey = crypto.createHash('sha256').update(apiKey).digest('hex')
+
+  console.log('Username:', username)
+  console.log('Password:', password)
+  console.log('API Key:', apiKey)
 
   await newDocument({
     model: 'adminUsers',
     data: {
       username,
-      password,
-      apiKey
+      apiKey: hashedApiKey,
+      password: hashedPassword
     }
   })
 }
