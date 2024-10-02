@@ -18,7 +18,7 @@ const updateGitSupport = async props => {
 
     cd ${newWwwDirectoryPath} || exit
     unset GIT_DIR
-    git pull hub master
+    git pull hub main
 
     exec git-update-server-info
   `

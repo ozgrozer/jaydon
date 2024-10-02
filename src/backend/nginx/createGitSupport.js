@@ -19,7 +19,7 @@ const createGitSupport = async props => {
 
       cd ${wwwDirectoryPath} || exit
       unset GIT_DIR
-      git pull hub master
+      git pull hub main
 
       exec git-update-server-info
     `
@@ -61,7 +61,7 @@ const createGitSupport = async props => {
 
       'git add .',
       'git commit -m "Initial commit."',
-      'git push --set-upstream hub master'
+      'git push --set-upstream hub main'
     ]
 
     const joinCommands = commands.join(' && ')
