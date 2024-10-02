@@ -10,6 +10,9 @@ const indexHtmlContentGenerator = props => {
       <title>${domain}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
       <style>
+        html {
+          color-scheme: light dark;
+        }
         html, body {
           height: 100%;
         }
