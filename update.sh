@@ -7,7 +7,7 @@ latestVersion=$(git describe --tags `git rev-list --tags --max-count=1`)
 echo "Your version: ${yourVersion}"
 echo "Latest version: ${latestVersion}"
 
-if [ $yourVersion == $latestVersion ]
+if [ "$yourVersion" = "$latestVersion" ]
 then
   echo "You're using the latest version"
 else
