@@ -44,11 +44,11 @@ const createGitSupport = async props => {
     const commands = [
       `mkdir -p ${bareDirectoryPath}`,
       `cd ${bareDirectoryPath}`,
-      'git init --bare',
+      'git init --bare --initial-branch=main',
 
       `mkdir -p ${wwwDirectoryPath}`,
       `cd ${wwwDirectoryPath}`,
-      'git init',
+      'git init -b main',
       `git remote add hub ${bareDirectoryPath}`,
 
       `touch ${postUpdateFilePath}`,
